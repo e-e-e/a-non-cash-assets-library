@@ -12,7 +12,7 @@ function configure_router (passport) {
 	const router = express.Router();
 
 	/* Middleware to append data to request object used in rendering dust templates */
-	router.use( (req,res,next) => {
+	function attach_template_data (req,res,next) {
 		//setup defaults that will be passed to all rendered templates
 		req.data = {
 			title: 'arts asset platform',
@@ -28,25 +28,44 @@ function configure_router (passport) {
 			error: req.flash('error') /* get error if raised on previous route */
 		};
 		next();
-	});
+	}
+
+	/** Simple middleware function to check if user is loged in before accessing restricted routes */
+	function is_logged_in(req, res, next) {
+		if (req.isAuthenticated())
+			return next();
+		res.redirect('/');
+	}
+
+	/** */
+	function render_template (template) {
+		return (req,res)=>{
+			res.render(template, req.data);
+		};
+	}
 
 	/* Get routes */
 
-	router.get('/', (req,res)=>{
-		res.render('index', req.data);
-	});
+	router.get('/', 
+							attach_template_data, 
+							render_template('index'));
+	
+	router.get('/login', 
+							attach_template_data, 
+							render_template('login'));
 
-	router.get('/login', (req,res)=> {
-		res.render('login', req.data);
-	});
-
-	router.get('/signup', (req,res)=> {
-		res.render('signup', req.data);
-	});
-
-	router.get('/profile', isLoggedIn, (req,res)=> {
-		res.render('profile', req.data);
-	});
+	router.get('/signup', 
+							attach_template_data, 
+							render_template('signup'));
+	
+	router.get('/about', 
+							attach_template_data, 
+							render_template('about'));
+	
+	router.get('/profile', 
+							is_logged_in, 
+							attach_template_data, 
+							render_template('profile'));
 
 	router.get('/logout', (req,res)=> {
 		req.logout();
@@ -66,13 +85,6 @@ function configure_router (passport) {
 		failureRedirect : '/login',
 		failureFlash : true
 	}));
-
-	/** Simple middleware function to check if user is loged in before accessing restricted routes */
-	function isLoggedIn(req, res, next) {
-		if (req.isAuthenticated())
-			return next();
-		res.redirect('/');
-	}
 
 	// router.get('/:path', (req,res)=> {
 	// 	res.render(req.params.path, {}, (err, html) => {

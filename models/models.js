@@ -88,13 +88,28 @@ class Users {
 				console.log(hashed.length);
 				return db.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING user_id',[nice_name, nice_email, hashed]);
 				})
+			.tap(()=>{
+				// send an email to verify account.
+			})
 			.then( result => {
 				return result.rows[0];
 			});
 	}
 }
 
+class Things {
+
+	haves() {
+
+	}
+
+	needs() {
+		
+	}
+}
+
 /*global exports:true*/
 exports = module.exports = {
-	users: new Users()
+	users: new Users(),
+	things: new Things()
 };
