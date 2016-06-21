@@ -7,15 +7,15 @@
 </head>
 <body>
 	<header>
-		<h1>{title}</h1>
 		<nav id="user-nav">
 			{?user}
 				(Logged in as <a href="/profile">{user.name}</a>) <a href="/logout">logout</a>
 			{:else}
-				<a href="/login">log in</a> 
-				<a href="/signup">join</a>
+				<a href="/login">login</a> or 
+				<a href="/signup">sign up</a>
 			{/user}
 		</nav>
+		<h1>{title}</h1>
 		<nav id="main-nav">
 			{#menu}
 				<span>{@ne key=link value=path}<a href="{link}">{name}</a>{:else}{name}{/ne}</span> 

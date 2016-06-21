@@ -2,12 +2,45 @@
 
 body, html {
 	color: @body-color;
-	width: 600px;
+	max-width: 600px;
 	margin: 0 auto;
-	font-size: 16px;
+	padding: 0;
 }
 
-main {
-	padding: 2em;
+hr {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-top: 1px solid @body-color;
 }
 
+h1, h2 {
+	text-align: center;
+}
+
+nav#user-nav {
+	padding: 1em 0 0 0;
+	text-align: right;
+}
+
+nav#main-nav {
+	font-size: 1.5em;
+	font-weight: bold;
+	span {
+		margin: 0 1em;
+	}
+}
+
+main section {
+	display: inline-block;
+	width: 49%;
+
+	&:first-child {
+		border: none;
+		border-right: 1px solid @body-color;
+	}
+}
+
+footer {
+	text-align: center;
+}
