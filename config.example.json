@@ -1,0 +1,11 @@
+{
+	"port":8080,
+	"cookies": {
+		"secret": "ExampleCookie",
+		"resave": false,
+		"saveUninitialized": true
+	},
+	"postgres": {
+		"connectionString":"postgres://admin:admin@localhost:5432/noncash"
+	}
+}
