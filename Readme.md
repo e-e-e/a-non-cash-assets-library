@@ -1,16 +1,14 @@
-# A non-cash asset library.
+# Arts Asset Platform (working title)
 
-## about
+*Need to include some text about the project here.*
 
-include some text about the project
-
-## running
+## Setup for development
 
 ```sh
 # install gulp globally for dev
 sudo npm i gulp -g
 
-# install dependancies
+# install node dependancies and run task
 npm install
 gulp
 
@@ -23,11 +21,23 @@ gulp run
 
 ```
 
-requires config.json:
+Requires config.json:
 
 ```js
 {
-	"port": 8080
+	"port":8080,
+	"cookies": {
+		"secret": "ExampleCookie",
+		"resave": false,
+		"saveUninitialized": true
+	},
+	"postgres": {
+		"connectionString":"postgres://admin:admin@localhost:5432/noncash"
+	}
 }
 ```
+
+Requires postgreSQL database running locally. On Mac OSX you can use [PostgresApp](http://postgresapp.com)
+Opening `database.sql` within psql should correctly set up the database: `\i \path\to\database.sql`
+
 
