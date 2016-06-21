@@ -37,9 +37,9 @@ function configure_router (passport) {
 		res.redirect('/');
 	}
 
-	/** */
+	/** Function to make template rendering routes */
 	function render_template (template) {
-		return (req,res)=>{
+		return (req,res) => {
 			res.render(template, req.data);
 		};
 	}
