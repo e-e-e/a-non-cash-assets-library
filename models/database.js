@@ -25,6 +25,7 @@ const query = function(text, values) {
 	}
 
 	var deferred = Q.defer();
+	//FIX THIS - connection parameter is not begin set by config.json
 	pg.connect(connectionParameters, (err,client,done) => {
 		if(err)	{
 			done(err);

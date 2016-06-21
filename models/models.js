@@ -12,8 +12,15 @@ const hash = Q.nfbind(bcrypt.hash);
 const genSalt = Q.nfbind(bcrypt.genSalt);
 const compare = Q.nfbind(bcrypt.compare);
 
-class Users {
 
+/** Interface to Users within the database. */
+class Users {
+	/** 
+	 * Retrieve user from database. 
+	 * @param {number|string} id - user_id or email address of user
+	 * @param {string} [password] - password to compare, rejects if passwords do not match 
+	 * @returns {Promise} resolves to user object.
+	 */
 	get (id, password) {
 		var q;
 		if(!id) {
@@ -45,23 +52,36 @@ class Users {
 		return q.then(result => result.rows[0]);
 	}
 
+	/** 
+	 * Add new user to database. 
+	 * Validates data and hashes password.
+	 * @param {string} name - username
+	 * @param {string} email - user's email
+	 * @param {string} password - the user's new password.
+	 * @returns {Promise} resolves to user_id of new user.
+	 */
 	add (name, email, password ) {
+		// TODO: validate name
+
 		// validate password
 		if(!password || typeof password !== 'string' || 
 				password.length < 6 || !validator.isAscii(password)){
 			return Q.reject('Password must be greater than 6 characters long and standard characters.');
 		}
+
 		// validate email
 		if(!validator.isEmail(email)) {
 			return Q.reject('Email is not valid.');
 		}
 
-		//sanitise 
+		// sanitise email
 		var nice_email = validator.normalizeEmail( email, { lowercase: true, remove_dots: false, remove_extension: true });
+		
+		// TODO: sanitise name - only valid characters
 		var nice_name = name;
-		// then hash password
-		// insert results into database 
 
+		// then hash password and
+		// insert results into database 
 		return genSalt(10)
 			.then( salt => hash(password,salt))
 			.then( hashed => {
@@ -72,7 +92,6 @@ class Users {
 				return result.rows[0];
 			});
 	}
-
 }
 
 /*global exports:true*/

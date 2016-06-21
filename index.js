@@ -3,6 +3,10 @@
 
 "use strict";
 
+//
+// Need to make a nice defaults function in case 
+// options are not explicitly passed, or config.json is absent.
+//
 // function defaults() {
 // 	var options;
 // 	try {

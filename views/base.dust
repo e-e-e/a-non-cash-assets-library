@@ -23,7 +23,9 @@
 		</nav>
 	</header>
 	<hr>
-	<content>{+content/}</content>
+	<main>
+		{+content/}
+	</main>
 	<hr>
 	<footer>
 		<sub>Footer Text</sub>
