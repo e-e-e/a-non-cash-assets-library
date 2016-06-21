@@ -9,10 +9,10 @@ const Q = require('q');
 var connectionParameters = 'postgres://admin:admin@localhost:5432/noncash';
 
 class Query {
-	constructor() {
-		this.name = null;
-		this.text = null;
-		this.values = null;
+	constructor(name, text, values) {
+		this.name = name;
+		this.text = text;
+		this.values = values;
 	}
 }
 
@@ -25,7 +25,7 @@ const query = function(text, values) {
 	}
 
 	var deferred = Q.defer();
-	//FIX THIS - connection parameter is not begin set by config.json
+	// FIX THIS - connection parameter is not begin set by config.json
 	pg.connect(connectionParameters, (err,client,done) => {
 		if(err)	{
 			done(err);
