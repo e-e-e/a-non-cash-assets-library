@@ -37,7 +37,8 @@ Requires config.json:
 }
 ```
 
-Requires postgreSQL database running locally. On Mac OSX you can use [PostgresApp](http://postgresapp.com)
+Requires postgreSQL database running locally. On Mac OSX you can use [PostgresApp](http://postgresapp.com).
+
 Opening `database.sql` within psql should correctly set up the database: `\i \path\to\database.sql`
 
 
