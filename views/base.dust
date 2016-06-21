@@ -28,7 +28,7 @@
 	</main>
 	<hr>
 	<footer>
-		<sub>Footer Text</sub>
+		<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
 	</footer>
 </body>
 </html>
