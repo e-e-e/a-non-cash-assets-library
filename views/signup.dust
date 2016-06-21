@@ -1,0 +1,14 @@
+{>base/}
+{<content}
+<h2>Signup</h2>
+{?error}<div class="message error">{error}</div>{/error}
+<form action="/signup" method="post">
+	<label for="name">Username*</label>
+	<input type="text" name="name" required><br>
+	<label for "email">Email*</label>
+	<input type="email" name="email" required><br>
+	<label for="password">Password*</label>
+	<input type="password" name="password" required><br>
+	<button type="submit">Signup Now</button>
+</form>
+{/content}

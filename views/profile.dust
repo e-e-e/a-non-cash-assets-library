@@ -1,0 +1,5 @@
+{>base/}
+{<content}
+<h2> Hello {user.name}</h2>
+<p>Your email is {user.email}</p>
+{/content}
