@@ -10,15 +10,15 @@
 	<p>Nothing currently listed</p>
 	{/haves}
 </section>
-<section id="wants">
-	<h2>Wants</h2>
-	{?wants}
+<section id="needs">
+	<h2>Needs</h2>
+	{?needs}
 	<ul>
-		{#wants}
+		{#needs}
 		<li>{.}</li>
-		{/wants}
+		{/needs}
 	</ul>
 	{:else}
 	<p>Nothing currently listed</p>
-	{/wants}
+	{/needs}
 </section>
