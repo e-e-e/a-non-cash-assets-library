@@ -33,7 +33,7 @@ CREATE TABLE haves (
   PRIMARY KEY(user_id,thing_id)
 );
 
-CREATE TABLE wants (
+CREATE TABLE needs (
   user_id integer references users(user_id) 
   ON UPDATE CASCADE ON DELETE CASCADE,
   thing_id integer references things(thing_id)
