@@ -114,18 +114,18 @@ class Things {
 				if (thing.type === 'have') {
 					return db.query('INSERT INTO haves (user_id, thing_id) VALUES ($1, $2)', [ user_id,thing_id ] );
 				}	else if (thing.type === 'need') {
-					return db.query('INSERT INTO wants (user_id, thing_id) VALUES ($1, $2)', [ user_id,thing_id ] );
+					return db.query('INSERT INTO needs (user_id, thing_id) VALUES ($1, $2)', [ user_id,thing_id ] );
 				} else {
 					throw "Invalid Thing Type";
 				}
 			});
 	}
 
-	haves(user_id) {
+	haves (user_id) {
 
 	}
 
-	wants(user_id) {
+	needs (user_id) {
 		
 	}
 }
