@@ -1,21 +1,4 @@
 {>base/}
 {<content}
-
-<section id="haves">
-	<h2>Haves</h2>
-	<ul>
-		{#haves}
-		<li>{.}</li>
-		{/haves}
-	</ul>
-</section>
-<section id="wants">
-	<h2>Wants</h2>
-	<ul>
-		{#wants}
-		<li>{.}</li>
-		{/wants}
-	</ul>
-</section>
-
+{>things/}
 {/content}

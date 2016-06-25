@@ -4,6 +4,7 @@
 "use strict";
 
 const express = require('express');
+const models = require('./models/models.js');
 
 module.exports.router = configure_router;
 
@@ -39,9 +40,7 @@ function configure_router (passport) {
 
 	/** Function to make template rendering routes */
 	function render_template (template) {
-		return (req,res) => {
-			res.render(template, req.data);
-		};
+		return (req,res) => res.render(template, req.data);
 	}
 
 	/* Get routes */
@@ -64,7 +63,7 @@ function configure_router (passport) {
 	
 	router.get('/profile', 
 							is_logged_in, 
-							attach_template_data, 
+							attach_template_data,
 							render_template('profile'));
 
 	router.get('/logout', (req,res)=> {
@@ -73,6 +72,15 @@ function configure_router (passport) {
 	});
 
 	/* Post routes */
+
+	// contribution 
+
+	router.post('/contribute', is_logged_in, (req, res) => {
+		console.log(req.body);
+		res.redirect('/profile');
+	});
+
+	// authentication
 
 	router.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile',

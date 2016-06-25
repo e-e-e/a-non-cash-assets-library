@@ -1,0 +1,24 @@
+<section id="haves">
+	<h2>Haves</h2>
+	{?haves}
+	<ul>
+		{#haves}
+		<li>{.}</li>
+		{/haves}
+	</ul>
+	{:else}
+	<p>Nothing currently listed</p>
+	{/haves}
+</section>
+<section id="wants">
+	<h2>Wants</h2>
+	{?wants}
+	<ul>
+		{#wants}
+		<li>{.}</li>
+		{/wants}
+	</ul>
+	{:else}
+	<p>Nothing currently listed</p>
+	{/wants}
+</section>

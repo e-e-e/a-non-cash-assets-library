@@ -2,4 +2,8 @@
 {<content}
 <h2> Hello {user.name}</h2>
 <p>Your email is {user.email}</p>
+<p>This is your profile page, here you can view your shared <strong>haves</strong> and <strong>needs</strong>, as well as add new things.</p>
+<h3>Your things:</h3>
+{>things/}
+{>contribute/}
 {/content}

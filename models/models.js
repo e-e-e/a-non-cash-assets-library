@@ -12,6 +12,12 @@ const hash = Q.nfbind(bcrypt.hash);
 const genSalt = Q.nfbind(bcrypt.genSalt);
 const compare = Q.nfbind(bcrypt.compare);
 
+const normalize_email_options = { 
+	lowercase: true, 
+	remove_dots: false, 
+	remove_extension: true 
+};
+
 
 /** Interface to Users within the database. */
 class Users {
@@ -29,7 +35,7 @@ class Users {
 				.then( result => result.rows );
 		}
 		if(typeof id === 'string') {
-			var email = validator.normalizeEmail( id, { lowercase: true, remove_dots: false, remove_extension: true });
+			var email = validator.normalizeEmail( id, normalize_email_options);
 			if (password)
 				q = db.query('SELECT user_id, name, email, password FROM users WHERE email = $1',[email])
 					.then( result => {
@@ -75,7 +81,7 @@ class Users {
 		}
 
 		// sanitise email
-		var nice_email = validator.normalizeEmail( email, { lowercase: true, remove_dots: false, remove_extension: true });
+		var nice_email = validator.normalizeEmail( email, normalize_email_options);
 		
 		// TODO: sanitise name - only valid characters
 		var nice_name = name;
@@ -97,13 +103,22 @@ class Users {
 	}
 }
 
+/** Interface to Things within the database. */
 class Things {
 
-	haves() {
+	add (user_id, thing) {
+		return db.query('INSERT INTO things (name,description) VALUES ($1, $2) RETURNING thing_id',[thing.name, thing.description])
+			.then( result => {
+				let thing_id = result.rows[0].thing_id;
+				return db.query('INSERT INTO $1 (user_id, thing_id) VALUES ($2, $3)', [ 'haves', user_id,thing_id ] );
+			});
+	}
+
+	haves(user_id) {
 
 	}
 
-	needs() {
+	needs(user_id) {
 		
 	}
 }

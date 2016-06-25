@@ -1,0 +1,11 @@
+<h2>Contribute a need or have:</h2>
+<form name="contribute" action="contribute" method="post">
+	<label for="type">Choose type: </label><select name="type">
+		<option>have</option>
+		<option>need</option>
+	</select><br>
+	<label for="name">Short name:</label><input type="text" name="name"></input><br>
+	<label for="description">Longer description:</label><br>
+	<textarea name="description" ></textarea><br>
+	<button type="submit">Contribute</button>
+</form>
