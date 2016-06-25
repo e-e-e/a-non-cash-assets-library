@@ -107,10 +107,17 @@ class Users {
 class Things {
 
 	add (user_id, thing) {
+		//add validation here. what if thing has no name.
 		return db.query('INSERT INTO things (name,description) VALUES ($1, $2) RETURNING thing_id',[thing.name, thing.description])
 			.then( result => {
 				let thing_id = result.rows[0].thing_id;
-				return db.query('INSERT INTO $1 (user_id, thing_id) VALUES ($2, $3)', [ 'haves', user_id,thing_id ] );
+				if (thing.type === 'have') {
+					return db.query('INSERT INTO haves (user_id, thing_id) VALUES ($1, $2)', [ user_id,thing_id ] );
+				}	else if (thing.type === 'need') {
+					return db.query('INSERT INTO wants (user_id, thing_id) VALUES ($1, $2)', [ user_id,thing_id ] );
+				} else {
+					throw "Invalid Thing Type";
+				}
 			});
 	}
 
@@ -118,7 +125,7 @@ class Things {
 
 	}
 
-	needs(user_id) {
+	wants(user_id) {
 		
 	}
 }

@@ -4,7 +4,7 @@
 "use strict";
 
 const express = require('express');
-const models = require('./models/models.js');
+const models = require('../models/models.js');
 
 module.exports.router = configure_router;
 
@@ -75,12 +75,23 @@ function configure_router (passport) {
 
 	// contribution 
 
-	router.post('/contribute', is_logged_in, (req, res) => {
+	router.post('/contribute', is_logged_in, (req, res, next) => {
 		console.log(req.body);
-		res.redirect('/profile');
+		models.things.add(req.user.user_id, req.body)
+			.then(result => res.redirect('/profile') )
+			.catch( err => {
+				console.log(err);
+				if ( typeof err === 'string' ) {
+					req.flash('error', err);
+					res.redirect('/profile');
+				} else {
+					next(err);
+				}
+			})
+		;
 	});
 
-	// authentication
+	// authentication signup/login
 
 	router.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile',
