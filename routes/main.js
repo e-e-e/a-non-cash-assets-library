@@ -4,7 +4,9 @@
 "use strict";
 
 const express = require('express');
-const models = require('../models/models.js');
+const Q 			= require('q');
+
+const models 	= require('../models/models.js');
 
 module.exports.router = configure_router;
 
@@ -31,6 +33,16 @@ function configure_router (passport) {
 		next();
 	}
 
+	/** Middleware to add haves and wants to template data */
+	function get_haves_and_wants (req,res, next) {
+		Q.all([models.things.haves(),models.things.needs()])
+			.spread( (haves, needs) => {
+				req.data.haves = haves;
+				req.data.needs = needs;
+			}).catch(err=> console.log('error getting haves/needs'))
+			.then(()=>next()); // an array of have objects
+	}
+
 	/** Simple middleware function to check if user is loged in before accessing restricted routes */
 	function is_logged_in(req, res, next) {
 		if (req.isAuthenticated())
@@ -46,7 +58,8 @@ function configure_router (passport) {
 	/* Get routes */
 
 	router.get('/', 
-							attach_template_data, 
+							attach_template_data,
+							get_haves_and_wants,
 							render_template('index'));
 	
 	router.get('/login', 

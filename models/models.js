@@ -106,6 +106,11 @@ class Users {
 /** Interface to Things within the database. */
 class Things {
 
+	constructor () {
+		this.select_needs = "SELECT u.name, t.name FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_haves = "SELECT u.name, t.name FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+	}
+
 	add (user_id, thing) {
 		//add validation here. what if thing has no name.
 		return db.query('INSERT INTO things (name,description) VALUES ($1, $2) RETURNING thing_id',[thing.name, thing.description])
@@ -122,11 +127,11 @@ class Things {
 	}
 
 	haves (user_id) {
-
+		return db.query(this.select_haves).then( res => res.rows );
 	}
 
 	needs (user_id) {
-		
+		return db.query(this.select_needs).then( res => res.rows );
 	}
 }
 
