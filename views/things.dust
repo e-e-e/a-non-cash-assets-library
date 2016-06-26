@@ -3,7 +3,7 @@
 	{?haves}
 	<ul>
 		{#haves}
-		<li>{.}{@contextDump/}</li>
+			{>thing-basicview/}
 		{/haves}
 	</ul>
 	{:else}
@@ -15,7 +15,7 @@
 	{?needs}
 	<ul>
 		{#needs}
-		<li>{.}{@contextDump/}</li>
+			{>thing-basicview/}
 		{/needs}
 	</ul>
 	{:else}
