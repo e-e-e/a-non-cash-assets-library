@@ -107,8 +107,8 @@ class Users {
 class Things {
 
 	constructor () {
-		this.select_needs = "SELECT u.name as owner, t.name FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
-		this.select_haves = "SELECT u.name as owner, t.name FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_needs = "SELECT u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_haves = "SELECT u.user_id as owner_id, u.name as owner, t.name, t.thing_id, t.description FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
 		this.select_needs_with_user_id = this.select_needs + "WHERE user_id = $1";
 		this.select_haves_with_user_id = this.select_haves + "WHERE user_id = $1";
 	}
