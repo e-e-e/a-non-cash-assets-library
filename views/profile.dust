@@ -4,6 +4,6 @@
 <p>Your email is {user.email}</p>
 <p>This is your profile page, here you can view your shared <strong>haves</strong> and <strong>needs</strong>, as well as add new things.</p>
 <h3>Your things:</h3>
-{>things haves=user.haves needs=user.needs/}
-{>contribute/}
+{>"partials/things" haves=user.haves needs=user.needs/}
+{>"partials/contribute"/}
 {/content}

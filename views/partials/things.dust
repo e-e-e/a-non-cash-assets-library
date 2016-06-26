@@ -1,0 +1,47 @@
+<div class="table">
+	<div class="cell">
+		<section id="haves">
+			<div class="header">
+				<h2>Haves</h2>
+			</div>
+			<div class="scrolling">
+				{?haves}
+				<ul>
+					{#haves}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+					{/haves}
+				</ul>
+				{:else}
+				<p>Nothing currently listed</p>
+				{/haves}
+			</div>
+		</section>
+	</div>
+	<div class="cell">
+		<section id="needs">
+			<div class="header">
+				<h2>Needs</h2>
+			</div>
+			<div class="scrolling">
+				{?needs}
+				<ul>
+					{#needs}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview"/}
+					{/needs}
+				</ul>
+				{:else}
+				<p>Nothing currently listed</p>
+				{/needs}
+			</div>
+		</section>
+	</div>
+</div>

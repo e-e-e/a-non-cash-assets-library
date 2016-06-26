@@ -115,6 +115,7 @@ class Things {
 
 	add (user_id, thing) {
 		//add validation here. what if thing has no name.
+		//what about html injection? is this covered by dustjs?
 		return db.query('INSERT INTO things (name,description) VALUES ($1, $2) RETURNING thing_id',[thing.name, thing.description])
 			.then( result => {
 				let thing_id = result.rows[0].thing_id;

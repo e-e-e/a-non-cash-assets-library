@@ -6,29 +6,38 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.min.css">
 </head>
 <body>
-	<header>
-		<nav id="user-nav">
-			{?user}
-				(Logged in as <a href="/profile">{user.name}</a>) <a href="/logout">logout</a>
-			{:else}
-				<a href="/login">login</a> or 
-				<a href="/signup">sign up</a>
-			{/user}
-		</nav>
-		<h1>{title}</h1>
-		<nav id="main-nav">
-			{#menu}
-				<span>{@ne key=link value=path}<a href="{link}">{name}</a>{:else}{name}{/ne}</span> 
-			{/menu}
-		</nav>
-	</header>
-	<hr>
-	<main>
-		{+content/}
-	</main>
-	<hr>
-	<footer>
-		<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
-	</footer>
+	<div class="wrapper">
+		<header class="row">
+			<nav id="user-nav">
+				{?user}
+					(Logged in as <a href="/profile">{user.name}</a>) <a href="/logout">logout</a>
+				{:else}
+					<a href="/login">login</a> or 
+					<a href="/signup">sign up</a>
+				{/user}
+			</nav>
+			<h1>{title}</h1>
+			<nav id="main-nav">
+				{#menu}
+					<span>{@ne key=link value=path}<a href="{link}">{name}</a>{:else}{name}{/ne}</span>
+				{/menu}
+				{?user}
+					<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>
+				{/user}
+			</nav>
+		</header>
+		<hr>
+		<main class="row">
+			<div style="position:relative; width: 100%; height: 100%;">
+				<div class="scrolling">
+					{+content/}
+				</div>
+			</div>
+		</main>
+		<hr>
+		<footer class="row">
+			<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
+		</footer>
+	</div>
 </body>
 </html>

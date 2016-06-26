@@ -1,4 +1,4 @@
 {>base/}
 {<content}
-{>things/}
+{>"partials/things"/}
 {/content}

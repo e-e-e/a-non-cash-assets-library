@@ -21,10 +21,10 @@ function configure_router (passport) {
 			title: 'arts asset platform',
 			path: req.path,
 			menu: [{ 
-				name: 'home',
+				name: 'Listings',
 				link:'/',
 				},{ 
-				name: 'about',
+				name: 'About',
 				link:'/about' 
 			}],
 			user: req.user,
