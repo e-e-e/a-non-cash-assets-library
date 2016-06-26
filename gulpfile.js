@@ -4,6 +4,8 @@
 "use strict";
 
 const gulp = require('gulp');
+const gutil = require('gulp-util');
+const watch = require('gulp-watch');
 const less = require('gulp-less');
 const cleanCSS = require( 'gulp-clean-css');
 const rename = require( 'gulp-rename');
@@ -34,6 +36,7 @@ gulp.task('clean', (done) => {
 gulp.task('styles', () => {
 	return gulp.src(paths.styles.src)
 		.pipe(less())
+		.on('error',gutil.log)
 		.pipe(cleanCSS())
 		.pipe(rename({
 			suffix: '.min'
@@ -44,6 +47,7 @@ gulp.task('styles', () => {
 gulp.task('hinting', () => {
 	return gulp.src(paths.hinting.src)
 		.pipe(jshint())
+		.on('error',gutil.log)
 		.pipe(jshint.reporter('default'));
 });
 
@@ -59,9 +63,9 @@ gulp.task('server', () => {
 
 gulp.task('run', () => {
 	runSequence('clean',['hinting','styles'], 'server', function(){
-		gulp.watch(paths.server.watch, ['server']);
-		gulp.watch(paths.styles.src,['styles']);
-		gulp.watch(paths.hinting.src,['hinting']);
+		watch(paths.server.watch, () => gulp.start('server'));
+		watch(paths.styles.src,() => gulp.start('styles'));
+		watch(paths.hinting.src,() => gulp.start('hinting'));
 	});
 });
 
