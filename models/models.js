@@ -107,8 +107,10 @@ class Users {
 class Things {
 
 	constructor () {
-		this.select_needs = "SELECT u.name, t.name FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
-		this.select_haves = "SELECT u.name, t.name FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_needs = "SELECT u.name as owner, t.name FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_haves = "SELECT u.name as owner, t.name FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id)";
+		this.select_needs_with_user_id = this.select_needs + "WHERE user_id = $1";
+		this.select_haves_with_user_id = this.select_haves + "WHERE user_id = $1";
 	}
 
 	add (user_id, thing) {
@@ -127,11 +129,21 @@ class Things {
 	}
 
 	haves (user_id) {
-		return db.query(this.select_haves).then( res => res.rows );
+		var q;
+		if(user_id)
+			q = db.query(this.select_haves_with_user_id, [user_id]);
+		else 
+			q = db.query(this.select_haves);
+		return q.then( res => res.rows );
 	}
 
 	needs (user_id) {
-		return db.query(this.select_needs).then( res => res.rows );
+		var q;
+		if(user_id)
+			q = db.query(this.select_needs_with_user_id, [user_id]);
+		else 
+			q = db.query(this.select_needs);
+		return q.then( res => res.rows );
 	}
 }
 

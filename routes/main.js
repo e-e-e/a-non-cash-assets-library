@@ -35,10 +35,23 @@ function configure_router (passport) {
 
 	/** Middleware to add haves and wants to template data */
 	function get_haves_and_wants (req,res, next) {
-		Q.all([models.things.haves(),models.things.needs()])
-			.spread( (haves, needs) => {
+		Q.all([
+				models.things.haves(),
+				models.things.needs()
+			]).spread( (haves, needs) => {
 				req.data.haves = haves;
 				req.data.needs = needs;
+			}).catch(err=> console.log('error getting haves/needs'))
+			.then(()=>next()); // an array of have objects
+	}
+
+	function get_haves_and_wants_of_user (req,res, next) {
+		Q.all([
+				models.things.haves(req.user.user_id),
+				models.things.needs(req.user.user_id)
+			]).spread( (haves, needs) => {
+				req.data.user.haves = haves;
+				req.data.user.needs = needs;
 			}).catch(err=> console.log('error getting haves/needs'))
 			.then(()=>next()); // an array of have objects
 	}
@@ -77,6 +90,7 @@ function configure_router (passport) {
 	router.get('/profile', 
 							is_logged_in, 
 							attach_template_data,
+							get_haves_and_wants_of_user,
 							render_template('profile'));
 
 	router.get('/logout', (req,res)=> {
