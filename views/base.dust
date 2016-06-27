@@ -28,11 +28,7 @@
 		</header>
 		<hr>
 		<main class="row">
-			<div style="position:relative; width: 100%; height: 100%;">
-				<div class="scrolling">
-					{+content/}
-				</div>
-			</div>
+			{+content/}
 		</main>
 		<hr>
 		<footer class="row">

@@ -9,10 +9,6 @@
 				<ul>
 					{#haves}
 						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
 					{/haves}
 				</ul>
 				{:else}
@@ -30,11 +26,6 @@
 				{?needs}
 				<ul>
 					{#needs}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
-						{>"partials/thing-basicview"/}
 						{>"partials/thing-basicview"/}
 					{/needs}
 				</ul>
