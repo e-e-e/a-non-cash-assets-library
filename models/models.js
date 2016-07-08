@@ -7,6 +7,7 @@ const validator = require('validator');
 const Q 				= require('q');
 const bcrypt		= require('bcrypt');
 const db 				= require('./database.js');
+const transactions = require('../transactions/');
 
 const hash = Q.nfbind(bcrypt.hash);
 const genSalt = Q.nfbind(bcrypt.genSalt);
@@ -94,7 +95,11 @@ class Users {
 				console.log(hashed.length);
 				return db.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING user_id',[nice_name, nice_email, hashed]);
 				})
-			.tap(()=>{
+			.tap( result =>{
+				return transactions.welcome(nice_email,{
+					name:nice_name, 
+					verify:'http://localhost:8080/validate?'+encodeURIComponent(nice_email)
+				}).catch(err=> console.log('failed to send message!', err));
 				// send an email to verify account.
 			})
 			.then( result => {

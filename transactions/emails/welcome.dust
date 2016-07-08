@@ -1,0 +1,2 @@
+<h1>Welcome {name}</h1>
+<p>To finalise your account please validate your email <a href="{verify}">here</a>.</p>
