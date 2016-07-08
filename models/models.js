@@ -98,13 +98,17 @@ class Users {
 			.tap( result =>{
 				return transactions.welcome(nice_email,{
 					name:nice_name, 
-					verify:'http://localhost:8080/validate?'+encodeURIComponent(nice_email)
+					verify:'http://localhost:8080/verify/'+encodeURIComponent(nice_email)
 				}).catch(err=> console.log('failed to send message!', err));
 				// send an email to verify account.
 			})
 			.then( result => {
 				return result.rows[0];
 			});
+	}
+
+	verify (email) {
+		return db.query('UPDATE users SET verified = true WHERE email = $1',[email]);
 	}
 }
 

@@ -82,7 +82,7 @@ function configure_router (passport) {
 	router.get('/signup', 
 							attach_template_data, 
 							render_template('signup'));
-	
+
 	router.get('/about', 
 							attach_template_data, 
 							render_template('about'));
@@ -92,6 +92,23 @@ function configure_router (passport) {
 							attach_template_data,
 							get_haves_and_wants_of_user,
 							render_template('profile'));
+
+	router.get('/verify/:email', (req,res) => {
+		models.users.verify(req.params.email)
+			.then(count=> {
+				if(count>0) {
+					req.flash('message', 'Account verified.');
+					res.redirect('/profile');
+				} else {
+					req.flash('error', 'Email not found.');
+					res.redirect('/');
+				}
+			})
+			.catch(err=> {
+				req.flash('error', err);
+				res.redirect('/');
+			});
+	});
 
 	router.get('/logout', (req,res)=> {
 		req.logout();
@@ -131,18 +148,6 @@ function configure_router (passport) {
 		failureRedirect : '/login',
 		failureFlash : true
 	}));
-
-	// router.get('/:path', (req,res)=> {
-	// 	res.render(req.params.path, {}, (err, html) => {
-	// 		if (err) {
-	// 			if (err.message.indexOf('Failed to lookup view') !== -1) {
-	// 				return res.render('index',{title:'something else'});
-	// 			}
-	// 			throw err;
-	// 		}
-	// 		res.send(html);
-	// 	});
-	// });
 
 	return router;
 }
