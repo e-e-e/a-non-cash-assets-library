@@ -28,6 +28,7 @@ function configure_router (passport) {
 				link:'/about' 
 			}],
 			user: req.user,
+			message: req.flash('message'),
 			error: req.flash('error') /* get error if raised on previous route */
 		};
 		next();
@@ -94,7 +95,7 @@ function configure_router (passport) {
 							render_template('profile'));
 
 	router.get('/verify/:email', (req,res) => {
-		models.users.verify(req.params.email)
+		models.users.verify(decodeURI(req.params.email))
 			.then(count=> {
 				if(count>0) {
 					req.flash('message', 'Account verified.');

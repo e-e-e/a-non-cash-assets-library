@@ -19,7 +19,6 @@ const normalize_email_options = {
 	remove_extension: true 
 };
 
-
 /** Interface to Users within the database. */
 class Users {
 	/** 
@@ -98,7 +97,7 @@ class Users {
 			.tap( result =>{
 				return transactions.welcome(nice_email,{
 					name:nice_name, 
-					verify:'http://localhost:8080/verify/'+encodeURIComponent(nice_email)
+					verify:'/verify/'+encodeURIComponent(nice_email)
 				}).catch(err=> console.log('failed to send message!', err));
 				// send an email to verify account.
 			})
@@ -108,7 +107,12 @@ class Users {
 	}
 
 	verify (email) {
-		return db.query('UPDATE users SET verified = true WHERE email = $1',[email]);
+		return db.query('UPDATE users SET verified = true WHERE email = $1',[email])
+			.tap(count => {
+				if(count>0) {
+					transactions.verified(email, { profile: '/profile' });
+				}
+			});
 	}
 }
 

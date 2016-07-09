@@ -57,7 +57,7 @@ app.use(main_router.router(passport));
 
 app.use(errorHandler());
 
-server.listen(options.port, (err,res) => {
+server.listen(options.server.port, (err,res) => {
 	if(err)	console.log(err);
-	else console.log('listening to port', options.port);
+	else console.log('listening to port ', options.server.port);
 });

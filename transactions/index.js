@@ -3,23 +3,51 @@
 
 'use strict';
 
-const options = require('../config.json').mailgun;
+const options = require('../config.json');
 const path = require('path');
 const Q = require('q');
 const Mailgun = require('mailgun-js');
 const kleiDust = require('klei-dust');
 
+const default_data = {
+	'domain': options.server.domain
+};
+
 const templates = {
 	welcome: {
 		subject: "Thanks for signing up to the Arts Asset Platform.",
 		body: path.join(__dirname,"/emails/welcome.dust")
+	},
+	verified: {
+		subject: "Arts Asset Platform Account Verified",
+		body: path.join(__dirname,"/emails/verified.dust")
 	}
 };
 
+// export each template as a function
+for (let template in templates) {
+	module.exports[template] = make_send_func(templates[template]);
+}
+
+function make_send_func (template) {
+	return (to, data) => send_email(template,to, data);
+} 
+
+function mixin(data, obj) {
+	for(let property in obj) {
+		if ( obj.hasOwnProperty(property) && 
+				!data.hasOwnProperty(property) ) {
+			data[property] = obj[property];
+		}
+	}
+	return data;
+}
+
 function send_email(template, to, data) {
 	var deferred = Q.defer();
-
-	var mg = new Mailgun({ domain:options.domain, apiKey:options.apiKey });
+	var mg = new Mailgun({ domain:options.mailgun.domain, apiKey:options.mailgun.apiKey });
+	//mixin default data
+	data = mixin(data,default_data);
 	kleiDust.dust(template.body, data, (err, body) => {
 		if(err)
 			return deferred.reject(err);
@@ -34,11 +62,3 @@ function send_email(template, to, data) {
 	return deferred.promise;
 }
 
-function make_send_func (template) {
-	return (to, data) => send_email(template,to, data);
-} 
-
-// refactor this to be automatically built from templates object
-exports = module.exports = {
-	welcome: make_send_func(templates.welcome),
-};
