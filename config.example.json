@@ -1,5 +1,8 @@
 {
-	"port":8080,
+	"server": {
+		"domain":"http://localhost:8080",
+		"port":8080
+	},
 	"cookies": {
 		"secret": "ExampleCookie",
 		"resave": false,
@@ -7,5 +10,10 @@
 	},
 	"postgres": {
 		"connectionString":"postgres://admin:admin@localhost:5432/noncash"
+	},
+	"mailgun": {
+		"domain":"mailgun.domain",
+		"apiKey":"your-api-key",
+		"publicKey":"your-public-key"
 	}
 }
