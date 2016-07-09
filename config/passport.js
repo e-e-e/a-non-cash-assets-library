@@ -34,7 +34,7 @@ module.exports = function(passport) {
 			passwordField : 'password',
 			passReqToCallback : true
 		},(req,email,password, done) => {
-			users.get(email)
+			users.get(email,password)
 				.then(handle_user(done,req))
 				.catch(handle_rejection(done,req));
 		})

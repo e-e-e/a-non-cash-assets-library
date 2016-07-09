@@ -41,9 +41,11 @@ class Users {
 					.then( result => {
 						if(!result.rows) 
 							return Q.reject('Email or password is incorrect');
-						return Q.all(compare(password,result.rows[0].password), result);
+						console.log(result);
+						return Q.all([compare(password,result.rows[0].password), result]);
 					})
 					.spread( (match, result) => {
+						console.log('ok');
 						if(!match) 
 							return Q.reject('Password is incorrect');
 						//remove password from returned user

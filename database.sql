@@ -6,7 +6,7 @@ CREATE DATABASE noncash OWNER admin;
 
 CREATE TABLE users (
   user_id serial PRIMARY KEY UNIQUE,
-  name varchar (50) NOT NULL,
+  name varchar (50) NOT NULL UNIQUE,
   email varchar (254) NOT NULL UNIQUE,
   password char(60) NOT NULL,
   verified boolean DEFAULT false,
