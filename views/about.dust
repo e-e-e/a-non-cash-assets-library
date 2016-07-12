@@ -1,10 +1,5 @@
 {>base/}
 {<content}
 <h2>About</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>“Arts Assets Platform” is the working title for a non-cash assets digital library and facilitator. We’re currently developing this through conversations with you, our community, about what stands in the way between your creative ideas and realising them (aside from the need for cold, hard cash). We’re researching how we currently find or share the skills, spaces and tools that we have and trying to build a space (digital and physical) that facilitates sharing particularly for the underrepresented and under-resourced artists among us.</p>
 {/content}
