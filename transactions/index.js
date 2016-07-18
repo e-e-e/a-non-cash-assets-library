@@ -30,7 +30,11 @@ for (let template in templates) {
 }
 
 function make_send_func (template) {
-	return (to, data) => send_email(template,to, data);
+	if(options.server.transactions==="mailgun") {
+		return (to, data) => send_email(template,to, data);
+	} else {
+		return Q.reject('No transactional email setup.');
+	}
 } 
 
 function mixin(data, obj) {

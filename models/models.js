@@ -112,7 +112,7 @@ class Users {
 		return db.query('UPDATE users SET verified = true WHERE email = $1',[email])
 			.tap(result => {
 				if(result.rowCount>0) {
-					transactions.verified(email, { profile: '/profile' }).catch(err=> console.log('failed to send message!', err));
+					return transactions.verified(email, { profile: '/profile' }).catch(err=> console.log('failed to send message!', err));
 				}
 			});
 	}
