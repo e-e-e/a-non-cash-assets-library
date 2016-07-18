@@ -21,7 +21,7 @@ function configure_router (passport) {
 			title: 'arts assets platform',
 			path: req.path,
 			menu: [{ 
-				name: 'Haves/Wants',
+				name: 'Haves/Needs',
 				link:'/',
 				},{ 
 				name: 'About',
