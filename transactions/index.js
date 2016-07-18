@@ -33,7 +33,7 @@ function make_send_func (template) {
 	if(options.server.transactions==="mailgun") {
 		return (to, data) => send_email(template,to, data);
 	} else {
-		return Q.reject('No transactional email setup.');
+		return (to, data) => Q.reject('No transactional email setup.');
 	}
 } 
 
