@@ -138,7 +138,7 @@ function configure_router (passport) {
 	router.post('/contribute', is_logged_in, (req, res) => {
 		models.things.add(req.user.user_id, req.body)
 			.then( result => {
-				res.flash('message',"successfully added need or have");
+				req.flash('message',"successfully added need or have");
 				res.redirect('/profile');
 			})
 			.catch( handle_error(req,res,'/profile') )
