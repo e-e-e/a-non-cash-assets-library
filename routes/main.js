@@ -57,6 +57,14 @@ function configure_router (passport) {
 			.then(()=>next()); // an array of have objects
 	}
 
+	function get_random_thing (req,res,next) {
+		models.things.random()
+			.then( thing => {
+				req.data.randomthing = thing;
+			}).catch(err => console.log(err))
+			.then(() => next());
+	}
+
 	/** Simple middleware function to check if user is loged in before accessing restricted routes */
 	function is_logged_in(req, res, next) {
 		if (req.isAuthenticated())
@@ -111,6 +119,18 @@ function configure_router (passport) {
 			is_logged_in,
 			attach_template_data,
 			render_template('profile/password'));
+
+	router.get('/profile/add-a-need',
+			is_logged_in,
+			attach_template_data,
+			get_random_thing,
+			render_template('profile/add-a-need'));
+
+	router.get('/profile/add-a-have',
+			is_logged_in,
+			attach_template_data,
+			get_random_thing,
+			render_template('profile/add-a-have'));
 
 	router.get('/verify/:email', (req,res) => {
 		models.users.verify(decodeURI(req.params.email))

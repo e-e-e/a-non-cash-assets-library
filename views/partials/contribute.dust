@@ -1,11 +1,15 @@
-<h2>Contribute a need or have:</h2>
-<form name="contribute" action="contribute" method="post">
+<form name="contribute" action="/contribute" method="post">
+	{?type}
+		<input type="hidden" name="type" value="{type}">
+	{:else}
 	<label for="type">Choose type: </label><select name="type">
 		<option>have</option>
 		<option>need</option>
 	</select><br>
-	<label for="name">Short name:</label><input type="text" name="name"></input><br>
+	{/type}
+	<label for="name">Short name:</label>
+	<input type="text" name="name" placeholder="eg. {randomthing.name}"></input><br>
 	<label for="description">Longer description:</label><br>
-	<textarea name="description" ></textarea><br>
+	<textarea name="description" placeholder="{+placeholder/}"></textarea><br>
 	<button type="submit">Contribute</button>
 </form>

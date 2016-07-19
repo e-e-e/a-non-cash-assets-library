@@ -1,0 +1,8 @@
+{>"../base"/}
+{<content}
+<h2>Add a need:</h2>
+{>"../partials/contribute" type="need"/}
+{<placeholder}
+this is a need
+{/placeholder}
+{/content}

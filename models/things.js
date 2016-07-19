@@ -36,7 +36,7 @@ class Things {
 	}
 
 	random () {
-		return db.query("SELECT name,description FROM things OFFSET floor(random()*N) LIMIT 1;")
+		return db.query("SELECT name,description FROM things OFFSET floor(random()* (SELECT count(*) from things) ) LIMIT 1;")
 			.then(result => {
 				if(result.rowCount>0){
 					return result.rows[0];

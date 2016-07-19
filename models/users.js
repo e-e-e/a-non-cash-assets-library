@@ -35,12 +35,12 @@ class Users {
 				.then( result => result.rows );
 		}
 		if(typeof id === 'string') {
-			let key, query;
-			if(validator.isEmail(id)) {
-				key = validator.normalizeEmail( id, normalize_email_options);
+			let query;
+			let key = id.trim();
+			if(validator.isEmail(key)) {
+				key = validator.normalizeEmail( key, normalize_email_options);
 				query = 'SELECT user_id, name, email, password FROM users WHERE email = $1';
 			} else {
-				key = id;
 				query = 'SELECT user_id, name, email, password FROM users WHERE name = $1';
 			}
 			if (password)
