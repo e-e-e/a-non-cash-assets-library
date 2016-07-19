@@ -4,8 +4,8 @@
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <form action="/login" method="post">
-	<label for "email">Email/Username*</label>
-	<input type="email" name="email" required><br>
+	<label for="email"> Email/Username*</label>
+	<input type="text" name="email" required><br>
 	<label for="password">Password*</label>
 	<input type="password" name="password" required><br>
 	<button type="submit">Login</button>
