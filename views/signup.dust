@@ -1,6 +1,11 @@
 {>base/}
 {<content}
 <h2>Signup</h2>
+<p>Welcome to the prototype version of Arts Assets!</p>
+<p>Please sign up and create a sharing profile. You'll receive an email to verify your registration so that you can get started listing your "needs" and "haves". We'll then get in touch with you if there is a match with something you've listed in the "haves". Please note - this platform acts as a "held resource" map as much as a space for locating shareable resources. You are under no obligation to make your skills, tools, spaces or things available.</p>
+<p>Thanks in advance for participating and for your constructive feedback for this project,</p>
+<p>—Arts Assets prototyping team<br>
+<a href="mailto:non.cash.assets@gmail.com">non.cash.assets@gmail.com</a></p>
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <form action="/signup" method="post">

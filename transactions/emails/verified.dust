@@ -1,3 +1,3 @@
-<h1>Your email acount has been verified!</h1>
-<p>Thanks for signing up to the Arts Asset Platform.</p>
-<p>You can log in to your account <a href="{domain}{profile}">here</a>.</p>
+<p>Great. You're email has been verified.</p>
+<p>Login to get started <a href="{domain}{profile}">here</a></p>
+<p>Thanks,<br>the Arts Assets Platform prototyping team</p>
