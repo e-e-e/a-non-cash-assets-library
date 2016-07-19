@@ -1,4 +1,3 @@
-<li>
-	<h4>{owner}: {name}</h4>
-	
+<li class="thing" data-id={thing_id}>
+	<strong>{owner}: {name}</strong>
 </li>
