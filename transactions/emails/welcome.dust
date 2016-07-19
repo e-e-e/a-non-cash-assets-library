@@ -1,2 +1,4 @@
-<h1>Welcome {name}</h1>
-<p>To finalise your account please validate your email <a href="{domain}{verify}">here</a>.</p>
+<p>Welcome {name}</p>,
+<p>Thanks for engaging with this sharing experiment! Please validate your <a href="{domain}{verify}">email</a> and we can get started with listing your "needs" and "haves".</p>
+<p>We're looking forward to your feedback!</p>
+<p>the Arts Assets prototyping team</p>
