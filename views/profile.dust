@@ -1,8 +1,11 @@
 {>base/}
 {<content}
 <h2> Hello {user.name}</h2>
-<p>Your email is {user.email}</p>
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
+<p>Your email is <em>{user.email}</em></p>
 <p>This is your profile page, here you can view your shared <strong>haves</strong> and <strong>needs</strong>, as well as add new things.</p>
+<p><a href="/profile/password">Set a new password.</a></p>
 <h3>Your things:</h3>
 {>"partials/things" haves=user.haves needs=user.needs/}
 {>"partials/contribute"/}

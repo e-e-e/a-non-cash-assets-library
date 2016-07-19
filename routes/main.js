@@ -69,6 +69,19 @@ function configure_router (passport) {
 		return (req,res) => res.render(template, req.data);
 	}
 
+	/** Function to handle sending error messages */
+	function handle_error(req, res, path) {
+		return err => {
+			if ( typeof err === 'string' ) {
+				req.flash('error', err);
+			} else {
+				req.flash('error', err.message);
+				console.log(err);
+			}
+			res.redirect(path);
+		};
+	}
+
 	/* Get routes */
 
 	router.get('/', 
@@ -94,6 +107,11 @@ function configure_router (passport) {
 							get_haves_and_wants_of_user,
 							render_template('profile'));
 
+	router.get('/profile/password',
+			is_logged_in,
+			attach_template_data,
+			render_template('profile/password'));
+
 	router.get('/verify/:email', (req,res) => {
 		models.users.verify(decodeURI(req.params.email))
 			.then(count=> {
@@ -105,10 +123,7 @@ function configure_router (passport) {
 					res.redirect('/');
 				}
 			})
-			.catch(err=> {
-				req.flash('error', err);
-				res.redirect('/');
-			});
+			.catch( handle_error(req,res,'/') );
 	});
 
 	router.get('/logout', (req,res)=> {
@@ -120,20 +135,28 @@ function configure_router (passport) {
 
 	// contribution 
 
-	router.post('/contribute', is_logged_in, (req, res, next) => {
-		console.log(req.body);
+	router.post('/contribute', is_logged_in, (req, res) => {
 		models.things.add(req.user.user_id, req.body)
-			.then(result => res.redirect('/profile') )
-			.catch( err => {
-				console.log(err);
-				if ( typeof err === 'string' ) {
-					req.flash('error', err);
-					res.redirect('/profile');
-				} else {
-					next(err);
-				}
+			.then( result => {
+				res.flash('message',"successfully added need or have");
+				res.redirect('/profile');
 			})
+			.catch( handle_error(req,res,'/profile') )
 		;
+	});
+
+	router.post('/update/password/', is_logged_in, (req,res, next) => {
+		if(req.body.newpassword !== req.body.confirmpassword) {
+			req.flash('error','New passwords do not match.');
+			res.redirect('/profile');
+		} else {
+			models.users.update_password(req.user.user_id,req.body.oldpassword, req.body.newpassword)
+				.then( result => {
+					req.flash('message','Password successfully updated.');
+					res.redirect('/profile');
+				})
+				.catch( handle_error(req,res,'/profile/password') );
+		}
 	});
 
 	// authentication signup/login

@@ -1,7 +1,8 @@
 {>base/}
 {<content}
 <h2>Signup</h2>
-{?error}<div class="message error">{error}</div>{/error}
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
 <form action="/signup" method="post">
 	<label for="name">Username*</label>
 	<input type="text" name="name" required><br>

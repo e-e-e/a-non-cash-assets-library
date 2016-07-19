@@ -56,7 +56,7 @@ module.exports = function(passport) {
 				console.log('err',err);
 				done(null, false, req.flash('error', err));
 			} else {
-				done(err);
+				done(null, false, req.flash('error', err.message));
 			}
 		};
 	}

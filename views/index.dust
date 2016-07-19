@@ -1,4 +1,7 @@
 {>base/}
+
 {<content}
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
 {>"partials/things"/}
 {/content}
