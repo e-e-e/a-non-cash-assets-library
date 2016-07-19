@@ -1,8 +1,20 @@
 {>"../base"/}
 {<content}
 <h2>Add a need:</h2>
+{?error}<div class="error">{error}</div>{/error}
+{?message}
+<div class="message">
+	<p>{message}</p>
+	<p>Why not add another "need" below, add to your <a href="/profile/add-a-have">"haves"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
+</div>
+{/message}
 {>"../partials/contribute" type="need"/}
 {<placeholder}
-this is a need
+eg: I'm looking for a rehearsal space close to a train station for 3 hours per week...&#10;
+OR&#10;
+eg: 1x HD projector for an exhibition at Gallery X for the month of August&#10;
+OR&#10;
+eg: A workshop or two in basic accounting skills&#10;
 {/placeholder}
+<p>Please Note: We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "need" something for a specific project or ongoing... please feel free to add these details as you see fit.</p>
 {/content}
