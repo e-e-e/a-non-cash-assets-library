@@ -57,7 +57,7 @@ function send_email(template, to, data) {
 			return deferred.reject(err);
 		var email_data = {
 			to: to,
-			from : "info@frontyardprojects.org",
+			from : options.mailgun.from,
 			subject : template.subject,
 			html: body
 		};
