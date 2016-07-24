@@ -7,6 +7,8 @@ const express = require('express');
 const Q 			= require('q');
 
 const models 	= require('../models/models.js');
+const transactions = require('../transactions');
+
 
 module.exports.router = configure_router;
 
@@ -21,12 +23,12 @@ function configure_router (passport) {
 			title: 'arts assets platform',
 			path: req.path,
 			menu: [{ 
-				name: 'Haves/Needs',
-				link:'/',
-				},{ 
 				name: 'About',
 				link:'/about' 
-			}],
+			},{ 
+				name: 'Listings',
+				link:'/',
+				}],
 			user: req.user,
 			message: req.flash('message'),
 			error: req.flash('error') /* get error if raised on previous route */
@@ -135,7 +137,8 @@ function configure_router (passport) {
 	router.get('/verify/:email', (req,res) => {
 		models.users.verify(decodeURI(req.params.email))
 			.then(count=> {
-				if(count>0) {
+				console.log(count);
+				if(count && count.rowCount>0) {
 					req.flash('message', 'Account verified.');
 					res.redirect('/profile');
 				} else {
@@ -149,6 +152,19 @@ function configure_router (passport) {
 	router.get('/logout', (req,res)=> {
 		req.logout();
 		res.redirect('/');
+	});
+
+	
+	// resend verification email to confirm email
+
+	router.get('/user/verify/', is_logged_in, (req, res) => {
+		transactions.welcome(req.user.email,{
+				name:req.user.name, 
+				verify:'/verify/'+encodeURIComponent(req.user.email)
+			}).then( result => {
+				req.flash( 'message' ,'The welcome email has been resent. Please follow link within the email to verify your account.');
+				res.redirect('/profile');
+			}).catch( handle_error(req,res,'/profile') );
 	});
 
 	/* Post routes */
@@ -170,7 +186,8 @@ function configure_router (passport) {
 		;
 	});
 
-	router.post('/update/password/', is_logged_in, (req,res, next) => {
+	// updating info
+	router.post('/update/password/', is_logged_in, (req,res) => {
 		if(req.body.newpassword !== req.body.confirmpassword) {
 			req.flash('error','New passwords do not match.');
 			res.redirect('/profile');
@@ -182,6 +199,20 @@ function configure_router (passport) {
 				})
 				.catch( handle_error(req,res,'/profile/password') );
 		}
+	});
+
+	router.post('/update/username/', is_logged_in, (req,res) => {
+		//need to add connector to model
+		res.redirect('/profile');
+	});
+
+	router.post('/update/thing/', is_logged_in, (req,res) => {
+		models.things.update(req.body)
+			.then( result => {
+				req.flash('message','Successfully updated!');
+				res.redirect('/profile');
+			})
+			.catch(handle_error(req,res,'/profile'));
 	});
 
 	// authentication signup/login
