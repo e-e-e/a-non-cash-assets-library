@@ -1,3 +1,4 @@
 <li class="thing" data-id={thing_id}>
-	<strong>{owner}: {name}</strong>
+	<strong>{?anon}someone{:else}{owner}{/anon}:{name}</strong><br>
+	{description}
 </li>
