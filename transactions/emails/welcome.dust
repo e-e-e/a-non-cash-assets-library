@@ -1,4 +1,4 @@
-<p>Welcome {name}</p>,
+<p>Welcome {name},</p>
 <p>Thanks for engaging with this sharing experiment! Please validate your <a href="{domain}{verify}">email</a> and we can get started with listing your "needs" and "haves".</p>
 <p>We're looking forward to your feedback!</p>
 <p>the Arts Assets prototyping team</p>
