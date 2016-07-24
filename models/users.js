@@ -19,6 +19,11 @@ const normalize_email_options = {
 	remove_extension: true 
 };
 
+function is_valid_password(password) {
+	return !(!password || typeof password !== 'string' || 
+			password.length < 6 || !validator.isAscii(password));
+}
+
 /** Interface to Users within the database. */
 class Users {
 	/** 
@@ -31,7 +36,7 @@ class Users {
 		var q;
 		if(!id) {
 			// if no id is provided return full list of users
-			return db.query('SELECT user_id, name, email FROM users')
+			return db.query('SELECT user_id, name, email, verified FROM users')
 				.then( result => result.rows );
 		}
 		if(typeof id === 'string') {
@@ -39,9 +44,9 @@ class Users {
 			let key = id.trim();
 			if(validator.isEmail(key)) {
 				key = validator.normalizeEmail( key, normalize_email_options);
-				query = 'SELECT user_id, name, email, password FROM users WHERE email = $1';
+				query = 'SELECT user_id, name, email, password, verified FROM users WHERE email = $1';
 			} else {
-				query = 'SELECT user_id, name, email, password FROM users WHERE name = $1';
+				query = 'SELECT user_id, name, email, password, verified FROM users WHERE name = $1';
 			}
 			if (password)
 				q = db.query(query,[key])
@@ -61,7 +66,7 @@ class Users {
 				q = db.query(query,[key]);
 			}
 		} else {
-			q = db.query('SELECT user_id, name, email FROM users WHERE user_id = $1',[id]);
+			q = db.query('SELECT user_id, name, email, verified FROM users WHERE user_id = $1',[id]);
 		}
 		return q.then(result => result.rows[0]);
 	}
@@ -78,8 +83,7 @@ class Users {
 		// TODO: validate name
 
 		// validate password
-		if(!password || typeof password !== 'string' || 
-				password.length < 6 || !validator.isAscii(password)){
+		if(!is_valid_password(password)){
 			return Q.reject('Password must be greater than 6 characters long and standard characters.');
 		}
 
@@ -118,6 +122,9 @@ class Users {
 	}
 
 	update_password (user_id, old_password, new_password) {
+		if(!is_valid_password(new_password)){
+			return Q.reject('New password must be greater than 6 characters long and standard characters.');
+		}
 		//check if old password matches and then updated with new one.
 		return db.query('SELECT password FROM users WHERE user_id = $1',[user_id])
 			.then( result => {

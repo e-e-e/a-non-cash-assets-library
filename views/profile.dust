@@ -4,6 +4,12 @@
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <p>Your email is <em>{user.email}</em></p>
+{^user.verified}
+<p><strong>Your account is currently unverified.</strong><br>
+We need to confirm your email before you can start contibuting.<br>
+To verify your account follow the link within the welcome email we sent.<br>
+<em>Did not receive a welcome email? Click <a href="/user/verify">here</a>, to have it resent to you.</em></p>
+{:else}
 <p>Let's list your <strong>"needs"</strong> and <strong>"haves"</strong>!</p>
 <p>Please start with your "needs". You can list as many as you like and add as much detail as you like. We'll then prompt you to list your "haves".</p>
 <ul>
@@ -11,6 +17,7 @@
 <li><a href="/profile/add-a-have">Add a have</a></li>
 <li><a href="/profile/password">Change password</a></li>
 </ul>
+{/user.verified}
 <hr>
 <h3>Your things:</h3>
 {>"partials/things" haves=user.haves needs=user.needs/}
