@@ -11,5 +11,6 @@
 	<input type="text" name="name" placeholder="eg. {randomthing.name}"></input><br>
 	<label for="description">Longer description:</label><br>
 	<textarea name="description" placeholder="{+placeholder/}"></textarea><br>
+	<input type="checkbox" name="visible" checked="checked" /><label for="visible">Publicly listed</label><br>
 	<button type="submit">Contribute</button>
 </form>
