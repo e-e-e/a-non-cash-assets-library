@@ -22,7 +22,7 @@ class Things {
 	add (user_id, thing) {
 		//add validation here. what if thing has no name.
 		//what about html injection? is this covered by dustjs?
-		return db.query('INSERT INTO things (name,description) VALUES ($1, $2) RETURNING thing_id',[thing.name, thing.description])
+		return db.query('INSERT INTO things (name,description,visible) VALUES ($1, $2, $3) RETURNING thing_id',[thing.name, thing.description, thing.visible || false ])
 			.then( result => {
 				let thing_id = result.rows[0].thing_id;
 				if (thing.type === 'have') {
@@ -36,6 +36,7 @@ class Things {
 	}
 
 	random () {
+		//this should be optimised so that it does not count things list every time.
 		return db.query("SELECT name,description FROM things OFFSET floor(random()* (SELECT count(*) from things) ) LIMIT 1;")
 			.then(result => {
 				if(result.rowCount>0){
@@ -47,8 +48,14 @@ class Things {
 			});
 	}
 
-	update (thing_id, name, description) {
+	update (thing_id, thing) {
 		//validate name and description
+		return db.query("UPDATE things SET (name, description, visible) = ($2,$3,$4) WHERE thing_id = $1;",[thing_id, thing.name, thing.description, thing.visible || false ]);
+	}
+
+	kill (thing_id) {
+		//remove thing
+		return db.query("DELETE things WHERE thing_id = $1;",[thing_id]);
 	}
 
 	haves (user_id) {
