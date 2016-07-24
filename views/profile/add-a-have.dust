@@ -5,7 +5,7 @@
 {?message}
 <div class="message">
 	<p>{message}</p>
-	<p>Why not add another "have" below, add to your <a href="/profile/add-a-needs">"needs"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
+	<p>Why not add another "have" below, add to your <a href="/profile/add-a-need">"needs"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
 </div>
 {/message}
 {>"../partials/contribute" type="have"/}
