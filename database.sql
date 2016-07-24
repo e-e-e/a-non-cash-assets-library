@@ -18,6 +18,7 @@ CREATE TABLE things (
   thing_id serial PRIMARY KEY UNIQUE,
   name varchar (256) NOT NULL,
   description text NOT NULL,
+  visible boolean NOT NULL DEFAULT true,
   date_added timestamp DEFAULT NOW(),
   lastmodified timestamp DEFAULT NOW()
 );
