@@ -1,16 +1,17 @@
-<form name="contribute" action="/contribute" method="post">
+<form name="contribute" action="{action}" method="post">
 	{?type}
 		<input type="hidden" name="type" value="{type}">
-	{:else}
+{! 	{:else}
 	<label for="type">Choose type: </label><select name="type">
 		<option>have</option>
 		<option>need</option>
-	</select><br>
+	</select><br> !}
 	{/type}
+	{?thing.thing_id}<input type="hidden" name="thing_id" value="{thing.thing_id}">{/thing.thing_id}
 	<label for="name">Short name:</label>
-	<input type="text" name="name" placeholder="eg. {randomthing.name}"></input><br>
+	<input type="text" name="name" placeholder="eg. {randomthing.name}" required='true' value="{thing.name}"></input><br>
 	<label for="description">Longer description:</label><br>
-	<textarea name="description" placeholder="{+placeholder/}"></textarea><br>
+	<textarea name="description" placeholder="{+placeholder/}">{thing.description}</textarea><br>
 	<input type="checkbox" name="visible" checked="checked" /><label for="visible">Publicly listed</label><br>
 	<button type="submit">Contribute</button>
 </form>

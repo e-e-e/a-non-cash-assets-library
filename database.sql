@@ -16,6 +16,8 @@ CREATE TABLE users (
 
 CREATE TABLE things (
   thing_id serial PRIMARY KEY UNIQUE,
+  creator integer REFERENCES users(user_id)
+  ON UPDATE CASCADE ON DELETE CASCADE; 
   name varchar (256) NOT NULL,
   description text NOT NULL,
   visible boolean NOT NULL DEFAULT true,

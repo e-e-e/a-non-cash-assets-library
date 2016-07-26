@@ -67,6 +67,19 @@ function configure_router (passport) {
 			.then(() => next());
 	}
 
+	function get_thing (req,res,next) {
+		if(req.query.thing_id) {
+			models.things.get(req.user.user_id, req.query.thing_id)
+				.then( thing => {
+					req.data.thing = thing;
+				}).catch(err => console.log(err))
+				.then(() => next());
+		} else {
+			req.flash('error','No thing_id specified to edit!');
+			res.redirect('/profile');
+		}
+	}
+
 	/** Simple middleware function to check if user is loged in before accessing restricted routes */
 	function is_logged_in(req, res, next) {
 		if (req.isAuthenticated())
@@ -134,10 +147,26 @@ function configure_router (passport) {
 			get_random_thing,
 			render_template('profile/add-a-have'));
 
-	router.get('/verify/:email', (req,res) => {
-		models.users.verify(decodeURI(req.params.email))
-			.then(count=> {
-				console.log(count);
+	router.get('/profile/edit-a-have',
+			is_logged_in,
+			attach_template_data,
+			get_thing,
+			render_template('profile/edit-a-have'));
+
+	router.get('/profile/edit-a-need',
+			is_logged_in,
+			attach_template_data,
+			get_thing,
+			render_template('profile/edit-a-need'));
+
+	router.get('/logout', (req,res)=> {
+		req.logout();
+		res.redirect('/');
+	});
+	
+	router.get('/verify/', (req,res) => {
+		models.users.verify(req.query.email)
+			.then(count => {
 				if(count && count.rowCount>0) {
 					req.flash('message', 'Account verified.');
 					res.redirect('/profile');
@@ -149,12 +178,6 @@ function configure_router (passport) {
 			.catch( handle_error(req,res,'/') );
 	});
 
-	router.get('/logout', (req,res)=> {
-		req.logout();
-		res.redirect('/');
-	});
-
-	
 	// resend verification email to confirm email
 
 	router.get('/user/verify/', is_logged_in, (req, res) => {
@@ -171,16 +194,21 @@ function configure_router (passport) {
 
 	// contribution 
 
-	router.post('/contribute', is_logged_in, (req, res) => {
+	router.post('/add/need/', is_logged_in, (req, res) => {
 		models.things.add(req.user.user_id, req.body)
 			.then( result => {
-				if(req.body.type==='need'){
-					req.flash('message',"Thanks for adding to the \"needs\" list. Hopefully we'll find a match for you soon...");
-					res.redirect('/profile/add-a-need');
-				} else {
-					req.flash('message',"Thanks for adding to the \"haves\" list. You rock.");
-					res.redirect('/profile/add-a-have');
-				}
+				req.flash('message',"Thanks for adding to the \"needs\" list. Hopefully we'll find a match for you soon...");
+				res.redirect('/profile/add-a-need');
+			})
+			.catch( handle_error(req,res,'/profile') )
+		;
+	});
+
+	router.post('/add/have/', is_logged_in, (req, res) => {
+		models.things.add(req.user.user_id, req.body)
+			.then( result => {
+				req.flash('message',"Thanks for adding to the \"haves\" list. You rock.");
+				res.redirect('/profile/add-a-have');
 			})
 			.catch( handle_error(req,res,'/profile') )
 		;
@@ -207,7 +235,7 @@ function configure_router (passport) {
 	});
 
 	router.post('/update/thing/', is_logged_in, (req,res) => {
-		models.things.update(req.body)
+		models.things.update(req.body.thing_id, req.body)
 			.then( result => {
 				req.flash('message','Successfully updated!');
 				res.redirect('/profile');

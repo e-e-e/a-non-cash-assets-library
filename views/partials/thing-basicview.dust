@@ -1,4 +1,9 @@
-<li class="thing" data-id={thing_id}>
-	<strong>{?anon}someone{:else}{owner}{/anon}:{name}</strong><br>
+<li class="thing {?visible}hidden{/visible}" data-id={thing_id}>
+	{@eq key=user.user_id value=owner_id}
+		<strong>{owner}:{name}</strong> <a href="/profile/edit-a-{type}?thing_id={thing_id}">edit</a>
+	{:else}
+		<strong>{?anon}someone{:else}{owner}{/anon}:{name}</strong>
+	{/eq}
+	<br>
 	{description}
 </li>

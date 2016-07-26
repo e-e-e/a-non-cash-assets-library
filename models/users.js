@@ -109,7 +109,7 @@ class Users {
 				// send an email to verify account.
 				return transactions.welcome(nice_email,{
 					name:nice_name, 
-					verify:'/verify/'+encodeURIComponent(nice_email)
+					verify:'/verify/?email='+encodeURIComponent(nice_email)
 				}).catch(err=> console.log('failed to send message!', err));
 			})
 			.then( result => {

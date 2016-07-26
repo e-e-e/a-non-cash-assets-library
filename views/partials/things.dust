@@ -8,7 +8,7 @@
 				{?needs}
 				<ul>
 					{#needs}
-						{>"partials/thing-basicview"/}
+						{>"partials/thing-basicview" type="need"/}
 					{/needs}
 				</ul>
 				{:else}
@@ -26,7 +26,7 @@
 				{?haves}
 				<ul>
 					{#haves}
-						{>"partials/thing-basicview" anon="true"/}
+						{>"partials/thing-basicview" anon="true" type="have"/}
 					{/haves}
 				</ul>
 				{:else}
