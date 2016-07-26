@@ -24,18 +24,18 @@ CREATE TABLE things (
 );
 
 CREATE TABLE haves (
-  user_id integer references users(user_id) 
+  user_id integer REFERENCES users(user_id) 
     ON UPDATE CASCADE ON DELETE CASCADE,
-  thing_id integer references things(thing_id) 
+  thing_id integer REFERENCES things(thing_id) 
     ON UPDATE CASCADE ON DELETE CASCADE,
   date_added timestamp DEFAULT NOW(),
   PRIMARY KEY(user_id,thing_id)
 );
 
 CREATE TABLE needs (
-  user_id integer references users(user_id) 
+  user_id integer REFERENCES users(user_id) 
   ON UPDATE CASCADE ON DELETE CASCADE,
-  thing_id integer references things(thing_id)
+  thing_id integer REFERENCES things(thing_id)
   ON UPDATE CASCADE ON DELETE CASCADE,
   date_added timestamp DEFAULT NOW(),
   PRIMARY KEY(user_id,thing_id)
