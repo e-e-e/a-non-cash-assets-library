@@ -13,5 +13,5 @@
 	<label for="description">Longer description:</label><br>
 	<textarea name="description" placeholder="{+placeholder/}">{thing.description}</textarea><br>
 	<input type="checkbox" name="visible" checked="checked" /><label for="visible">Publicly listed</label><br>
-	<button type="submit">Contribute</button>
+	<button type="submit">{?thing}Update{:else}Contribute{/thing}</button>
 </form>
