@@ -1,5 +1,6 @@
-@body-color: #000;
 @maxwidth: 600px;
+@body-color: #000;
+@link-color: #F00;
 @error-color: #F00;
 @message-color: green;
 
@@ -32,6 +33,20 @@ h1 {
 
 main p {
 	line-height: 1.75em;
+}
+
+*::selection {
+	background: tint(#FF0,50%);
+}
+
+a {
+	color: @link-color;
+	&:visited {
+		color: tint(@link-color,0%);
+	}
+	&:hover {
+		color: shade(@link-color,30%);
+	}
 }
 
 div.error {
