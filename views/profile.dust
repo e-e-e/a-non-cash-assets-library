@@ -19,6 +19,6 @@ To verify your account follow the link within the welcome email we sent.<br>
 </ul>
 {/user.verified}
 <hr>
-<h3>Your things:</h3>
+<h2>Your things:</h2>
 {>"partials/things" haves=user.haves needs=user.needs/}
 {/content}

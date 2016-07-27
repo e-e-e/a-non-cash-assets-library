@@ -1,4 +1,4 @@
-<li class="thing {?visible}hidden{/visible}" data-id={thing_id}>
+<li class="thing {?public}hidden{/public}" data-id={thing_id}>
 	{@eq key=user.user_id value=owner_id}
 		<strong>{owner}:{name}</strong> <a href="/profile/edit-a-{type}?thing_id={thing_id}">edit</a>
 	{:else}
@@ -6,4 +6,6 @@
 	{/eq}
 	<br>
 	{description}
+	<br>
+	{have_id}{need_id}
 </li>

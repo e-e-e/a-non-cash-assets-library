@@ -1,38 +1,30 @@
 <div class="table">
 	<div class="cell">
 		<section id="needs">
-			<div class="header">
-				<h2>Needs</h2>
-			</div>
-			<div class="scrolling">
-				{?needs}
-				<ul>
-					{#needs}
-						{>"partials/thing-basicview" type="need"/}
-					{/needs}
-				</ul>
-				{:else}
-				<p>Nothing currently listed</p>
+			<h2>Needs</h2>
+			{?needs}
+			<ul>
+				{#needs}
+					{>"partials/thing-basicview" type="need"/}
 				{/needs}
-			</div>
+			</ul>
+			{:else}
+			<p>Nothing currently listed</p>
+			{/needs}
 		</section>
 	</div>
 	<div class="cell">
 		<section id="haves">
-			<div class="header">
-				<h2>Haves</h2>
-			</div>
-			<div class="scrolling">
-				{?haves}
-				<ul>
-					{#haves}
-						{>"partials/thing-basicview" anon="true" type="have"/}
-					{/haves}
-				</ul>
-				{:else}
-				<p>Nothing currently listed</p>
+			<h2>Haves</h2>
+			{?haves}
+			<ul>
+				{#haves}
+					{>"partials/thing-basicview" anon="true" type="have"/}
 				{/haves}
-			</div>
+			</ul>
+			{:else}
+			<p>Nothing currently listed</p>
+			{/haves}
 		</section>
 	</div>
 </div>
