@@ -20,7 +20,7 @@ function configure_router (passport) {
 	function attach_template_data (req,res,next) {
 		//setup defaults that will be passed to all rendered templates
 		req.data = {
-			title: 'arts assets platform',
+			title: 'arts assets prototype',
 			path: req.path,
 			menu: [{ 
 				name: 'About',
