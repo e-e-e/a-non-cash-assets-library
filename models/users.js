@@ -36,7 +36,7 @@ class Users {
 		var q;
 		if(!id) {
 			// if no id is provided return full list of users
-			return db.query('SELECT user_id, name, email, verified FROM users')
+			return db.query('SELECT user_id, name, email, verified, admin FROM users')
 				.then( result => result.rows );
 		}
 		if(typeof id === 'string') {
@@ -44,9 +44,9 @@ class Users {
 			let key = id.trim();
 			if(validator.isEmail(key)) {
 				key = validator.normalizeEmail( key, normalize_email_options);
-				query = 'SELECT user_id, name, email, password, verified FROM users WHERE email = $1';
+				query = 'SELECT user_id, name, email, password, verified, admin FROM users WHERE email = $1';
 			} else {
-				query = 'SELECT user_id, name, email, password, verified FROM users WHERE name = $1';
+				query = 'SELECT user_id, name, email, password, verified, admin FROM users WHERE name = $1';
 			}
 			if (password)
 				q = db.query(query,[key])
@@ -66,7 +66,7 @@ class Users {
 				q = db.query(query,[key]);
 			}
 		} else {
-			q = db.query('SELECT user_id, name, email, verified FROM users WHERE user_id = $1',[id]);
+			q = db.query('SELECT user_id, name, email, verified, admin FROM users WHERE user_id = $1',[id]);
 		}
 		return q.then(result => result.rows[0]);
 	}

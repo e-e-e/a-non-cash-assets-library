@@ -10,7 +10,8 @@ CREATE TABLE users (
   name varchar (50) NOT NULL UNIQUE,
   email varchar (254) NOT NULL UNIQUE,
   password char(60) NOT NULL,
-  verified boolean DEFAULT false,
+  verified boolean NOT NULL DEFAULT false,
+  admin boolean NOT NULL DEFAULT false,
   date_added timestamp DEFAULT NOW(),
   lastmodified timestamp DEFAULT NOW()
 );

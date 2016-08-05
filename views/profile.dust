@@ -1,6 +1,7 @@
 {>base/}
 {<content}
 <h2> Hello {user.name}</h2>
+{?user.admin}<p>You have administrative privileges!</p>{/user.admin}
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <p>Your email is <em>{user.email}</em></p>
