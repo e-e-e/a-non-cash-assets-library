@@ -2,7 +2,11 @@
 	{@eq key=user.user_id value=owner_id}
 		<strong>{owner}:{name}</strong> <a href="/profile/edit/{type}?id={have_id}{need_id}">edit</a>
 	{:else}
+		{?user.admin}
+			<strong>{owner}:{name}</strong> <a href="/profile/edit/{type}?id={have_id}{need_id}">edit</a>
+		{:else}
 		<strong>{?anon}someone{:else}{owner}{/anon}:{name}</strong>
+		{/user.admin}
 	{/eq}
 	<br>
 	{description}
