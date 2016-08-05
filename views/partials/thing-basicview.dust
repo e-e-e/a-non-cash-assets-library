@@ -1,11 +1,10 @@
-<li class="thing {?public}hidden{/public}" data-id={thing_id}>
+<li class="thing {^public}hidden{/public}" data-id={thing_id}>
 	{@eq key=user.user_id value=owner_id}
-		<strong>{owner}:{name}</strong> <a href="/profile/edit-a-{type}?thing_id={thing_id}">edit</a>
+		<strong>{owner}:{name}</strong> <a href="/profile/edit/{type}?id={have_id}{need_id}">edit</a>
 	{:else}
 		<strong>{?anon}someone{:else}{owner}{/anon}:{name}</strong>
 	{/eq}
 	<br>
 	{description}
 	<br>
-	{have_id}{need_id}
 </li>

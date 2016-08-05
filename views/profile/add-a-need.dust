@@ -8,7 +8,7 @@
 	<p>Why not add another "need" below, add to your <a href="/profile/add-a-have">"haves"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
 </div>
 {/message}
-{>contribute action="/add/need" type="need"/}
+{>contribute action="/add/need" type="need" public="true"/}
 {<placeholder}
 eg: I'm looking for a rehearsal space close to a train station for 3 hours per week...&#10;
 OR&#10;

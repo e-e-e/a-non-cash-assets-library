@@ -20,7 +20,7 @@ function configure_router (passport) {
 	function attach_template_data (req,res,next) {
 		//setup defaults that will be passed to all rendered templates
 		req.data = {
-			title: 'arts assets prototype',
+			title: 'Arts Assets Prototype',
 			path: req.path,
 			menu: [{ 
 				name: 'About',
@@ -44,7 +44,7 @@ function configure_router (passport) {
 			]).spread( (haves, needs) => {
 				req.data.haves = haves;
 				req.data.needs = needs;
-			}).catch(err=> console.log('error getting haves/needs'))
+			}).catch(err=> console.log('error getting haves/needs',err))
 			.then(()=>next()); // an array of have objects
 	}
 
@@ -55,7 +55,10 @@ function configure_router (passport) {
 			]).spread( (haves, needs) => {
 				req.data.user.haves = haves;
 				req.data.user.needs = needs;
-			}).catch(err=> console.log('error getting haves/needs'))
+			}).catch(err=> {
+				console.log('error getting haves/needs');
+				console.log(err);
+			})
 			.then(()=>next()); // an array of have objects
 	}
 
@@ -67,12 +70,29 @@ function configure_router (passport) {
 			.then(() => next());
 	}
 
-	function get_thing (req,res,next) {
-		if(req.query.thing_id) {
-			models.things.get(req.user.user_id, req.query.thing_id)
+
+	//get need and have functions need to be refactored into a single function
+	function get_have (req,res,next) {
+		if(req.query.id) {
+			models.things.get_have(req.query.id)
 				.then( thing => {
 					req.data.thing = thing;
-				}).catch(err => console.log(err))
+				})
+				.catch(err => console.log(err))
+				.then(() => next());
+		} else {
+			req.flash('error','No thing_id specified to edit!');
+			res.redirect('/profile');
+		}
+	}
+
+	function get_need (req,res,next) {
+		if(req.query.id) {
+			models.things.get_need(req.query.id)
+				.then( thing => {
+					req.data.thing = thing;
+				})
+				.catch(err => console.log(err))
 				.then(() => next());
 		} else {
 			req.flash('error','No thing_id specified to edit!');
@@ -135,29 +155,29 @@ function configure_router (passport) {
 			attach_template_data,
 			render_template('profile/password'));
 
-	router.get('/profile/add-a-need',
+	router.get('/profile/add/need',
 			is_logged_in,
 			attach_template_data,
 			get_random_thing,
 			render_template('profile/add-a-need'));
 
-	router.get('/profile/add-a-have',
+	router.get('/profile/add/have',
 			is_logged_in,
 			attach_template_data,
 			get_random_thing,
 			render_template('profile/add-a-have'));
 
-	router.get('/profile/edit-a-have',
+	router.get('/profile/edit/need',
 			is_logged_in,
 			attach_template_data,
-			get_thing,
-			render_template('profile/edit-a-have'));
-
-	router.get('/profile/edit-a-need',
-			is_logged_in,
-			attach_template_data,
-			get_thing,
+			get_need,
 			render_template('profile/edit-a-need'));
+
+	router.get('/profile/edit/have',
+			is_logged_in,
+			attach_template_data,
+			get_have,
+			render_template('profile/edit-a-have'));
 
 	router.get('/logout', (req,res)=> {
 		req.logout();
@@ -198,7 +218,7 @@ function configure_router (passport) {
 		models.things.add(req.user.user_id, req.body)
 			.then( result => {
 				req.flash('message',"Thanks for adding to the \"needs\" list. Hopefully we'll find a match for you soon...");
-				res.redirect('/profile/add-a-need');
+				res.redirect('/profile/add/need');
 			})
 			.catch( handle_error(req,res,'/profile') )
 		;
@@ -208,7 +228,7 @@ function configure_router (passport) {
 		models.things.add(req.user.user_id, req.body)
 			.then( result => {
 				req.flash('message',"Thanks for adding to the \"haves\" list. You rock.");
-				res.redirect('/profile/add-a-have');
+				res.redirect('/profile/add/have');
 			})
 			.catch( handle_error(req,res,'/profile') )
 		;
@@ -235,10 +255,12 @@ function configure_router (passport) {
 	});
 
 	router.post('/update/thing/', is_logged_in, (req,res) => {
-		models.things.update(req.body.thing_id, req.body)
+		console.log(req.body);
+		models.things.update(req.user.user_id, req.body)
 			.then( result => {
 				req.flash('message','Successfully updated!');
-				res.redirect('/profile');
+				let redirect = (req.body.type === 'have')? '/profile/edit/have?id='+req.body.have_id : '/profile/edit/need?id='+req.body.need_id ;
+				res.redirect(redirect);
 			})
 			.catch(handle_error(req,res,'/profile'));
 	});

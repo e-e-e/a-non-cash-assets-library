@@ -14,8 +14,8 @@ To verify your account follow the link within the welcome email we sent.<br>
 <p>Let's list your <strong>"needs"</strong> and <strong>"haves"</strong>!</p>
 <p>Please start with your "needs". You can list as many as you like and add as much detail as you like. We'll then prompt you to list your "haves".</p>
 <ul>
-<li><a href="/profile/add-a-need">Add a need</a></li>
-<li><a href="/profile/add-a-have">Add a have</a></li>
+<li><a href="/profile/add/need">Add a need</a></li>
+<li><a href="/profile/add/have">Add a have</a></li>
 <li><a href="/profile/password">Change password</a></li>
 </ul>
 {/user.verified}
