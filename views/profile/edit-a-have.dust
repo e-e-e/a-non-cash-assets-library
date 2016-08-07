@@ -3,5 +3,5 @@
 <h2>Edit your Have:</h2>
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
-{>contribute action="/update/thing" type="have"/}
+{>contribute action="/profile/update/thing" type="have"/}
 {/content}

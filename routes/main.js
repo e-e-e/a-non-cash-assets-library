@@ -8,33 +8,14 @@ const Q 			= require('q');
 
 const models 	= require('../models/models.js');
 const transactions = require('../transactions');
-
+const middleware = require('./middleware.js');
+const profile = require('./profile.js');
 
 module.exports.router = configure_router;
 
 function configure_router (passport) {
 
 	const router = express.Router();
-
-	/* Middleware to append data to request object used in rendering dust templates */
-	function attach_template_data (req,res,next) {
-		//setup defaults that will be passed to all rendered templates
-		req.data = {
-			title: 'Arts Assets Prototype',
-			path: req.path,
-			menu: [{ 
-				name: 'About',
-				link:'/about' 
-			},{ 
-				name: 'Listings',
-				link:'/',
-				}],
-			user: req.user,
-			message: req.flash('message'),
-			error: req.flash('error') /* get error if raised on previous route */
-		};
-		next();
-	}
 
 	/** Middleware to add haves and wants to template data */
 	function get_haves_and_wants (req,res, next) {
@@ -48,142 +29,37 @@ function configure_router (passport) {
 			.then(()=>next()); // an array of have objects
 	}
 
-	function get_haves_and_wants_of_user (req,res, next) {
-		Q.all([
-				models.things.haves(req.user.user_id),
-				models.things.needs(req.user.user_id)
-			]).spread( (haves, needs) => {
-				req.data.user.haves = haves;
-				req.data.user.needs = needs;
-			}).catch(err=> {
-				console.log('error getting haves/needs');
-				console.log(err);
-			})
-			.then(()=>next()); // an array of have objects
-	}
-
-	function get_random_thing (req,res,next) {
-		models.things.random()
-			.then( thing => {
-				req.data.randomthing = thing;
-			}).catch(err => console.log(err))
-			.then(() => next());
-	}
-
-
-	//get need and have functions need to be refactored into a single function
-	function get_have (req,res,next) {
-		if(req.query.id) {
-			models.things.get_have(req.query.id)
-				.then( thing => {
-					req.data.thing = thing;
-				})
-				.catch(err => console.log(err))
-				.then(() => next());
-		} else {
-			req.flash('error','No thing_id specified to edit!');
-			res.redirect('/profile');
-		}
-	}
-
-	function get_need (req,res,next) {
-		if(req.query.id) {
-			models.things.get_need(req.query.id)
-				.then( thing => {
-					req.data.thing = thing;
-				})
-				.catch(err => console.log(err))
-				.then(() => next());
-		} else {
-			req.flash('error','No thing_id specified to edit!');
-			res.redirect('/profile');
-		}
-	}
-
-	/** Simple middleware function to check if user is loged in before accessing restricted routes */
-	function is_logged_in(req, res, next) {
-		if (req.isAuthenticated())
-			return next();
-		res.redirect('/');
-	}
-
-	/** Function to make template rendering routes */
-	function render_template (template) {
-		return (req,res) => res.render(template, req.data);
-	}
-
-	/** Function to handle sending error messages */
-	function handle_error(req, res, path) {
-		return err => {
-			if ( typeof err === 'string' ) {
-				req.flash('error', err);
-			} else {
-				req.flash('error', err.message);
-				console.log(err);
-			}
-			res.redirect(path);
-		};
-	}
-
 	/* Get routes */
 
 	router.get('/', 
-							attach_template_data,
+							middleware.attach_template_data,
 							get_haves_and_wants,
-							render_template('index'));
+							middleware.render_template('index'));
 	
 	router.get('/login', 
-							attach_template_data, 
-							render_template('login'));
+							middleware.attach_template_data, 
+							middleware.render_template('login'));
 
 	router.get('/signup', 
-							attach_template_data, 
-							render_template('signup'));
+							middleware.attach_template_data, 
+							middleware.render_template('signup'));
 
 	router.get('/about', 
-							attach_template_data, 
-							render_template('about'));
-	
-	router.get('/profile', 
-							is_logged_in, 
-							attach_template_data,
-							get_haves_and_wants_of_user,
-							render_template('profile'));
+							middleware.attach_template_data, 
+							middleware.render_template('about'));
 
-	router.get('/profile/password',
-			is_logged_in,
-			attach_template_data,
-			render_template('profile/password'));
-
-	router.get('/profile/add/need',
-			is_logged_in,
-			attach_template_data,
-			get_random_thing,
-			render_template('profile/add-a-need'));
-
-	router.get('/profile/add/have',
-			is_logged_in,
-			attach_template_data,
-			get_random_thing,
-			render_template('profile/add-a-have'));
-
-	router.get('/profile/edit/need',
-			is_logged_in,
-			attach_template_data,
-			get_need,
-			render_template('profile/edit-a-need'));
-
-	router.get('/profile/edit/have',
-			is_logged_in,
-			attach_template_data,
-			get_have,
-			render_template('profile/edit-a-have'));
+	/** must be logged in to access profile */
+	router.use('/profile', 
+							middleware.is_logged_in,
+							middleware.attach_template_data,
+							profile.router() );
 
 	router.get('/logout', (req,res)=> {
 		req.logout();
 		res.redirect('/');
 	});
 	
+	/** route to verify email account */
 	router.get('/verify/', (req,res) => {
 		models.users.verify(req.query.email)
 			.then(count => {
@@ -195,74 +71,7 @@ function configure_router (passport) {
 					res.redirect('/');
 				}
 			})
-			.catch( handle_error(req,res,'/') );
-	});
-
-	// resend verification email to confirm email
-
-	router.get('/user/verify/', is_logged_in, (req, res) => {
-		transactions.welcome(req.user.email,{
-				name:req.user.name, 
-				verify:'/verify/'+encodeURIComponent(req.user.email)
-			}).then( result => {
-				req.flash( 'message' ,'The welcome email has been resent. Please follow link within the email to verify your account.');
-				res.redirect('/profile');
-			}).catch( handle_error(req,res,'/profile') );
-	});
-
-	/* Post routes */
-
-	// contribution 
-
-	router.post('/add/need/', is_logged_in, (req, res) => {
-		models.things.add(req.user.user_id, req.body)
-			.then( result => {
-				req.flash('message',"Thanks for adding to the \"needs\" list. Hopefully we'll find a match for you soon...");
-				res.redirect('/profile/add/need');
-			})
-			.catch( handle_error(req,res,'/profile') )
-		;
-	});
-
-	router.post('/add/have/', is_logged_in, (req, res) => {
-		models.things.add(req.user.user_id, req.body)
-			.then( result => {
-				req.flash('message',"Thanks for adding to the \"haves\" list. You rock.");
-				res.redirect('/profile/add/have');
-			})
-			.catch( handle_error(req,res,'/profile') )
-		;
-	});
-
-	// updating info
-	router.post('/update/password/', is_logged_in, (req,res) => {
-		if(req.body.newpassword !== req.body.confirmpassword) {
-			req.flash('error','New passwords do not match.');
-			res.redirect('/profile');
-		} else {
-			models.users.update_password(req.user.user_id,req.body.oldpassword, req.body.newpassword)
-				.then( result => {
-					req.flash('message','Password successfully updated.');
-					res.redirect('/profile');
-				})
-				.catch( handle_error(req,res,'/profile/password') );
-		}
-	});
-
-	router.post('/update/username/', is_logged_in, (req,res) => {
-		//need to add connector to model
-		res.redirect('/profile');
-	});
-
-	router.post('/update/thing/', is_logged_in, (req,res) => {
-		console.log(req.body);
-		models.things.update(req.user.user_id, req.body)
-			.then( result => {
-				req.flash('message','Successfully updated!');
-				let redirect = (req.body.type === 'have')? '/profile/edit/have?id='+req.body.have_id : '/profile/edit/need?id='+req.body.need_id ;
-				res.redirect(redirect);
-			})
-			.catch(handle_error(req,res,'/profile'));
+			.catch( middleware.handle_error(req,res,'/') );
 	});
 
 	// authentication signup/login
