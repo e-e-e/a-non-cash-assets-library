@@ -32,12 +32,12 @@
 				<ul>
 					{#menu}
 						<li>
-							<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
+							{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}
 						</li>
 					{/menu}
 					{?user}
 						<li>
-							<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>
+							{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}
 						</li>
 					{/user}
 				</ul>
