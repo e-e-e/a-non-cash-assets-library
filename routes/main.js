@@ -29,7 +29,7 @@ function configure_router (passport) {
 			},{
 				name: 'Listings',
 				link:'/',
-				title: 'Find and share the things you need to make the art.'
+				title: 'Find and share the things you need to make art.'
 				}],
 			user: req.user,
 			message: req.flash('message'),
