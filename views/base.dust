@@ -19,7 +19,7 @@
 			<h1>{title}</h1>
 			<nav id="main-nav">
 				{#menu}
-					<span>{@ne key=link value=path}<a href="{link}">{name}</a>{:else}{name}{/ne}</span>
+					<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
 				{/menu}
 				{?user}
 					<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>

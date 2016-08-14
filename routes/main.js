@@ -24,10 +24,12 @@ function configure_router (passport) {
 			path: req.path,
 			menu: [{ 
 				name: 'About',
-				link:'/about' 
+				link:'/about',
+ 				title: 'Learn about about this project.'
 			},{ 
 				name: 'Listings',
 				link:'/',
+				title: 'Find and share the things you need to make the art.'
 				}],
 			user: req.user,
 			message: req.flash('message'),
