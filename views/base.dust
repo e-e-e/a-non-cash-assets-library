@@ -9,21 +9,38 @@
 	<div class="wrapper">
 		<header class="row">
 			<nav id="user-nav">
-				{?user}
-					(Logged in as <a href="/profile">{user.name}</a>) <a href="/logout">logout</a>
-				{:else}
-					<a href="/login">login</a> or 
-					<a href="/signup">sign up</a>
-				{/user}
+				<ul>
+					{?user}
+						<li>
+							(Logged in as <a href="/profile">{user.name}</a>)
+						</li>
+						<li>
+							<a href="/logout">logout</a>
+						</li>
+					{:else}
+						<li>
+							<a href="/login">login</a> or
+						</li>
+						<li>
+							<a href="/signup">sign up</a>
+						</li>
+					{/user}
+				</ul>
 			</nav>
 			<h1>{title}</h1>
 			<nav id="main-nav">
-				{#menu}
-					<span>{@ne key=link value=path}<a href="{link}">{name}</a>{:else}{name}{/ne}</span>
-				{/menu}
-				{?user}
-					<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>
-				{/user}
+				<ul>
+					{#menu}
+						<li>
+							{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}
+						</li>
+					{/menu}
+					{?user}
+						<li>
+							{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}
+						</li>
+					{/user}
+				</ul>
 			</nav>
 		</header>
 		<hr>
