@@ -22,11 +22,11 @@ function configure_router (passport) {
 		req.data = {
 			title: 'Arts Assets Prototype',
 			path: req.path,
-			menu: [{ 
+			menu: [{
 				name: 'About',
 				link:'/about',
  				title: 'Learn about about this project.'
-			},{ 
+			},{
 				name: 'Listings',
 				link:'/',
 				title: 'Find and share the things you need to make the art.'
