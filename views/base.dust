@@ -18,12 +18,18 @@
 			</nav>
 			<h1>{title}</h1>
 			<nav id="main-nav">
-				{#menu}
-					<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
-				{/menu}
-				{?user}
-					<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>
-				{/user}
+				<ul>
+					{#menu}
+						<li>
+							<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
+						</li>
+					{/menu}
+					{?user}
+						<li>
+							<span>{@ne key=path value="/profile"}<a href="/profile">Profile</a>{:else}Profile{/ne}</span>
+						</li>
+					{/user}
+				</ul>
 			</nav>
 		</header>
 		<hr>
