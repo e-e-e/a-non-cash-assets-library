@@ -6,12 +6,12 @@
 const express = require('express');
 const Q 			= require('q');
 
-const models 	= require('../models/models.js');
-const User 	= require('../models/user.js').User;
-const transactions = require('../transactions');
-const helpers = require('./middleware.js');
-const profile = require('./profile.js');
-const admin = require('./admin.js');
+const Things 				= require('../models/models.js').Things;
+const User 					= require('../models/models.js').User;
+const transactions 	= require('../transactions');
+const helpers 			= require('./middleware.js');
+const profile 			= require('./profile.js');
+const admin 				= require('./admin.js');
 
 module.exports.router = configure_router;
 
@@ -22,8 +22,8 @@ function configure_router (passport) {
 	/** Middleware to add haves and wants to template data */
 	function get_haves_and_wants (req,res, next) {
 		Q.all([
-				models.things.haves(),
-				models.things.needs()
+				Things.haves(req.user),
+				Things.needs(req.user)
 			]).spread( (haves, needs) => {
 				req.data.haves = haves;
 				req.data.needs = needs;

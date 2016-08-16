@@ -7,6 +7,7 @@ const validator = require('validator');
 const Q 				= require('q');
 const bcrypt		= require('bcrypt');
 const db 				= require('./database.js');
+const sql 			= require('./queries.js');
 
 function is_valid_thing(thing) {
 	if (!thing.name) return false;
@@ -41,23 +42,9 @@ class Things {
 		// //update statements
 	}
 
-	get_have (have_id) {
-		return db.query(this.select_have_with_id, [have_id] ).then(exists);
-	}
-
-	get_need (need_id) {
-		return db.query(this.select_need_with_id, [need_id] ).then(exists);
-	}
-
-	get (user_id, thing_id) {
-		// will only get things if things creator matches user_id - user cannot edit what they did not make.
-		return db.query("SELECT thing_id, name, description FROM things WHERE thing_id=$2 AND creator=$1;",[user_id,thing_id])
-			.then(exists);
-	}
-
-	random () {
+	static random () {
 		//this should be optimised so that it does not count things list every time.
-		return db.query("SELECT name, description FROM things OFFSET floor(random()* (SELECT count(*) from things) ) LIMIT 1;")
+		return db.query(sql.select.things.random)
 			.then(result => {
 				if(result.rowCount>0){
 					return result.rows[0];
@@ -68,22 +55,28 @@ class Things {
 			});
 	}
 
-	haves (user_id) {
+	static haves (user) {
 		var q;
-		if(user_id){
-			q = db.query(this.select_haves_with_user_id, [user_id]);
+		if(user && user.admin) {
+			//get everything
+			q = db.query(sql.select.haves.all, [user.user_id]);
 		} else {
-			q = db.query(this.select_haves);
+			//get only public
+			let id = (user) ? user.user_id : null;
+			q = db.query(sql.select.haves.all_public, [ id ]);
 		}
 		return q.then( res => res.rows );
 	}
 
-	needs (user_id) {
+	static needs (user) {
 		var q;
-		if(user_id){
-			q = db.query(this.select_needs_with_user_id, [user_id]);
+		if(user &&  user.admin) {
+			//get everything
+			q = db.query(sql.select.needs.all, [user.user_id]);
 		} else {
-			q = db.query(this.select_needs);
+			//get only public
+			let id = (user) ? user.user_id : null;
+			q = db.query(sql.select.needs.all_public, [ id ]);
 		}
 		return q.then( res => res.rows );
 	}

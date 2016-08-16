@@ -3,11 +3,11 @@
 
 'use strict';
 
-const Users = require('./users.js');
+const User = require('./user.js');
 const Things = require('./things.js');
 
 /*global exports:true*/
 exports = module.exports = {
-	users: new Users(),
-	things: new Things()
+	User: User,
+	Things: Things
 };

@@ -7,9 +7,9 @@ const express = require('express');
 const Q 			= require('q');
 
 const helpers = require('./middleware.js');
-const models 	= require('../models/models.js');
 const transactions = require('../transactions');
-const User = require('../models/user.js').User;
+const User = require('../models/models.js').User;
+const Things = require('../models/models.js').Things;
 
 /* global exports:true */
 exports = module.exports.router = configure_router;
@@ -20,7 +20,7 @@ function configure_router() {
 
 	//gets a random thing to for generating placeholder texts.
 	function get_random_thing (req,res,next) {
-		models.things.random()
+		Things.random()
 			.then( thing => {
 				req.data.randomthing = thing;
 			}).catch(err => console.log(err))
@@ -30,7 +30,7 @@ function configure_router() {
 	//get need and have functions need to be refactored into a single function
 	function get_have (req,res,next) {
 		if(req.query.id) {
-			models.things.get_have(req.query.id)
+			req.user.get_have(req.query.id)
 				.then( thing => {
 					req.data.thing = thing;
 				})
@@ -44,7 +44,7 @@ function configure_router() {
 
 	function get_need (req,res,next) {
 		if(req.query.id) {
-			models.things.get_need(req.query.id)
+			req.user.get_need(req.query.id)
 				.then( thing => {
 					req.data.thing = thing;
 				})

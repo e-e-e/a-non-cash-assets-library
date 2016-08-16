@@ -224,7 +224,7 @@ class User {
 }
 
 /* global exports:true */
-exports = module.exports = { User: User };
+exports = module.exports = User;
 
 //general info
 
