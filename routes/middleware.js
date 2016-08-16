@@ -45,10 +45,12 @@ function attach_template_data (req,res,next) {
 		path: url.parse(req.originalUrl).pathname,
 		menu: [{ 
 			name: 'About',
-			link:'/about' 
+			link:'/about',
+			title: 'Learn about about this project.',
 		},{ 
 			name: 'Listings',
 			link:'/',
+			title: 'Find the things you need to make art and share the things you have for others.'
 			}],
 		user: req.user,
 		message: req.flash('message'),
