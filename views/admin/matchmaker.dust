@@ -1,0 +1,16 @@
+{>"../base"/}
+{<content}
+	<h2>Suggest matches</h2>
+	<p>Select</p>
+	{>"../partials/thing" permission="admin"/}
+	<form action="/admin/add/match" method="POST">
+		<ul>
+			{#things}
+			<li>
+			{>"../partials/thing" permission="admin"/}
+			</li>
+			{/things}
+		</ul>
+		<button type="submit">Suggest Match</button>
+	</form>
+{/content}

@@ -5,7 +5,7 @@
 {?message}
 <div class="message">
 	<p>{message}</p>
-	<p>Why not add another "need" below, add to your <a href="/profile/add-a-have">"haves"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
+	<p>Why not add another "need" below, add to your <a href="/profile/add/have">"haves"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
 </div>
 {/message}
 {>contribute action="/profile/add/need" type="need" public="true"/}

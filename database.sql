@@ -55,7 +55,38 @@ CREATE TABLE matches (
     ON UPDATE CASCADE ON DELETE CASCADE,
   need_id integer REFERENCES needs(need_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  status integer NOT NULL DEFAULT 1,
+  status integer NOT NULL DEFAULT 1, -- see comments below
+  date_added timestamp DEFAULT NOW(),
+  lastmodified timestamp DEFAULT NOW()
+);
+
+-- Match status stores progress of matches.
+-- 1 = SUGGESTED - add to queue to email 'haver' about match
+--     - their options OFFER, 
+--                     DISMISS AT THE MOMENT, 
+--                     DISMISS FOREVER
+-- 2 = OFFERED -- 'haver' offered to 'needer' - email 'needer'
+--     - their options DISCUSS (negotiate exchange), 
+--                     DISMISS AT THE MOMENT, 
+--                     DISMISS FOREVER
+-- 3 = DISCUSS PRIVATELY -- 'needer' and  'haver'
+--     - options keep chating, 
+--               CONCLUDE (successful),
+--               CONCLUDE (haver exits), 
+--               CONCLUDE (needer exits)
+-- 4 = RESOLVED -- match was successful 
+-- 11 = DISMISSED DON'T MATCH AGAIN
+-- 12 = DISMISSED FOR NOW
+-- 13 = CANCELED BY HAVER
+-- 14 = CANCELED BY NEEDER
+
+CREATE TABLE match_messages (
+  match_message_id serial PRIMARY KEY UNIQUE,
+  match_id integer REFERENCES matches(match_id) -- which match is it in relation too.
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  user_id integer REFERENCES users(user_id) -- who is speaking?
+    ON UPDATE CASCADE,
+  message text NOT NULL,
   date_added timestamp DEFAULT NOW(),
   lastmodified timestamp DEFAULT NOW()
 );
@@ -74,5 +105,6 @@ CREATE TRIGGER sync_lastmod BEFORE UPDATE ON matches FOR EACH ROW EXECUTE PROCED
 GRANT SELECT, UPDATE, INSERT ON ALL TABLES IN SCHEMA public TO admin;
 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO admin;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO admin;
+
 
 

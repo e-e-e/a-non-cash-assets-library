@@ -4,9 +4,19 @@
 			<h2>Needs</h2>
 			{?needs}
 			<ul>
-				{#needs}
-					{>"partials/thing-basicview" type="need"/}
-				{/needs}
+				{?user.admin}
+					{#needs}
+							{>"partials/thing" type="need" permission="admin"/}
+					{/needs}
+				{:else}
+					{#needs}
+						{?owned}
+							{>"partials/thing" type="need" permission="owner"/}
+						{:else}
+							{>"partials/thing" type="need"/} 
+						{/owned}
+					{/needs}
+				{/user.admin}
 			</ul>
 			{:else}
 			<p>Nothing currently listed</p>
@@ -18,9 +28,19 @@
 			<h2>Haves</h2>
 			{?haves}
 			<ul>
-				{#haves}
-					{>"partials/thing-basicview" anon="true" type="have"/}
-				{/haves}
+				{?user.admin}
+					{#haves}
+							{>"partials/thing" type="have" permission="admin"/}
+					{/haves}
+				{:else}
+					{#haves}
+						{?owned}
+							{>"partials/thing" type="have" permission="owner"/}
+						{:else}
+							{>"partials/thing" type="have"/} 
+						{/owned}
+					{/haves}
+				{/user.admin}
 			</ul>
 			{:else}
 			<p>Nothing currently listed</p>

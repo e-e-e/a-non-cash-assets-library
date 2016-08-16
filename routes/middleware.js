@@ -4,6 +4,8 @@
 
 "use strict";
 
+const url = require('url');
+
 const express = require('express');
 
 const models 	= require('../models/models.js');
@@ -14,6 +16,7 @@ exports = module.exports = {
 	render_template: render_template,
 	handle_error: handle_error,
 	is_logged_in: is_logged_in,
+	is_admin: is_admin,
 	attach_template_data:attach_template_data,
 };
 
@@ -28,7 +31,7 @@ function handle_error (req, res, path) {
 			req.flash('error', err);
 		} else {
 			req.flash('error', err.message);
-			console.log(err);
+			//console.log(err.stack);
 		}
 		res.redirect(path);
 	};
@@ -36,10 +39,10 @@ function handle_error (req, res, path) {
 
 /* Middleware to append data to request object used in rendering dust templates */
 function attach_template_data (req,res,next) {
-	//setup defaults that will be passed to all rendered templates
+	//setup defaults that will be passed to all rendered template
 	req.data = {
 		title: 'Arts Assets Prototype',
-		path: req.path,
+		path: url.parse(req.originalUrl).pathname,
 		menu: [{ 
 			name: 'About',
 			link:'/about' 
@@ -57,6 +60,13 @@ function attach_template_data (req,res,next) {
 /** Simple middleware function to check if user is loged in before accessing restricted routes */
 function is_logged_in(req, res, next) {
 	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+}
+
+/** Simple middleware function to check if user is admin in before accessing restricted routes */
+function is_admin(req, res, next) {
+	if (req.user.admin)
 		return next();
 	res.redirect('/');
 }

@@ -2,15 +2,17 @@
 /* global require, module, console, __dirname */
 
 'use strict';
+
 var LocalStrategy = require('passport-local').Strategy;
-var users = require('../models/models.js').users;
+
+var User = require('../models/user.js').User;
 
 module.exports = function(passport) {
 	
 	passport.serializeUser((user,done) => done(null, user.user_id) );
 	
 	passport.deserializeUser(
-		(id,done) => users.get(id)
+		(id,done) => User.deserialise(id)
 											.then( user => done(null,user) )
 											.catch( err => done(err) )
 		);
@@ -21,8 +23,7 @@ module.exports = function(passport) {
 			passwordField : 'password',
 			passReqToCallback : true
 		},(req, email, password, done) => {
-			console.log('ok');
-			users.add(req.body.name, email, password)
+			User.signup(req.body.name, email, password)
 				.then(handle_user(done,req))
 				.catch(handle_rejection(done,req));
 		})
@@ -34,7 +35,7 @@ module.exports = function(passport) {
 			passwordField : 'password',
 			passReqToCallback : true
 		},(req,email,password, done) => {
-			users.get(email,password)
+			User.login(email,password)
 				.then(handle_user(done,req))
 				.catch(handle_rejection(done,req));
 		})
