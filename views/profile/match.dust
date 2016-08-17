@@ -27,12 +27,9 @@
 		{/eq}
 		{@eq value=3}
 			<ul>
-				<form action="/profile/matches/chat" method="post">
-					<input type="hidden" name="match_id" value="{match.match_id}">
-					<li>
-						<button type="submit">Discuss now.</button>
-					</li>
-				</form>
+				<li>
+					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+				</li>
 			</ul>
 		{/eq}
 		{@eq value=4}
@@ -59,12 +56,9 @@
 		{/eq}
 		{@eq value=3}
 			<ul>
-				<form action="/profile/matches/chat" method="post">
-					<input type="hidden" name="match_id" value="{match.match_id}">
-					<li>
-						<button type="submit">Discuss now.</button>
-					</li>
-				</form>
+				<li>
+					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+				</li>
 			</ul>
 		{/eq}
 		{@eq value=4}
