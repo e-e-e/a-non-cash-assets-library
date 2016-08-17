@@ -7,8 +7,9 @@
 const url = require('url');
 
 const express = require('express');
+const Q 			= require('q');
 
-const models 	= require('../models/models.js');
+const Things 	= require('../models/models.js').Things;
 
 
 /* global exports:true */
@@ -16,6 +17,11 @@ exports = module.exports = {
 	render_template: render_template,
 	handle_error: handle_error,
 	is_logged_in: is_logged_in,
+	get_haves_and_needs:get_haves_and_needs,
+	get_haves:get_haves,
+	get_needs:get_needs,
+	get_have_by_query_id: get_have_by_query_id,
+	get_need_by_query_id: get_need_by_query_id,
 	is_admin: is_admin,
 	attach_template_data:attach_template_data,
 };
@@ -57,6 +63,63 @@ function attach_template_data (req,res,next) {
 		error: req.flash('error') /* get error if raised on previous route */
 	};
 	next();
+}
+
+/** Middleware to add haves and wants to template data */
+function get_haves_and_needs (req,res, next) {
+	Q.all([
+			Things.haves(req.user),
+			Things.needs(req.user)
+		]).spread( (haves, needs) => {
+			req.data.haves = haves;
+			req.data.needs = needs;
+		}).catch(err=> console.log('error getting haves/needs',err))
+		.then(()=>next()); // an array of have objects
+}
+
+function get_haves (req,res, next ) {
+	Things.haves(req.user).
+		then ( results => {
+			req.data.haves = results;
+		}).catch(err=> console.log('error getting haves.',err))
+		.then(()=>next()); // an array of have objects
+}
+
+function get_needs (req,res, next ) {
+	Things.needs(req.user).
+		then ( results => {
+			req.data.needs = results;
+		}).catch(err=> console.log('error getting needs.',err))
+		.then(()=>next()); // an array of have objects
+}
+
+//get need and have functions need to be refactored into a single function
+function get_have_by_query_id (req,res,next) {
+	if(req.query.id) {
+		req.user.get_have(req.query.id)
+			.then( thing => {
+				req.data.thing = thing;
+			})
+			.catch(err => console.log(err))
+			.then(() => next());
+	} else {
+		req.flash('error','No thing_id specified to edit!');
+		res.redirect('/profile');
+	}
+}
+
+function get_need_by_query_id (req,res,next) {
+	if(req.query.id) {
+		req.user.get_need(req.query.id)
+			.then( thing => {
+				req.data.thing = thing;
+			})
+			.catch(err => console.log(err))
+			.then(() => next());
+	} else {
+		req.flash('error','No thing_id specified to edit!');
+		res.redirect('/profile');
+	}
 }
 
 /** Simple middleware function to check if user is loged in before accessing restricted routes */

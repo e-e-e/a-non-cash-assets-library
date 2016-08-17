@@ -22,9 +22,7 @@
 			{@eq value="owner"}
 				<a href="/profile/edit/{type}?id={id}">edit</a> 
 			{/eq}
-			{@none}
-				nothing
-			{/none}
+			{@none}{/none}
 		{/select}
 	</div>
 	<p>{description}</p>

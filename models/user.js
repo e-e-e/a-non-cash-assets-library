@@ -82,6 +82,7 @@ class User {
 		return q.then(exists);
 	}
 
+	// - add a need
 	// - add a have
 	add_thing (thing) {
 		if(!is_valid_thing(thing)) {
@@ -100,11 +101,10 @@ class User {
 				}
 			});
 	}
-
-	// - add a need
 	
 	// - update my need
 	// - update my have
+	// - TODO: enable admin to edit things that are not theirs.
 	update_thing (thing) {
 		if(!is_valid_thing(thing)) {
 			return Q.reject('Failed: You need to fill out the name field');

@@ -23,8 +23,8 @@ const sql = {
 			all_public: 
 				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true",
 			with_user_id: "SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE user_id = $1",
-			with_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public FROM haves INNER JOIN things t USING (thing_id) WHERE have_id=$1",
-			with_id_and_user_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public FROM haves INNER JOIN things t USING (thing_id) WHERE have_id=$1 and user_id=$2"
+			with_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public, u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1",
+			with_id_and_user_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 and user_id=$2"
 		},
 		needs: {
 			all: 
@@ -34,9 +34,9 @@ const sql = {
 			with_user_id: 
 				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE user_id = $1",
 			with_id:
-				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public FROM needs INNER JOIN things t USING (thing_id) WHERE need_id=$1",
+				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public, u.user_id as owner_id, u.name as owner FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE need_id=$1",
 			with_id_and_user_id:
-				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public FROM needs INNER JOIN things t USING (thing_id) WHERE need_id=$1 and user_id=$2"
+				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public, u.user_id as owner_id, u.name as owner FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE need_id=$1 and user_id=$2"
 		},
 		things: {
 			random:
@@ -51,7 +51,9 @@ const sql = {
 		have:
 			"INSERT INTO haves (user_id, thing_id, public) VALUES ($1, $2, $3)",
 		need:
-			"INSERT INTO needs (user_id, thing_id, public) VALUES ($1, $2, $3)"
+			"INSERT INTO needs (user_id, thing_id, public) VALUES ($1, $2, $3)",
+		match:
+			"INSERT INTO matches (have_id,need_id) VALUES ($1, $2)"
 	},
 	update: {
 		users: {

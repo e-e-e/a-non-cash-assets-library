@@ -1,15 +1,35 @@
 {>"../base"/}
 {<content}
-	<h2>Suggest matches</h2>
-	<p>Select</p>
-	{>"../partials/thing" permission="admin"/}
-	<form action="/admin/add/match" method="POST">
+	<h2>Suggest matches for this {?needs}Have{/needs}{?haves}Need{/haves}:</h2>
+	{#thing}
+		{>"../partials/thing"/}
+	{/thing}
+	<hr>
+	<form action="/admin/add/matches" method="POST">
+		{?needs}
+			<input type="hidden" name="type" value="needs">
+		{:else}
+			<input type="hidden" name="type" value="haves">
+		{/needs}
+		<input type="hidden" name="id" value="{thing.id}">
 		<ul>
-			{#things}
+			{#needs}
 			<li>
-			{>"../partials/thing" permission="admin"/}
+				<label>
+					<input type="checkbox" name="matches" value="{id}">
+					{>"../partials/thing"/}
+				</label>
 			</li>
-			{/things}
+			{/needs}
+
+			{#haves}
+			<li>
+				<label>
+					<input type="checkbox" name="matches" value="{id}">
+					{>"../partials/thing"/}
+				</label>
+			</li>
+			{/haves}
 		</ul>
 		<button type="submit">Suggest Match</button>
 	</form>

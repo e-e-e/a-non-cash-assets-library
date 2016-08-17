@@ -4,7 +4,6 @@
 "use strict";
 
 const express = require('express');
-const Q 			= require('q');
 
 const Things 				= require('../models/models.js').Things;
 const User 					= require('../models/models.js').User;
@@ -19,23 +18,11 @@ function configure_router (passport) {
 
 	const router = express.Router();
 
-	/** Middleware to add haves and wants to template data */
-	function get_haves_and_wants (req,res, next) {
-		Q.all([
-				Things.haves(req.user),
-				Things.needs(req.user)
-			]).spread( (haves, needs) => {
-				req.data.haves = haves;
-				req.data.needs = needs;
-			}).catch(err=> console.log('error getting haves/needs',err))
-			.then(()=>next()); // an array of have objects
-	}
-
 	/* Get routes */
 
-	router.get('/', 
+	router.get('/',
 							helpers.attach_template_data,
-							get_haves_and_wants,
+							helpers.get_haves_and_needs,
 							helpers.render_template('index'));
 	
 	router.get('/login', 

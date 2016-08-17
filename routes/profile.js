@@ -27,35 +27,6 @@ function configure_router() {
 			.then(() => next());
 	}
 
-	//get need and have functions need to be refactored into a single function
-	function get_have (req,res,next) {
-		if(req.query.id) {
-			req.user.get_have(req.query.id)
-				.then( thing => {
-					req.data.thing = thing;
-				})
-				.catch(err => console.log(err))
-				.then(() => next());
-		} else {
-			req.flash('error','No thing_id specified to edit!');
-			res.redirect('/profile');
-		}
-	}
-
-	function get_need (req,res,next) {
-		if(req.query.id) {
-			req.user.get_need(req.query.id)
-				.then( thing => {
-					req.data.thing = thing;
-				})
-				.catch(err => console.log(err))
-				.then(() => next());
-		} else {
-			req.flash('error','No thing_id specified to edit!');
-			res.redirect('/profile');
-		}
-	}
-
 	function do_user_action_and_redirect(func,success_msg,success_route, error_route) {
 		return (req, res, next) => {
 			//need to check existance of fn etc.
@@ -93,11 +64,11 @@ function configure_router() {
 			helpers.render_template('profile/add-a-have'));
 
 	router.get('/edit/need',
-			get_need,
+			helpers.get_need_by_query_id,
 			helpers.render_template('profile/edit-a-need'));
 
 	router.get('/edit/have',
-			get_have,
+			helpers.get_have_by_query_id,
 			helpers.render_template('profile/edit-a-have'));
 
 	// resend verification email to confirm email
