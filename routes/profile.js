@@ -57,7 +57,9 @@ function configure_router() {
 			do_user_action('attach_needs_that_match'),
 			helpers.render_template('profile/matches'));
 
-	router.get('/matches/chat', helpers.render_template('profile/chat'));
+	router.get('/matches/chat',
+		// do_user_action('get_chat')
+		helpers.render_template('profile/chat'));
 
 	router.get('/password',
 			helpers.render_template('profile/password'));
