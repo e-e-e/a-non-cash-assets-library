@@ -70,6 +70,44 @@ class User {
 		});
 	}
 
+	attach_haves_that_match () {
+		return db.query(sql.select.matches.haves_with_user_id, [this.user_id])
+			.then( results => {
+				//for each match get the need and the have
+				return Q.all(results.rows.map(e => {
+					return Q.all([ db.query(sql.select.needs.with_id, [e.need_id]) , 
+												 db.query(sql.select.haves.with_id, [e.have_id]) , 
+												 e ]
+											).spread((need,have,match) => {
+												return { need:need.rows[0], 
+																 have:have.rows[0], 
+																 match:match }; 
+											});
+				}));
+			}).then(results => {
+				this.have_matches = results;
+			});
+	}
+
+	attach_needs_that_match () {
+		return db.query(sql.select.matches.needs_with_user_id, [this.user_id])
+			.then( results => {
+				//for each match get the need and the have
+				return Q.all(results.rows.map(e => {
+					return Q.all([ db.query(sql.select.needs.with_id, [e.need_id]) , 
+												 db.query(sql.select.haves.with_id, [e.have_id]) , 
+												 e ]
+											).spread((need,have,match) => {
+												return { need:need.rows[0], 
+																 have:have.rows[0],
+																 match: match }; 
+											});
+				}));
+			}).then(results => {
+				this.need_matches = results;
+			});
+	}
+
 	get_need (id) {
 		let q = (this.admin) ? db.query(sql.select.needs.with_id, [id]):
 							db.query(sql.select.needs.with_id_and_user_id, [id,this.user_id]);
@@ -143,6 +181,31 @@ class User {
 
 	// - hide my thing (need or have?)
 	// - show my thing (need or have?)
+
+	offer_match(body) {
+		//TODO: check if you are the haver
+		return db.query('UPDATE matches SET status = 2 WHERE match_id = $1 AND status = 1', [body.match_id]);
+	}
+
+	accept_match(body) {
+		//TODO: check if you are the needer
+		return db.query('UPDATE matches SET status = 3 WHERE match_id = $1 AND status = 2', [body.match_id]);
+	}
+
+	resolve_match(body) {
+		// TODO: check who resolved it and change status on that basis
+		return db.query('UPDATE matches SET status = 4 WHERE match_id = $1 AND status = 3', [body.match_id]);
+	}
+
+	dismiss_match(body) {
+		//TODO: check who dismissed it
+		return db.query('UPDATE matches SET status = 12 WHERE match_id = $1', [body.match_id]);
+	}
+
+	comment_on_match(body) {
+		// TODO: check that this is your match to be commenting on. 
+		return db.query(sql.insert.message, [this.user_id, body.match_id, body.message ]);
+	}
 
 	/** static functions  */
 

@@ -1,0 +1,77 @@
+<h4>Match (id:{match.match_id}): status {match.status}</h4>
+{#have}
+	<h5>HAVE</h5>
+	{>"../partials/thing" type="have"/}
+{/have}
+{#need}
+	<h5>NEED</h5>
+	{>"../partials/thing" type="need"/}
+{/need}
+{?your_have}
+	{@select key=match.status}
+		{@eq value=1} {! match suggested !}
+			<ul>
+				<form action="/profile/matches/offer" method="post">
+					<input type="hidden" name="match_id" value="{match.match_id}">
+					<li>
+						<button type="submit">Offer</button>
+					</li>
+					<li>
+						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+					</li>
+				</form>
+			</ul>
+		{/eq}
+		{@eq value=2}
+			<p>Match has been offered. Ball's in their court.</p>
+		{/eq}
+		{@eq value=3}
+			<ul>
+				<form action="/profile/matches/chat" method="post">
+					<input type="hidden" name="match_id" value="{match.match_id}">
+					<li>
+						<button type="submit">Discuss now.</button>
+					</li>
+				</form>
+			</ul>
+		{/eq}
+		{@eq value=4}
+			<p>This match was a success! Thanks for sharing!</p>
+		{/eq}
+	{/select}
+{:else}
+	{@select key=match.status}
+		{@eq value=1} {! match suggested !}
+			<p>Not yet offered to you. You should not be able to see this.</p>
+		{/eq}
+		{@eq value=2}
+			<ul>
+				<form action="/profile/matches/accept" method="post">
+					<input type="hidden" name="match_id" value="{match.match_id}">
+					<li>
+						<button type="submit">Accept Offer</button>
+					</li>
+					<li>
+						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+					</li>
+				</form>
+			</ul>
+		{/eq}
+		{@eq value=3}
+			<ul>
+				<form action="/profile/matches/chat" method="post">
+					<input type="hidden" name="match_id" value="{match.match_id}">
+					<li>
+						<button type="submit">Discuss now.</button>
+					</li>
+				</form>
+			</ul>
+		{/eq}
+		{@eq value=4}
+			<p>This match was a success! Thanks for sharing!</p>
+		{/eq}
+		{@none}
+			<p>this match was most likely dismissed</p>
+		{/none}
+	{/select}
+{/your_have}

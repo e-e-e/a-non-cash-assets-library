@@ -17,6 +17,7 @@ To verify your account follow the link within the welcome email we sent.<br>
 <li><a href="/profile/add/need">Add a need</a></li>
 <li><a href="/profile/add/have">Add a have</a></li>
 <li><a href="/profile/password">Change password</a></li>
+<li><a href="/profile/matches">See your matches</a></li>
 </ul>
 {/user.verified}
 <hr>

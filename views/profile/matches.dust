@@ -1,0 +1,20 @@
+{>"../base"/}
+{<content}
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
+<h2>Your Matches</h2>
+<hr>
+<h3>Your haves match the following:</h3>
+{#user.have_matches}
+	{>match your_have="true" /}
+{:else}
+	<p>Your haves currently do not match any needs</p>
+{/user.have_matches}
+<hr>
+<h3>Your needs match the following:</h3>
+{#user.need_matches}
+	{>match/}
+{:else}
+	<p>Your needs currently do not match any haves</p>
+{/user.need_matches}
+{/content}

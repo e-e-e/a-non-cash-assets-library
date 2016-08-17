@@ -21,7 +21,6 @@
 				</label>
 			</li>
 			{/needs}
-
 			{#haves}
 			<li>
 				<label>

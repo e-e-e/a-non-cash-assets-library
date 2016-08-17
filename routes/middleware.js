@@ -37,7 +37,7 @@ function handle_error (req, res, path) {
 			req.flash('error', err);
 		} else {
 			req.flash('error', err.message);
-			//console.log(err.stack);
+			console.log(err.stack);
 		}
 		res.redirect(path);
 	};

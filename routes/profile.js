@@ -52,6 +52,13 @@ function configure_router() {
 			do_user_action('attach_things'),
 			helpers.render_template('profile'));
 
+	router.get('/matches',
+			do_user_action('attach_haves_that_match'),
+			do_user_action('attach_needs_that_match'),
+			helpers.render_template('profile/matches'));
+
+	// router.get('/match/chat', );
+
 	router.get('/password',
 			helpers.render_template('profile/password'));
 
@@ -116,6 +123,21 @@ function configure_router() {
 			'Successfully updated!',
 			'/profile'
 		));
+
+	router.post('/matches/offer',
+		do_user_action_and_redirect('offer_match',
+			'Match offered!',
+			'/profile/matches'));
+
+	router.post('/matches/accept', 
+		do_user_action_and_redirect('accept_match',
+			'Match Accepted now chat about it!',
+			'/profile/matches'));
+
+	router.post('/matches/dismiss', 
+		do_user_action_and_redirect('dismiss_match',
+			'Match has been ignored',
+			'/profile/matches'));
 
 	return router;
 }
