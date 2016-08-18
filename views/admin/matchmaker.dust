@@ -5,6 +5,7 @@
 		{>"../partials/thing"/}
 	{/thing}
 	<hr>
+	<h2>{?needs}Needs{:else}Haves{/needs} List:</h2>
 	<form action="/admin/add/matches" method="POST">
 		{?needs}
 			<input type="hidden" name="type" value="needs">
