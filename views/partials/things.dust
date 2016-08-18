@@ -37,7 +37,7 @@
 						{?owned}
 							{>"partials/thing" type="have" permission="owner"/}
 						{:else}
-							{>"partials/thing" type="have"/} 
+							{>"partials/thing" type="have" anon="true"/} 
 						{/owned}
 					{/haves}
 				{/user.admin}
