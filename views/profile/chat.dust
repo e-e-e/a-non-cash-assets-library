@@ -1,19 +1,26 @@
 {>"../base"/}
 {<content}
 <h1>Chit-Chat</h1>
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
 <p>Need some text that says that this is private etc.</p>
 <p>HERE SHOULD BE THE INFO ABOUT THE ITEM</p>
+{#match}
+	{>"./match"/}
+{/match}
+<hr>
 <ul>
 	{#messages}
 		<li>
-			<h3>({time}) {user_name}:</h3>
+			<h3>({date_added}) {name}:</h3>
 			<p>{message}</p>
 		</li>
 	{/messages}
 </ul>
+<hr>
 <form action="/profile/matches/comment" method="POST">
 	<input type="hidden" name="user_id" value="{user.user_id}">
-	<input type="hidden" name="match_id" value="{match_id}">
+	<input type="hidden" name="match_id" value="{match.match.match_id}">
 	<label for="message">Write something to:</label>
 	<textarea name="message"></textarea>
 	<button type="submit">Post</button>

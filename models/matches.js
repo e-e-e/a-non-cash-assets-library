@@ -17,7 +17,27 @@ class Matches {
 
 	static all() {
 		return db.query(sql.select.matches.all)
-						 .then( results=> results.rows );
+						 .then( results => results.rows );
+	}
+
+	static match(match_id) {
+		return db.query(sql.select.matches.with_match_id,[match_id]).then(results => {
+				let match = results.rows[0];
+				return Q.all([ 
+					db.query(sql.select.needs.with_id, [match.need_id]), 
+					db.query(sql.select.haves.with_id, [match.have_id]), 
+					match
+				]);
+			}).spread((need,have,match) => {
+				return { need:need.rows[0], 
+								 have:have.rows[0],
+								 match: match }; 
+			});
+	}
+
+	static conversation(match_id) {
+		return db.query(sql.select.converstation.with_match_id, [match_id])
+						 .then( results => results.rows );
 	}
 }
 

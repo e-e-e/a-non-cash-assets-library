@@ -44,11 +44,17 @@ const sql = {
 		},
 		matches: {
 			all:
-				"SELECT match_id, need_id, have_id, status FROM matches;",
+				"SELECT match_id, need_id, have_id, status FROM matches",
+			with_match_id:
+				"SELECT match_id, need_id, have_id, status FROM matches WHERE match_id = $1",
 			haves_with_user_id:
 				"SELECT match_id, need_id, have_id, status FROM haves h INNER JOIN matches m USING (have_id) WHERE user_id=$1",
 			needs_with_user_id:
 				"SELECT match_id, need_id, have_id, status FROM needs n INNER JOIN matches m USING (need_id) WHERE user_id=$1",
+		},
+		converstation: {
+			with_match_id: 
+				"SELECT user_id, match_id, u.name, message, m.date_added FROM match_messages m INNER JOIN users u USING(user_id) WHERE match_id = $1 ORDER BY m.date_added"
 		}
 	},
 	insert: {

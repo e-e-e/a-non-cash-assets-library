@@ -3,6 +3,8 @@
 
 "use strict";
 
+const url			= require('url');
+
 const express = require('express');
 const Q 			= require('q');
 
@@ -10,6 +12,7 @@ const helpers = require('./middleware.js');
 const transactions = require('../transactions');
 const User = require('../models/models.js').User;
 const Things = require('../models/models.js').Things;
+const Matches = require('../models/models.js').Matches;
 
 /* global exports:true */
 exports = module.exports.router = configure_router;
@@ -58,7 +61,20 @@ function configure_router() {
 			helpers.render_template('profile/matches'));
 
 	router.get('/matches/chat',
-		// do_user_action('get_chat')
+		(req,res,next)=> {
+			Matches.conversation(req.query.match_id)
+				.then(words=> {
+					req.data.messages = words;
+					next();
+				}).catch(err=> next(err));
+		},
+		(req,res,next)=> {
+			Matches.match(req.query.match_id)
+				.then(match=> {
+					req.data.match = match;
+					next();
+				}).catch(err=> next(err));
+		},
 		helpers.render_template('profile/chat'));
 
 	router.get('/password',
@@ -141,5 +157,18 @@ function configure_router() {
 			'Match has been ignored',
 			'/profile/matches'));
 
+	router.post('/matches/comment', 
+		(req,res) => {
+			let path = '/profile/matches/chat?match_id='+req.body.match_id;
+			req.user.comment_on_match(req.body)
+				.then( results => {
+					req.flash('message', "Commented Successfully");
+					res.redirect(path);
+				})
+				.catch( helpers.handle_error(req,res,path) );
+		});
+		// do_user_action_and_redirect('comment_on_match',
+		// 	'Commented Successfully',
+		// 	'profile/matches'));
 	return router;
 }
