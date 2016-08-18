@@ -106,7 +106,9 @@ class User {
 				}));
 			}).then(results => {
 				// this should be done in the sql query.
-				this.need_matches = results.filter( e => e.need.user_id != this.user_id );
+				this.need_matches = results.filter( e => {
+					return !( e.match.status == 1 && e.need.owner_id == this.user_id );
+				});
 			});
 	}
 
