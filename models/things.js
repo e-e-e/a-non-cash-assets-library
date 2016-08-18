@@ -55,6 +55,11 @@ class Things {
 			});
 	}
 
+	static have (id) {
+		return db.query(sql.select.haves.with_id, [ id ])
+			.then( res => res.rows[0] );
+	}
+
 	static haves (user) {
 		var q;
 		if(user && user.admin) {
@@ -66,6 +71,11 @@ class Things {
 			q = db.query(sql.select.haves.all_public, [ id ]);
 		}
 		return q.then( res => res.rows );
+	}
+
+	static need (id) {
+		return db.query(sql.select.needs.with_id, [ id ])
+			.then( res => res.rows[0] );
 	}
 
 	static needs (user) {
