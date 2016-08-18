@@ -24,7 +24,12 @@ function configure_router (passport) {
 							helpers.attach_template_data,
 							helpers.get_haves_and_needs,
 							helpers.render_template('index'));
-	
+
+  router.get('/need/',
+ 							helpers.attach_template_data,
+ 							helpers.get_need,
+ 							helpers.render_template('thing_detail'));
+
 	router.get('/login', 
 							helpers.attach_template_data, 
 							helpers.render_template('login'));
