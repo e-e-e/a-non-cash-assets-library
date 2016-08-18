@@ -90,6 +90,7 @@ class User {
 	}
 
 	attach_needs_that_match () {
+		//do not return matches where needer 
 		return db.query(sql.select.matches.needs_with_user_id, [this.user_id])
 			.then( results => {
 				//for each match get the need and the have
@@ -104,7 +105,8 @@ class User {
 											});
 				}));
 			}).then(results => {
-				this.need_matches = results;
+				// this should be done in the sql query.
+				this.need_matches = results.filter( e => e.need.user_id != this.user_id );
 			});
 	}
 
