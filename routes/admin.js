@@ -29,6 +29,13 @@ function configure_router() {
 		helpers.get_haves, // get the list of haves
 		helpers.render_template('admin/matchmaker'));
 
+	router.get('/view/matches', (req,res, next)=> {
+			Matches.all()
+				.then( matches => req.data.matches = matches )
+				.then(() => next());
+		},
+		helpers.render_template('admin/matches'));
+
 	//add matches
 	router.post('/add/matches', (req,res)=> {
 		let success_msg = 'matches made';
@@ -44,7 +51,7 @@ function configure_router() {
 		} else {
 			let need_id = req.body.id;
 			let promises = (Array.isArray(req.body.matches)) ? 
-				req.body.matches.map(id=> Matches.add(id, need_id)) : 
+				req.body.matches.map( id => Matches.add(id, need_id)) : 
 				[ Matches.add(req.body.matches, need_id) ];
 			Q.all(promises).then( () => {
 				req.flash(success_msg);

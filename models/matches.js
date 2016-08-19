@@ -17,7 +17,7 @@ class Matches {
 
 	static all() {
 		return db.query(sql.select.matches.all)
-						 .then( results => results.rows );
+						 .then( results => Q.all( results.rows.map( Matches.get_details )));
 	}
 
 	static get_details (match) {
