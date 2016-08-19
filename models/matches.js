@@ -20,7 +20,11 @@ class Matches {
 						 .then( results => results.rows );
 	}
 
-	static match(match_id) {
+	static details () {
+		
+	}
+
+	static get(match_id) {
 		return db.query(sql.select.matches.with_match_id,[match_id]).then(results => {
 				let match = results.rows[0];
 				return Q.all([ 
