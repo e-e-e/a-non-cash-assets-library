@@ -9,7 +9,9 @@ const bcrypt		= require('bcrypt');
 
 const db 				= require('./database.js');
 const sql 			= require('./queries');
+const Matches 	= require('./matches.js');
 const transactions = require('../transactions/');
+
 
 const hash = Q.nfbind(bcrypt.hash);
 const genSalt = Q.nfbind(bcrypt.genSalt);
@@ -44,7 +46,11 @@ class User {
 	constructor(id) {
 		this.user_id = id;
 	}
- 
+
+	is_not_match_needer_or_status_not_init (match) {
+		return !( match.match.status == 1 && match.need.owner_id == this.user_id );
+	}
+
 	// - get my account data
 	attach_details () {
 		return db.query(sql.select.users.user_with_id, [ this.user_id ])
@@ -74,16 +80,7 @@ class User {
 		return db.query(sql.select.matches.haves_with_user_id, [this.user_id])
 			.then( results => {
 				//for each match get the need and the have
-				return Q.all(results.rows.map(e => {
-					return Q.all([ db.query(sql.select.needs.with_id, [e.need_id]) , 
-												 db.query(sql.select.haves.with_id, [e.have_id]) , 
-												 e ]
-											).spread((need,have,match) => {
-												return { need:need.rows[0], 
-																 have:have.rows[0], 
-																 match:match }; 
-											});
-				}));
+				return Q.all(results.rows.map(Matches.get_details));
 			}).then(results => {
 				this.have_matches = results;
 			});
@@ -94,21 +91,10 @@ class User {
 		return db.query(sql.select.matches.needs_with_user_id, [this.user_id])
 			.then( results => {
 				//for each match get the need and the have
-				return Q.all(results.rows.map(e => {
-					return Q.all([ db.query(sql.select.needs.with_id, [e.need_id]) , 
-												 db.query(sql.select.haves.with_id, [e.have_id]) , 
-												 e ]
-											).spread((need,have,match) => {
-												return { need:need.rows[0], 
-																 have:have.rows[0],
-																 match: match }; 
-											});
-				}));
+				return Q.all( results.rows.map( Matches.get_details ));
 			}).then(results => {
 				// this should be done in the sql query.
-				this.need_matches = results.filter( e => {
-					return !( e.match.status == 1 && e.need.owner_id == this.user_id );
-				});
+				this.need_matches = results.filter( this.is_not_match_needer_or_status_not_init );
 			});
 	}
 

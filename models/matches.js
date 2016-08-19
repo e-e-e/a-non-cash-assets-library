@@ -20,23 +20,22 @@ class Matches {
 						 .then( results => results.rows );
 	}
 
-	static details () {
-		
-	}
-
-	static get(match_id) {
-		return db.query(sql.select.matches.with_match_id,[match_id]).then(results => {
-				let match = results.rows[0];
-				return Q.all([ 
-					db.query(sql.select.needs.with_id, [match.need_id]), 
-					db.query(sql.select.haves.with_id, [match.have_id]), 
-					match
-				]);
-			}).spread((need,have,match) => {
+	static get_details (match) {
+		return Q.all([ 
+				db.query(sql.select.needs.with_id, [match.need_id]), 
+				db.query(sql.select.haves.with_id, [match.have_id]), 
+				match
+			]).spread((need,have,match) => {
 				return { need:need.rows[0], 
 								 have:have.rows[0],
 								 match: match }; 
 			});
+	}
+
+	static get(match_id) {
+		return db.query(sql.select.matches.with_match_id,[match_id])
+			.then( results => results.rows[0] )
+			.then( Matches.get_details );
 	}
 
 	static conversation(match_id) {
