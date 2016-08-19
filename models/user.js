@@ -45,6 +45,8 @@ class User {
 
 	constructor(id) {
 		this.user_id = id;
+
+		this.is_not_match_needer_or_status_not_init = this.is_not_match_needer_or_status_not_init.bind(this);
 	}
 
 	is_not_match_needer_or_status_not_init (match) {
