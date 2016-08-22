@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="wrapper">
-		<header class="row">
+		<header>
 			<nav id="user-nav">
 				<ul>
 				{?user}
@@ -44,11 +44,11 @@
 			</nav>
 		</header>
 		<hr>
-		<main class="row">
+		<main>
 			{+content/}
 		</main>
 		<hr>
-		<footer class="row">
+		<footer>
 			<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
 		</footer>
 	</div>
