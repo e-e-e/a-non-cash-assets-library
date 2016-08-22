@@ -25,6 +25,11 @@ function configure_router (passport) {
 							helpers.get_haves_and_needs,
 							helpers.render_template('index'));
 
+  router.get('/have/',
+ 							helpers.attach_template_data,
+ 							helpers.get_have,
+ 							helpers.render_template('have_detail'));
+
   router.get('/need/',
  							helpers.attach_template_data,
  							helpers.get_need,
