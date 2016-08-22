@@ -13,7 +13,6 @@ html, body {
 
 body, html {
 	color: @body-color;
-	max-width: @maxwidth;
 	margin: 0 auto;
 	padding: 0;
 	font-family: helvetica, sans-serif;
@@ -129,7 +128,8 @@ label div.thing {
 .wrapper {
 	height: 100%;
 	width: 100%;
-	display: table;
+	max-width: @maxwidth;
+	margin: 0 auto;
 }
 
 .things-list {
