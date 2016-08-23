@@ -18,6 +18,8 @@ exports = module.exports = {
 	handle_error: handle_error,
 	is_logged_in: is_logged_in,
 	get_haves_and_needs:get_haves_and_needs,
+	get_have:get_have,
+	get_need:get_need,
 	get_haves:get_haves,
 	get_needs:get_needs,
 	get_have_by_query_id: get_have_by_query_id,
@@ -75,6 +77,22 @@ function get_haves_and_needs (req,res, next) {
 			req.data.needs = needs;
 		}).catch(err=> console.log('error getting haves/needs',err))
 		.then(()=>next()); // an array of have objects
+}
+
+function get_need (req,res, next ) {
+	Things.need(req.query.id).
+		then ( results => {
+			req.data.thing = results;
+		}).catch(err=> console.log('can’t find need', err))
+		.then(()=>next());
+}
+
+function get_have (req,res, next ) {
+	Things.have(req.query.id).
+		then ( results => {
+			req.data.thing = results;
+		}).catch(err=> console.log('can’t find have', err))
+		.then(()=>next());
 }
 
 function get_haves (req,res, next ) {

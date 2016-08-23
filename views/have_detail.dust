@@ -1,0 +1,10 @@
+{>base/}
+{<content}
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
+
+<article class="thing-detail">
+	<h1>Someone has {thing.name} to share</h1>
+	<p>{thing.description}</p>
+</article>
+{/content}
