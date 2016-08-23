@@ -47,6 +47,11 @@ class User {
 		this.user_id = id;
 
 		this.is_not_match_needer_or_status_not_init = this.is_not_match_needer_or_status_not_init.bind(this);
+		this.has_permission_to_see = this.has_permission_to_see.bind(this);
+	}
+
+	has_permission_to_see (thing) {
+		return (thing.public || this.admin || this.user_id === thing.owner_id );
 	}
 
 	is_not_match_needer_or_status_not_init (match) {

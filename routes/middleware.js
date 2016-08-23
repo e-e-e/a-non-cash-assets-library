@@ -75,40 +75,45 @@ function get_haves_and_needs (req,res, next) {
 		]).spread( (haves, needs) => {
 			req.data.haves = haves;
 			req.data.needs = needs;
-		}).catch(err=> console.log('error getting haves/needs',err))
-		.then(()=>next()); // an array of have objects
+		})
+		.then(()=>next())
+		.catch( next);
 }
 
 function get_need (req,res, next ) {
-	Things.need(req.query.id).
-		then ( results => {
+	Things.need(req.query.id)
+		.then ( results => {
 			req.data.thing = results;
-		}).catch(err=> console.log('can’t find need', err))
-		.then(()=>next());
+		})
+		.then(()=>next())
+		.catch( next );
 }
 
 function get_have (req,res, next ) {
-	Things.have(req.query.id).
-		then ( results => {
+	Things.have(req.query.id)
+		.then ( results => {
 			req.data.thing = results;
-		}).catch(err=> console.log('can’t find have', err))
-		.then(()=>next());
+		})
+		.then(()=>next())
+		.catch( next );
 }
 
 function get_haves (req,res, next ) {
-	Things.haves(req.user).
-		then ( results => {
+	Things.haves(req.user)
+		.then ( results => {
 			req.data.haves = results;
-		}).catch(err=> console.log('error getting haves.',err))
-		.then(()=>next()); // an array of have objects
+		})
+		.then(()=>next())
+		.catch( next );
 }
 
 function get_needs (req,res, next ) {
-	Things.needs(req.user).
-		then ( results => {
+	Things.needs(req.user)
+		.then ( results => {
 			req.data.needs = results;
-		}).catch(err=> console.log('error getting needs.',err))
-		.then(()=>next()); // an array of have objects
+		})
+		.then(()=>next())
+		.catch( next );
 }
 
 //get need and have functions need to be refactored into a single function

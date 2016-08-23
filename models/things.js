@@ -38,9 +38,21 @@ class Things {
 			});
 	}
 
-	static have (id) {
+	static check_permission(thing,user) {
+		if( thing.public || (user && user.has_permission_to_view(thing))) {
+			return thing;
+		} else {
+			throw "YOU DONT HAVE PERMISSION TO VIEW";
+		}
+	}
+
+	static have (id, user) {
 		return db.query(sql.select.haves.with_id, [ id ])
-			.then( res => res.rows[0] );
+			.then( results => {
+				if (results.rowCount > 0) {
+					return Things.check_permission(results.rows[0], user);
+				} else throw "NOTHING";
+			});
 	}
 
 	static haves (user) {
@@ -56,9 +68,14 @@ class Things {
 		return q.then( res => res.rows );
 	}
 
-	static need (id) {
+	static need (id, user) {
 		return db.query(sql.select.needs.with_id, [ id ])
-			.then( res => res.rows[0] );
+			.then( results => {
+				console.log(results);
+				if (results.rowCount > 0) {
+					return Things.check_permission(results.rows[0], user);
+				} else throw "NOTHING";
+			});
 	}
 
 	static needs (user) {
