@@ -4,7 +4,15 @@
 {?message}<div class="message">{message}</div>{/message}
 
 <article class="thing-detail">
-	<h1>Someone has {thing.name} to share</h1>
+	{?user.admin}
+		<h1>{thing.owner} has {thing.name} to share</h1>
+	{:else}
+		{?owned}
+			<h1>{thing.owner} has {thing.name} to share</h1>
+		{:else}
+			<h1>Someone has {thing.name} to share</h1>
+		{/owned}
+	{/user.admin}
 	<p>{thing.description}</p>
 </article>
 {/content}

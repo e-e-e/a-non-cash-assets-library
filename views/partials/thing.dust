@@ -17,12 +17,13 @@
 		{@select key=permission}
 			{@eq value="admin"}
 				<a href="/profile/edit/{type}?id={id}">edit</a> 
-				<a href="/admin/matchmaker/{type}?id={id}">find matches</a>
+				<a href="/admin/matchmaker/{type}?id={id}">find matches</a> 
 			{/eq}
 			{@eq value="owner"}
 				<a href="/profile/edit/{type}?id={id}">edit</a> 
 			{/eq}
 			{@none}{/none}
+			<a href="/{type}/?id={id}">view more</a> 
 		{/select}
 	</div>
 	<p>{description}</p>

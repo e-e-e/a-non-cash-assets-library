@@ -81,7 +81,7 @@ function get_haves_and_needs (req,res, next) {
 }
 
 function get_need (req,res, next ) {
-	Things.need(req.query.id)
+	Things.need(req.query.id, req.user)
 		.then ( results => {
 			req.data.thing = results;
 		})
@@ -90,7 +90,7 @@ function get_need (req,res, next ) {
 }
 
 function get_have (req,res, next ) {
-	Things.have(req.query.id)
+	Things.have(req.query.id, req.user)
 		.then ( results => {
 			req.data.thing = results;
 		})

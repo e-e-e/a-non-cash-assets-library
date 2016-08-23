@@ -39,7 +39,7 @@ class Things {
 	}
 
 	static check_permission(thing,user) {
-		if( thing.public || (user && user.has_permission_to_view(thing))) {
+		if( thing.public || (user && user.has_permission_to_see(thing))) {
 			return thing;
 		} else {
 			throw "YOU DONT HAVE PERMISSION TO VIEW";
