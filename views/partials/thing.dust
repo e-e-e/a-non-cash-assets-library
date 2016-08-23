@@ -1,4 +1,4 @@
-<div class="thing {^public}hidden{/public}" data-id={thing_id}>
+<div class="thing {^public}hidden{/public} {type}" data-id={thing_id} data-{type}-id={id}>
 	<h3>{name}</h3>
 	<h4>
 		{@select key=permission }
