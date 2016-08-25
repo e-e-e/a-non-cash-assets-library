@@ -1,0 +1,30 @@
+<div class="thing {^public}hidden{/public}" data-id={thing_id}>
+	<h3>
+		{@select key=permission }
+			{@eq value="admin"}
+				{owner}
+			{/eq}
+			{@eq value="owner"}
+				{owner}
+			{/eq}
+			{@none}
+				{?anon}someone{:else}{owner}{/anon}
+			{/none}
+		{/select} 
+		needs 
+		{name}
+	</h3>
+	<div>
+		{@select key=permission}
+			{@eq value="admin"}
+				<a href="/profile/edit/{type}?id={id}">edit</a> 
+				<a href="/admin/matchmaker/{type}?id={id}">find matches</a>
+			{/eq}
+			{@eq value="owner"}
+				<a href="/profile/edit/{type}?id={id}">edit</a> 
+			{/eq}
+			{@none}{/none}
+		{/select}
+	</div>
+	<p>{description}</p>
+</div>
