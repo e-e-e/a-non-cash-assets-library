@@ -2,26 +2,25 @@
 	<h3>
 		{@select key=permission }
 			{@eq value="admin"}
-				{owner}
+				{owner} has 
 			{/eq}
 			{@eq value="owner"}
-				{owner}
+				You have 
 			{/eq}
 			{@none}
-				{?anon}someone{:else}{owner}{/anon}
+				{?anon}someone{:else}{owner}{/anon} has 
 			{/none}
-		{/select} 
-		has 
+		{/select}  
 		{name}
 	</h3>
 	<div>
 		{@select key=permission}
 			{@eq value="admin"}
-				<a href="/profile/edit/{type}?id={id}">edit</a> 
-				<a href="/admin/matchmaker/{type}?id={id}">find matches</a>
+				<a href="/profile/edit/have?id={id}">edit</a> 
+				<a href="/admin/matchmaker/have?id={id}">find matches</a>
 			{/eq}
 			{@eq value="owner"}
-				<a href="/profile/edit/{type}?id={id}">edit</a> 
+				<a href="/profile/edit/have?id={id}">edit</a> 
 			{/eq}
 			{@none}{/none}
 		{/select}

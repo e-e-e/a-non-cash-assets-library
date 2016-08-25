@@ -1,10 +1,18 @@
 <article class="match-pair">
 	<div class="match-things">
 		{#have}
-			{>"../partials/match_have" type="have"/}
+			{@eq key=owner_id value=user.user_id}
+				{>"../partials/match_have" permission="owner"/}
+			{:else}
+				{>"../partials/match_have"/}
+			{/eq}
 		{/have}
 		{#need}
-			{>"../partials/match_need" type="need"/}
+			{@eq key=owner_id value=user.user_id}
+				{>"../partials/match_need" permission="owner"/}
+			{:else}
+				{>"../partials/match_need"/}
+			{/eq}
 		{/need}
 	</div>
 <section class="match-actions">

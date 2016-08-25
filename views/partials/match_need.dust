@@ -2,16 +2,15 @@
 	<h3>
 		{@select key=permission }
 			{@eq value="admin"}
-				{owner}
+				{owner} needs 
 			{/eq}
 			{@eq value="owner"}
-				{owner}
+				You need 
 			{/eq}
 			{@none}
-				{?anon}someone{:else}{owner}{/anon}
+				{?anon}someone{:else}{owner}{/anon} needs 
 			{/none}
-		{/select} 
-		needs 
+		{/select}
 		{name}
 	</h3>
 	<div>
