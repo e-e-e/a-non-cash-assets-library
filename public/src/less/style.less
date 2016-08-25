@@ -209,6 +209,20 @@ textarea {
 	}
 }
 
+.match-things {
+	@media only screen and (min-width: 30em) {
+		display: flex;
+	}
+
+	.thing {
+		flex: .5;
+
+		&:first-child {
+			border-right: 1px #aaa solid;
+		}
+	}
+}
+
 .match-actions {
 	ul {
 		margin: 0;
