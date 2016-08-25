@@ -1,12 +1,13 @@
-<h4>Match (id:{match.match_id}): status {match.status}</h4>
-{#have}
-	<h5>HAVE</h5>
-	{>"../partials/thing" type="have"/}
-{/have}
-{#need}
-	<h5>NEED</h5>
-	{>"../partials/thing" type="need"/}
-{/need}
+<article class="match-pair">
+	<div class="match-things">
+		{#have}
+			{>"../partials/match_have" type="have"/}
+		{/have}
+		{#need}
+			{>"../partials/match_need" type="need"/}
+		{/need}
+	</div>
+<section class="match-actions">
 {?your_have}
 	{@select key=match.status}
 		{@eq value=1} {! match suggested !}
@@ -14,10 +15,10 @@
 				<form action="/profile/matches/offer" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button type="submit">Discuss sharing this with {need.owner}</button>
+						<button class="primary-button button" type="submit">Discuss sharing this with {need.owner}</button>
 					</li>
 					<li>
-						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
 					</li>
 				</form>
 			</ul>
@@ -28,7 +29,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
 				</li>
 			</ul>
 		{/eq}
@@ -46,10 +47,10 @@
 				<form action="/profile/matches/accept" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button type="submit">Accept Offer</button>
+						<button class="primary-button button" type="submit">Accept Offer</button>
 					</li>
 					<li>
-						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
 					</li>
 				</form>
 			</ul>
@@ -57,7 +58,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
 				</li>
 			</ul>
 		{/eq}
@@ -69,3 +70,5 @@
 		{/none}
 	{/select}
 {/your_have}
+</section class="match-actions">
+</article>

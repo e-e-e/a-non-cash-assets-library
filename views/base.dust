@@ -4,51 +4,51 @@
 	<meta charset="UTF-8">
 	<title>{title}</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<div class="wrapper">
-		<header class="row">
-			<nav id="user-nav">
-				<ul>
+	<header class="site-header">
+		<nav id="main-nav">
+			<h1 class="site-title">{title}</h1>
+			<ul>
+				{#menu}
+					<li>
+						<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
+					</li>
+				{/menu}
 				{?user}
 					<li>
-						(Logged in as <a href="/profile">{user.name}</a>)
-					</li>
-					<li>
-						<a href="/logout">logout</a>
-					</li>
-				{:else}
-					<li>
-						<a href="/login">login</a> or 
-					</li>
-					<li>
-						<a href="/signup">sign up</a>
+						<span>{@ne key=path value="/profile"}<a href="/profile" title="{title}">Profile</a>{:else}Profile{/ne}</span>
 					</li>
 				{/user}
-				</ul>
-			</nav>
-			<h1>{title}</h1>
-			<nav id="main-nav">
-				<ul>
-					{#menu}
-						<li>
-							<span>{@ne key=link value=path}<a href="{link}" title="{title}">{name}</a>{:else}{name}{/ne}</span>
-						</li>
-					{/menu}
-					{?user}
-						<li>
-							<span>{@ne key=path value="/profile"}<a href="/profile" title="{title}">Profile</a>{:else}Profile{/ne}</span>
-						</li>
-					{/user}
-				</ul>
-			</nav>
-		</header>
-		<hr>
-		<main class="row">
+			</ul>
+		</nav>
+		<nav id="user-nav">
+			<ul>
+			{?user}
+				<li>
+					(Logged in as <a href="/profile">{user.name}</a>)
+				</li>
+				<li>
+					<a href="/logout">logout</a>
+				</li>
+			{:else}
+				<li>
+					<a href="/login">login</a> or 
+				</li>
+				<li>
+					<a href="/signup">sign up</a>
+				</li>
+			{/user}
+			</ul>
+		</nav>
+	</header>
+	<hr>
+	<div class="wrapper">
+		<main>
 			{+content/}
 		</main>
-		<hr>
-		<footer class="row">
+		<footer class="site-footer">
 			<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
 		</footer>
 	</div>
