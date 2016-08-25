@@ -69,7 +69,7 @@ function configure_router() {
 				}).catch(err=> next(err));
 		},
 		(req,res,next)=> {
-			Matches.match(req.query.match_id)
+			Matches.get(req.query.match_id)
 				.then(match=> {
 					req.data.match = match;
 					next();
