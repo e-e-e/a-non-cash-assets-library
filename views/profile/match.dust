@@ -15,10 +15,10 @@
 				<form action="/profile/matches/offer" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button type="submit">Discuss sharing this with {need.owner}</button>
+						<button class="primary-button button" type="submit">Discuss sharing this with {need.owner}</button>
 					</li>
 					<li>
-						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
 					</li>
 				</form>
 			</ul>
@@ -29,7 +29,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
 				</li>
 			</ul>
 		{/eq}
@@ -47,10 +47,10 @@
 				<form action="/profile/matches/accept" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button type="submit">Accept Offer</button>
+						<button class="primary-button button" type="submit">Accept Offer</button>
 					</li>
 					<li>
-						<button type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
+						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
 					</li>
 				</form>
 			</ul>
@@ -58,7 +58,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
 				</li>
 			</ul>
 		{/eq}

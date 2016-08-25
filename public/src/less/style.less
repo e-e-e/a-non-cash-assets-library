@@ -46,6 +46,35 @@ a {
 	}
 }
 
+a.button,
+.button,
+button {
+	margin: 0 0 1em;
+	font-size: 1em;
+	padding: .5em 1em;
+	border: 0;
+	border-radius: .5em;
+	background-color: #eee;
+	appearance: none;
+	color: @body-color;
+	text-decoration: none;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		background-color: #bbb;
+	}
+}
+
+.primary-button {
+	background-color: tint(@message-color,90%);
+
+	&:hover,
+	&:focus {
+		background-color: tint(@message-color,80%);
+	}
+}
+
 div.error {
 	background-color: tint(@error-color,90%);
 	color: @error-color;
@@ -229,14 +258,8 @@ textarea {
 		padding: 0;
 	}
 
-	a,
-	button{
+	.button {
 		margin: 0 0 1em;
-		font-size: 1em;
-		padding: .5em 1em;
-		border: 0;
-		border-radius: .5em;
-		background: #eee;
-		appearance: none;
+		text-align: left;
 	}
 }
