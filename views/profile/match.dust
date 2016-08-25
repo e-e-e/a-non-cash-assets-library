@@ -1,12 +1,11 @@
-<h4>Match (id:{match.match_id}): status {match.status}</h4>
-{#have}
-	<h5>HAVE</h5>
-	{>"../partials/match_have" type="have"/}
-{/have}
-{#need}
-	<h5>NEED</h5>
-	{>"../partials/match_need" type="need"/}
-{/need}
+<article class="match-pair">
+	{#have}
+		{>"../partials/match_have" type="have"/}
+	{/have}
+	{#need}
+		{>"../partials/match_need" type="need"/}
+	{/need}
+<section class="match-actions">
 {?your_have}
 	{@select key=match.status}
 		{@eq value=1} {! match suggested !}
@@ -69,3 +68,5 @@
 		{/none}
 	{/select}
 {/your_have}
+</section class="match-actions">
+</article>
