@@ -17,7 +17,6 @@
 		</li>
 	{/messages}
 </ul>
-<hr>
 <form action="/profile/matches/comment" method="POST">
 	<input type="hidden" name="user_id" value="{user.user_id}">
 	<input type="hidden" name="match_id" value="{match.match.match_id}">
