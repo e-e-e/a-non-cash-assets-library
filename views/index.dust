@@ -2,5 +2,12 @@
 {<content}
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
+<form class="form-search" action="/" method="get" role="search">
+<label for="thing-search">What do you need for your art?</label>
+<div class="input-group">
+	<input type="text" class="text-input" id="thing-search" name="q" placeholder="e.g. storage space" value="{search}">
+	<button type="submit">Search</button>
+</div>
+</form>
 {>"partials/things"/}
 {/content}

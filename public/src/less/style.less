@@ -62,6 +62,24 @@ textarea {
 	display: block;
 }
 
+.input-group {
+	display: flex;
+	align-items: flex-start;
+
+	input {
+		flex: 1;
+		line-height: 1.65;
+		border-right: 0;
+	}
+
+	button {
+		border: 2px #bbb solid;
+		border-left: 0;
+		border-radius: 0;
+		background: #bbb;
+	}
+}
+
 a {
 	color: @link-color;
 	&:visited {
