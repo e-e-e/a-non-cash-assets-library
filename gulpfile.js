@@ -8,6 +8,8 @@ const gutil = require('gulp-util');
 const watch = require('gulp-watch');
 const less = require('gulp-less');
 const cleanCSS = require( 'gulp-clean-css');
+const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
 const rename = require( 'gulp-rename');
 const jshint = require( 'gulp-jshint');
 const runSequence = require('run-sequence');
@@ -35,12 +37,18 @@ gulp.task('clean', (done) => {
 
 gulp.task('styles', () => {
 	return gulp.src(paths.styles.src)
+		.pipe(sourcemaps.init())
 		.pipe(less())
 		.on('error',gutil.log)
 		.pipe(cleanCSS())
+		.pipe(autoprefixer({
+			browsers: ['last 4 versions'],
+			cascade: false
+		}))
 		.pipe(rename({
 			suffix: '.min'
 		}))
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.styles.dest));
 });
 
