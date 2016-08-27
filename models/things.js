@@ -55,15 +55,23 @@ class Things {
 			});
 	}
 
-	static haves (user) {
+	static haves (user, search) {
 		var q;
+		var sqlselect = sql.select.haves;
 		if(user && user.admin) {
-			//get everything
-			q = db.query(sql.select.haves.all, [user.user_id]);
+			if(search) {
+				q = db.query(sqlselect.all + ' WHERE t.name ILIKE $2', [user.user_id, '%'+search+'%']);
+			} else {
+				q = db.query(sqlselect.all, [user.user_id]);
+			}
 		} else {
 			//get only public
 			let id = (user) ? user.user_id : null;
-			q = db.query(sql.select.haves.all_public, [ id ]);
+			if(search) {
+				q = db.query(sqlselect.all_public + ' AND t.name ILIKE $2', [ id, '%'+search+'%']);
+			} else {
+				q = db.query(sqlselect.all_public, [ id ]);
+			}
 		}
 		return q.then( res => res.rows );
 	}
@@ -78,15 +86,23 @@ class Things {
 			});
 	}
 
-	static needs (user) {
+	static needs (user, search) {
 		var q;
-		if(user &&  user.admin) {
-			//get everything
-			q = db.query(sql.select.needs.all, [user.user_id]);
+		var sqlselect = sql.select.needs;
+		if(user && user.admin) {
+			if(search) {
+				q = db.query(sqlselect.all + ' WHERE t.name ILIKE $2', [user.user_id, '%'+search+'%']);
+			} else {
+				q = db.query(sqlselect.all, [user.user_id]);
+			}
 		} else {
 			//get only public
 			let id = (user) ? user.user_id : null;
-			q = db.query(sql.select.needs.all_public, [ id ]);
+			if(search) {
+				q = db.query(sqlselect.all_public + ' AND t.name ILIKE $2', [ id, '%'+search+'%']);
+			} else {
+				q = db.query(sqlselect.all_public, [ id ]);
+			}
 		}
 		return q.then( res => res.rows );
 	}
