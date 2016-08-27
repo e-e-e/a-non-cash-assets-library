@@ -37,7 +37,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss Now</a>
 				</li>
 			</ul>
 		{/eq}
@@ -66,7 +66,7 @@
 		{@eq value=3}
 			<ul>
 				<li>
-					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss now.</a>
+					<a class="primary-button button" href="/profile/matches/chat?match_id={match.match_id}">Discuss Now</a>
 				</li>
 			</ul>
 		{/eq}
