@@ -63,6 +63,18 @@ textarea {
 	display: block;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+	& + label {
+		display: inline-block;
+	}
+}
+
+[type="submit"] {
+	display: block;
+	margin-top: 1em;
+}
+
 .input-group {
 	display: flex;
 	align-items: stretch;
