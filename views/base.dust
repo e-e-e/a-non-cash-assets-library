@@ -43,7 +43,6 @@
 			</ul>
 		</nav>
 	</header>
-	<hr>
 	<main class="main">
 		{+content/}
 	</main>
