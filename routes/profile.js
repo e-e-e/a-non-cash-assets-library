@@ -21,15 +21,6 @@ function configure_router() {
 
 	const router = express.Router();
 
-	//gets a random thing to for generating placeholder texts.
-	function get_random_thing (req,res,next) {
-		Things.random()
-			.then( thing => {
-				req.data.randomthing = thing;
-			}).catch(err => console.log(err))
-			.then(() => next());
-	}
-
 	function do_user_action_and_redirect(func,success_msg,success_route, error_route) {
 		return (req, res, next) => {
 			//need to check existance of fn etc.
@@ -81,11 +72,11 @@ function configure_router() {
 			helpers.render_template('profile/password'));
 
 	router.get('/add/need',
-			get_random_thing,
+			helpers.get_random_thing,
 			helpers.render_template('profile/add-a-need'));
 
 	router.get('/add/have',
-			get_random_thing,
+			helpers.get_random_thing,
 			helpers.render_template('profile/add-a-have'));
 
 	router.get('/edit/need',

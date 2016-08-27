@@ -17,6 +17,7 @@ exports = module.exports = {
 	render_template: render_template,
 	handle_error: handle_error,
 	is_logged_in: is_logged_in,
+	get_random_thing:get_random_thing,
 	get_haves_and_needs:get_haves_and_needs,
 	get_have:get_have,
 	get_need:get_need,
@@ -66,6 +67,15 @@ function attach_template_data (req,res,next) {
 		error: req.flash('error') /* get error if raised on previous route */
 	};
 	next();
+}
+
+//gets a random thing to for generating placeholder texts.
+function get_random_thing (req,res,next) {
+	Things.random()
+		.then( thing => {
+			req.data.randomthing = thing;
+		}).catch(err => console.log(err))
+		.then(() => next());
 }
 
 /** Middleware to add haves and wants to template data */
