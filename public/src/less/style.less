@@ -290,8 +290,7 @@ textarea {
 
 .match-pair {
 	margin: 0 0 2em;
-	border: 1px #aaa solid;
-	border-radius: .5em;
+	border: 2px @body-color solid;
 
 	.thing,
 	.match-actions {
@@ -299,7 +298,7 @@ textarea {
 	}
 
 	.thing {
-		border-bottom: 1px #aaa solid;
+		border-bottom: 2px @body-color solid;
 	}
 }
 
@@ -312,7 +311,9 @@ textarea {
 		flex: .5;
 
 		&:first-child {
-			border-right: 1px #aaa solid;
+			@media only screen and (min-width: 30em) {
+				border-right: 2px @body-color solid;
+			}
 		}
 	}
 }
