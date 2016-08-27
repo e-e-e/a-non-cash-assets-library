@@ -10,11 +10,11 @@
 {/message}
 {>contribute action="/profile/add/have" type="have" public="true" /}
 {<placeholder}
-eg: Rehearsal space close to a train station available Wednesday 3pm-9pm&#10;
-OR&#10;
-eg: 1x HD projector. Pick up from South King St&#10;
-OR&#10;
-eg: Basic accounting skills workshops and services. Based in Surry Hills, available most Thursdays.&#10;
+eg: Rehearsal space close to a train station available Wednesday 3pm-9pm &#10;
+OR &#10;
+eg: 1x HD projector. Pick up from South King St &#10;
+OR &#10;
+eg: Basic accounting skills workshops and services. Based in Surry Hills, available most Thursdays. &#10;
 {/placeholder}
 <p>Please note - you are under NO OBLIGATION to share any of these listings. It is currently just as valuable to register them as "assets" even if they are currently unavailable. These listings are also anonymous so that participants don't feel obligated or hassled to share.</p>
 <p>We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "have" something for a specific project or ongoing... please feel free to add these details as you see fit.</p>

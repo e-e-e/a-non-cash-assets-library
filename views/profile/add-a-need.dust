@@ -10,11 +10,11 @@
 {/message}
 {>contribute action="/profile/add/need" type="need" public="true"/}
 {<placeholder}
-eg: I'm looking for a rehearsal space close to a train station for 3 hours per week...&#10;
-OR&#10;
-eg: 1x HD projector for an exhibition at Gallery X for the month of August&#10;
-OR&#10;
-eg: A workshop or two in basic accounting skills&#10;
+eg: I'm looking for a rehearsal space close to a train station for 3 hours per week... &#10;
+OR &#10;
+eg: 1x HD projector for an exhibition at Gallery X for the month of August &#10;
+OR &#10;
+eg: A workshop or two in basic accounting skills &#10;
 {/placeholder}
 <p>Please Note: We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "need" something for a specific project or ongoing... please feel free to add these details as you see fit.</p>
 {/content}
