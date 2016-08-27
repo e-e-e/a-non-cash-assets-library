@@ -19,7 +19,11 @@
 				{/user.admin}
 			</ul>
 			{:else}
-			<p>Nothing currently listed</p>
+				{?search}
+					<p>Nobody currently lists needing something that matches your search <em>"{search}"<em>.</p>
+				{:else}
+					<p>Nothing currently listed.</p>
+				{/search}
 			{/needs}
 		</section>
 	</div>
@@ -43,7 +47,11 @@
 				{/user.admin}
 			</ul>
 			{:else}
-			<p>Nothing currently listed</p>
+				{?search}
+					<p>Nobody currently lists having something that matches your search <em>"{search}"<em>.</p>
+				{:else}
+					<p>Nothing currently listed.</p>
+				{/search}
 			{/haves}
 		</section>
 	</div>
