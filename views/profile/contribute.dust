@@ -12,9 +12,9 @@
 		<input type="hidden" name="have_id" value="{thing.have_id}">
 	{/thing.have_id}
 	<label for="name">Short name:</label>
-	<input type="text" name="name" placeholder="eg. {randomthing.name}" required='true' value="{thing.name}"></input><br>
-	<label for="description">Longer description:</label><br>
-	<textarea name="description" placeholder="{+placeholder/}">{thing.description}</textarea><br>
-	<input type="checkbox" name="public" {?thing.public}checked{:else}{?public}checked{/public}{/thing.public} /><label for="public">Publicly listed</label><br>
+	<input type="text" name="name" placeholder="eg. {randomthing.name}" required='true' value="{thing.name}"></input>
+	<label for="description">Longer description:</label>
+	<textarea name="description" placeholder="{+placeholder/}">{thing.description}</textarea>
+	<input type="checkbox" name="public" {?thing.public}checked{:else}{?public}checked{/public}{/thing.public} /><label for="public">Publicly listed</label>
 	<button type="submit">{?thing}Update{:else}Contribute{/thing}</button>
 </form>
