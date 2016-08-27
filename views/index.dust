@@ -3,7 +3,7 @@
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <form class="form-search" action="/" method="get" role="search">
-<h1><label for="thing-search">What are looking for?</label></h1>
+<h1><label for="thing-search">What are looking you for?</label></h1>
 <div class="input-group">
 	<input type="text" class="text-input" id="thing-search" name="q" placeholder="e.g. {randomthing.name}" value="{search}">
 	<button type="submit">Search</button>
