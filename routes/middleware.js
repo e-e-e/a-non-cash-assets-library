@@ -60,6 +60,7 @@ function attach_template_data (req,res,next) {
 			link:'/',
 			title: 'Find the things you need to make art and share the things you have for others.'
 			}],
+		search: req.query.q,
 		user: req.user,
 		message: req.flash('message'),
 		error: req.flash('error') /* get error if raised on previous route */
@@ -69,9 +70,10 @@ function attach_template_data (req,res,next) {
 
 /** Middleware to add haves and wants to template data */
 function get_haves_and_needs (req,res, next) {
+	let search = req.query.q;
 	Q.all([
-			Things.haves(req.user),
-			Things.needs(req.user)
+			Things.haves(req.user,search),
+			Things.needs(req.user,search)
 		]).spread( (haves, needs) => {
 			req.data.haves = haves;
 			req.data.needs = needs;
