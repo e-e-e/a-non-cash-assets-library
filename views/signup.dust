@@ -10,11 +10,11 @@
 {?message}<div class="message">{message}</div>{/message}
 <form action="/signup" method="post">
 	<label for="name">Username*</label>
-	<input type="text" name="name" required><br>
+	<input type="text" name="name" required>
 	<label for "email">Email*</label>
-	<input type="email" name="email" required><br>
+	<input type="email" name="email" required>
 	<label for="password">Password*</label>
-	<input type="password" name="password" required><br>
+	<input type="password" name="password" required>
 	<button type="submit">Signup Now</button>
 </form>
 {/content}
