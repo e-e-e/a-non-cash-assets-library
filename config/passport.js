@@ -43,7 +43,6 @@ module.exports = function(passport) {
 
 	function handle_user(done, req) {
 		return user => {
-			console.log(user);
 			if(!user) done(null, false, req.flash('error', 'No users found.'));
 			else done(null, user);
 		};
