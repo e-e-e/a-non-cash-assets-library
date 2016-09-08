@@ -9,5 +9,5 @@
 	<button type="submit">Search</button>
 </div>
 </form>
-{>"partials/things"/}
+{>"partials/things" with_intro="true"/}
 {/content}
