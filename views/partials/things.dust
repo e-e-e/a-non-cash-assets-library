@@ -3,11 +3,8 @@
 		<section id="needs">
 			<h2>Needs</h2>
 			<p>
-				Apart from money, what are the things, skills, spaces that you don't
-				currently have that would help you to "live more creatively" / "make creative work"
-				/ "make art" in Sydney? Can be project-based, can be on-going.
-				Can be skills that would help to save you money, time and energy
-				in the longterm... go for it!
+				These are the things, skills, and spaces that people think 
+				would help them make more creative work in Sydney.
 			</p>
 			{?needs}
 			<ul>
@@ -38,13 +35,8 @@
 		<section id="haves">
 			<h2>Haves</h2>
 			<p>
-				Here's our collective non-cash assets.
-				The list is growing daily. We cue the HAVEr to offer
-				their item to NEEDer when there's a match.
-				You'll have a no obligation chat within the platform to see
-				if both parties want to go through with the offer.
-				This is in an effort to prompt giving, taking the pressure off the “asker”.
-				If you see something in the NEED list that you HAVE - go on and list it!
+				Here's our collective non-cash assets. 
+				The list is growing daily.
 			</p>
 			{?haves}
 			<ul>
