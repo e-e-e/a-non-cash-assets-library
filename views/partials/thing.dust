@@ -1,6 +1,6 @@
 <div class="thing {^public}hidden{/public} {type}" data-id={thing_id} data-{type}-id={id}>
 	<h3>{name}</h3>
-	<h4>
+	<p>
 		{@select key=permission }
 			{@eq value="admin"}
 				{owner}
@@ -12,7 +12,7 @@
 				{?anon}someone{:else}{owner}{/anon}
 			{/none}
 		{/select}
-	</h4>
+	</p>
 	<div>
 		{@select key=permission}
 			{@eq value="admin"}
