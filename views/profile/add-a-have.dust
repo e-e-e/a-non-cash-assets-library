@@ -1,5 +1,6 @@
 {>"../base"/}
 {<content}
+<div class="inset-section">
 <h2>Add a have:</h2>
 {?error}<div class="error">{error}</div>{/error}
 {?message}
@@ -18,4 +19,5 @@ eg: Basic accounting skills workshops and services. Based in Surry Hills, availa
 {/placeholder}
 <p>Please note - you are under NO OBLIGATION to share any of these listings. It is currently just as valuable to register them as "assets" even if they are currently unavailable. These listings are also anonymous so that participants don't feel obligated or hassled to share.</p>
 <p>We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "have" something for a specific project or ongoing... please feel free to add these details as you see fit.</p>
+</div>
 {/content}

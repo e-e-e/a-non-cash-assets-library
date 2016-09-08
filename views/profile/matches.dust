@@ -1,5 +1,6 @@
 {>"../base"/}
 {<content}
+<div class="inset-section">
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 <h2>Your Matches</h2>
@@ -10,4 +11,5 @@
 	{>match/}
 {/user.need_matches}
 <!--  TODO: if there's nothing say something -->
+</div>
 {/content}

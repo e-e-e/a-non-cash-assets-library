@@ -1,8 +1,10 @@
 {>base/}
 {<content}
+<div class="inset-section">
 <h2>About</h2>
 <p>“Arts Assets Platform” is the working title for a non-cash assets digital library and facilitator. We’re currently developing this through conversations with you, our community, about what stands in the way between your creative ideas and realising them (aside from the need for cold, hard cash). We’re researching how we currently find or share the skills, spaces and tools that we have and trying to build a space (digital and physical) that facilitates sharing particularly for the underrepresented and under-resourced artists among us.</p>
 <p>This project has been funded by the <a href="http://www.cityofsydney.nsw.gov.au/" title="Visit the City of Sydney website.">City of Sydney</a> through a <a href="http://www.cityofsydney.nsw.gov.au/community/grants-and-sponsorships/community-grants/knowledge-exchange-sponsorships" title="Learn about the City of Sydney’s Knowledge Exchange program.">Knowledge Exchange grant</a>.</p>
 <h2>Privacy Policy</h2>
 <p>We are committed to the highest level of data privacy we can, given that you are choosing your own user name and choosing the amount of data you publish to a public list! We recommend that you use your initials or a pseudonym. Your personal information in your profile is only seen by the administrators of this prototype. It is not being on-sold, used by or manipulated. If you have any suggestions as to how we could do more to protect your information, please let us know <a href="mailto:non.cash.assets@gmail.com">non.cash.assets@gmail.com</a></p>
+</div>
 {/content}

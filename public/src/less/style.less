@@ -1,4 +1,5 @@
-@maxwidth: 650px;
+@narrow-width: 650px;
+@wider-width: 70em;
 @body-color: #000;
 @link-color: #F00;
 @error-color: #F00;
@@ -261,9 +262,15 @@ label div.thing {
 }
 
 .main {
-	max-width: @maxwidth;
+	max-width: @wider-width;
 	margin: 0 auto;
 	padding: 0 1em;
+}
+
+.inset-section {
+	margin-right: auto;
+	margin-left: auto;
+	max-width: @narrow-width;
 }
 
 .things-list {

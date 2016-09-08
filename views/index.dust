@@ -2,7 +2,7 @@
 {<content}
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
-<form class="form-search" action="/" method="get" role="search">
+<form class="form-search inset-section" action="/" method="get" role="search">
 <h1><label for="thing-search">What are you looking for?</label></h1>
 <div class="input-group">
 	<input type="text" class="text-input" id="thing-search" name="q" placeholder="e.g. {randomthing.name}" value="{search}">

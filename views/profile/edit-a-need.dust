@@ -1,7 +1,9 @@
 {>"../base"/}
+<div class="inset-section">
 {<content}
 <h2>Edit your Need:</h2>
 {?error}<div class="error">{error}</div>{/error}
 {?message}<div class="message">{message}</div>{/message}
 {>contribute action="/profile/update/thing" type="need"/}
+</div>
 {/content}
