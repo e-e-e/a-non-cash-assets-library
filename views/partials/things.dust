@@ -35,7 +35,7 @@
 		<section id="haves">
 			<h2>Haves</h2>
 			<p>
-				Here's our collective non-cash assets. 
+				Here’s our collective non-cash assets. 
 				The list is growing daily.
 			</p>
 			{?haves}
