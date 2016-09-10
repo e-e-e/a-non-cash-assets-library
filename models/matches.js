@@ -21,7 +21,7 @@ class Matches {
 							.spread( (have, need) => {
 								let h = have.rows[0];
 								let n = need.rows[0];
-								return transactions.match(h.email,{have_name: h.name, need_name:n.name });
+								return transactions.match(h.email,{have_name: h.name, need_name:n.name, thing:h.have });
 							})
 							.catch(err => console.log(err))
 						);
