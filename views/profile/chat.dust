@@ -13,8 +13,8 @@
 <ul>
 	{#messages}
 		<li>
-			<h3>({date_added}) {name}:</h3>
 			<p>{message}</p>
+			<h3>{name} wrote on ({date_added})</h3>
 		</li>
 	{/messages}
 </ul>
