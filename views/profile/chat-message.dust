@@ -6,6 +6,6 @@
 			{:else}
 			{name}, 
 			{/is_owned}
-			<span title="{date_added}">{time_ago_in_words}</span>
+			<span title="{date_added}">about {time_ago_in_words}</span>
 		</footer>
 	</li>
