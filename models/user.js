@@ -215,7 +215,6 @@ class User {
 	}
 
 	comment_on_match(body) {
-		console.log(body);
 		// TODO: check that this is your match to be commenting on. 
 		if(!body.message) return Q.reject('Need to enter text!');
 		return db.query(sql.insert.message, [this.user_id, body.match_id, body.message ]);//this is where we should tap to send email letting the other person know that there is a new comment
