@@ -16,7 +16,9 @@ const sql = {
 				"SELECT user_id, name, email, verified, admin FROM users WHERE user_id = $1",
 			user_password_with_id: 
 				"SELECT password FROM users WHERE user_id = $1",
-			},
+			user_email_with_id:
+				"SELECT email FROM users WHERE user_id = $1",
+		},
 		haves: {
 			all: 
 				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) ORDER BY a.date_added DESC ",
