@@ -210,7 +210,49 @@ class User {
 	comment_on_match(body) {
 		// TODO: check that this is your match to be commenting on. 
 		if(!body.message) return Q.reject('Need to enter text!');
-		return db.query(sql.insert.message, [this.user_id, body.match_id, body.message ]);//this is where we should tap to send email letting the other person know that there is a new comment
+		return db.query(sql.insert.message, [this.user_id, body.match_id, body.message ])
+			.tap(()=>{ //email other person that you have commented.
+				//
+				Matches.get(body.match_id)
+					.then(data=> {
+						console.log(data);
+						//if this.user_id === owner_id
+						let to,
+								to_id,
+								to_thing,
+								from_thing;
+						if(this.user_id === data.need.owner_id ) {
+							//email haver
+							to = data.have.owner;
+							to_id = data.have.owner_id;
+							to_thing = data.have.name;
+							from_thing = data.need.name;
+						} else if(this.user_id === data.have.owner_id ) {
+							//email needer
+							to = data.need.owner;
+							to_id = data.need.owner_id;
+							to_thing = data.need.name;
+							from_thing = data.have.name;
+						} else {
+							throw new Error('This should not be called as user should match either need or have owner');
+						}
+						//get email to send to
+						return db.query(sql.select.users.user_email_with_id, [to_id])
+							.then( results => results.rows[0].email )
+							.then( email => 
+								transactions.new_message(email,{
+									from: this.name,
+									from_thing: from_thing,
+									to: to,
+									to_thing: to_thing,
+									message: body.message,
+									match_url: '/profile/matches/chat?match_id='+body.match_id
+								})
+							);
+						//
+					})
+					.catch(err => console.log(err));
+			});
 	}
 
 	/** static functions  */
