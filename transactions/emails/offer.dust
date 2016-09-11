@@ -1,6 +1,6 @@
 <p>Hi {needers_name}</p>
 
-<p>Guess what?! <strong>{havers_name}</strong> may be able to help you out with your listed NEED (<strong>{need}</strong>) as they HAVE (<strong>{need}</strong>) which might just be what your after.</p>
+<p>Guess what?! <strong>{havers_name}</strong> may be able to help you out with your listed NEED (<strong>{need}</strong>) as they HAVE (<strong>{have}</strong>) which might just be what your after.</p>
 
 <p>They're up for chatting about how to make it happen, you just need to let them know that you're INTERESTED and start a no obligation chat via the <a href="{domain}/profile/matches">matches section of your profile</a>.</p>
 
