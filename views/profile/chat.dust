@@ -12,18 +12,11 @@
 <hr>
 <ul class="conversation">
 	{#messages}
-		<li class="conversation-message">
-			<blockquote>{message}</blockquote>
-			<footer>
-				{@eq key=user.user_id value=user_id}
-				You 
-				{:else}
-				{name} 
-				{/eq}
-				wrote 
-				<span title="{date_added}">{time_ago_in_words}</span>
-			</footer>
-		</li>
+		{@eq key=user.user_id value=user_id}
+		{>"./chat-message" is_owned="owned"/}
+		{:else}
+		{>"./chat-message"/}
+		{/eq}
 	{/messages}
 </ul>
 <form action="/profile/matches/comment" method="POST">

@@ -1,0 +1,12 @@
+	<li class="conversation-message {is_owned}">
+		<blockquote>{message}</blockquote>
+		<footer>
+			{?is_owned}
+			You 
+			{:else}
+			{name} 
+			{/is_owned}
+			wrote 
+			<span title="{date_added}">{time_ago_in_words}</span>
+		</footer>
+	</li>
