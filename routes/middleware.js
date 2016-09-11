@@ -161,7 +161,7 @@ function get_need_by_query_id (req,res,next) {
 function is_logged_in(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
-	res.redirect('/');
+	res.redirect('/login');
 }
 
 /** Simple middleware function to check if user is admin in before accessing restricted routes */
