@@ -1,0 +1,10 @@
+<p>Hi {to},</p>
+
+<p><strong>{from}</strong> has left a new message for you about the potential match between your {to_thing} and their {from_thing}</p>
+
+<p>They said: <em>{message}</em></p>
+
+<p>Don't reply to this email!!! Visit the <a href="{domain}{match_url}">match section of your profile</a> to continue the discussion.</p>
+
+<p>Thanks,</p>
+<p>Arts Assets Team</p>
