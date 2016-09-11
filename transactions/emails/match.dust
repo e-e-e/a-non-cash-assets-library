@@ -1,6 +1,6 @@
 <p>Hi {have_name},</p>
 
-<p>Guess what?! {need_name}</strong> listed that they NEED your <strong>{name}</strong>!</p>
+<p>Guess what?! <strong>{need_name}</strong> listed that they NEED your <strong>{thing}</strong>!</p>
 
 <p>Are you up for a no-obligation chat to see if you want to go through with the offer? If so, <a href="{domain}/profile/matches">login to your profile</a> to proceed. </p>
 
