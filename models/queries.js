@@ -28,7 +28,9 @@ const sql = {
 				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true AND t.name ILIKE $2 ORDER BY a.date_added DESC ",
 			with_user_id: "SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE user_id = $1 ORDER BY a.date_added DESC ",
 			with_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public, u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 ORDER BY haves.date_added DESC ",
-			with_id_and_user_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 and user_id=$2 ORDER BY haves.date_added DESC "
+			with_id_and_user_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 and user_id=$2 ORDER BY haves.date_added DESC ",
+			user_details_and_thing_name_with_id:
+				"SELECT users.name AS name, users.email as email, t.name as thing FROM users INNER JOIN haves USING (user_id) INNER JOIN things t USING (thing_id) WHERE haves.have_id = $1",
 		},
 		needs: {
 			all: 
@@ -44,7 +46,9 @@ const sql = {
 			with_id:
 				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public, u.user_id as owner_id, u.name as owner FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE need_id=$1 ORDER BY needs.date_added DESC ",
 			with_id_and_user_id:
-				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public, u.user_id as owner_id, u.name as owner FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE need_id=$1 and user_id=$2 ORDER BY needs.date_added DESC "
+				"SELECT needs.need_id as id, t.thing_id, t.name, t.description, needs.public, u.user_id as owner_id, u.name as owner FROM needs INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE need_id=$1 and user_id=$2 ORDER BY needs.date_added DESC ",
+			user_details_and_thing_name_with_id:
+				"SELECT users.name AS name, users.email as email, t.name as thing FROM users INNER JOIN needs USING (user_id) INNER JOIN things t USING (thing_id) WHERE needs.need_id = $1",
 		},
 		things: {
 			random:
