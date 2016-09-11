@@ -19,7 +19,7 @@ const templates = {
 		body: path.join(__dirname,"/emails/welcome.dust")
 	},
 	verified: {
-		subject: "Arts Asset Platform Account Verified",
+		subject: "Arts Asset Platform Account Verified.",
 		body: path.join(__dirname,"/emails/verified.dust")
 	},
 	match: {
