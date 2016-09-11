@@ -55,6 +55,13 @@ app.use(express.static(__dirname + '/public/dist/'));
 
 app.use(main_router.router(passport));
 
+app.use((err,req,res,next) => {
+	console.log("ERRROR");
+	console.log(err);
+	if (err.status === 500 ) res.status(err.status).render('500');
+	else next();
+});
+
 app.use(errorHandler());
 
 server.listen(options.server.port, (err,res) => {

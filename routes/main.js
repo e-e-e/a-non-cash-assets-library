@@ -95,5 +95,8 @@ function configure_router (passport) {
 		failureFlash : true
 	}));
 
+	router.get('*', helpers.attach_template_data, 
+		(req,res) => res.status(404).render('404', req.data) );
+
 	return router;
 }

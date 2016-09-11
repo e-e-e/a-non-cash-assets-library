@@ -1,0 +1,8 @@
+{>base/}
+{<content}
+<div class="inset-section">
+	<h2>Opps! Something went wrong!</h2>
+	<p>Tell us about it here: <a href="mailto:non.cash.assets@gmail.com">non.cash.assets@gmail.com</a></p>
+	<p>We will try and fix it.</p>
+</div>
+{/content}
