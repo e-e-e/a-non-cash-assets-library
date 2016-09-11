@@ -2,11 +2,10 @@
 		<blockquote>{message}</blockquote>
 		<footer>
 			{?is_owned}
-			You 
+			You, 
 			{:else}
-			{name} 
+			{name}, 
 			{/is_owned}
-			wrote 
 			<span title="{date_added}">{time_ago_in_words}</span>
 		</footer>
 	</li>
