@@ -1,10 +1,10 @@
-<p>Hi {have_name},</p>
+<p>Hi {havers_name},</p>
 
-<p>Guess what?! <strong>{need_name}</strong> listed that they NEED your <strong>{thing}</strong>!</p>
+<p>Clare (or another member of the Arts Assets Team) think that your HAVE (<strong>{have}</strong>) may be a match for the NEED (<strong>{need}</strong>) listed by <strong>{needers_name}</strong>!
 
-<p>Are you up for a no-obligation chat to see if you want to go through with the offer? If so, <a href="{domain}/profile/matches">login to your profile</a> to proceed. </p>
+<p>Are you up for a no-obligation chat to see if you could help {needers_name} out? If so, <a href="{domain}/profile/matches">login to your profile</a> to let them know that you might be able to help.</p>
 
-<p>We're keen to hear how it went, so please let us know if you get a moment.</p>
+<p>We're keen to hear how it all goes, so please let us know if you get a moment.</p>
 
 <p>Thanks,</p>
 <p>Arts Assets Team</p>
