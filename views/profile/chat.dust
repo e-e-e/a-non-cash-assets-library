@@ -14,7 +14,15 @@
 	{#messages}
 		<li class="conversation-message">
 			<blockquote>{message}</blockquote>
-			<footer>{name} wrote <span title="{date_added}">{time_ago_in_words}</span></footer>
+			<footer>
+				{@eq key=user.user_id value=user_id}
+				You 
+				{:else}
+				{name} 
+				{/eq}
+				wrote 
+				<span title="{date_added}">{time_ago_in_words}</span>
+			</footer>
 		</li>
 	{/messages}
 </ul>
