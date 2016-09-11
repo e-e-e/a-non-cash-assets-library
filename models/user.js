@@ -181,7 +181,22 @@ class User {
 
 	offer_match(body) {
 		//TODO: check if you are the haver
-		return db.query('UPDATE matches SET status = 2 WHERE match_id = $1 AND status = 1', [body.match_id]);
+		//send offer email to needer letting them know
+		//havers name, needers name, needers email 
+		return db.query('UPDATE matches SET status = 2 WHERE match_id = $1 AND status = 1 RETURNING need_id, have_id', [body.match_id])
+			.tap( results => {
+				let result = results.rows[0];
+				Q.all([
+					db.query('SELECT users.name AS name FROM users INNER JOIN haves USING (user_id) INNER JOIN things t USING (thing_id) WHERE haves.have_id = $1',[result.have_id]),
+					db.query('SELECT , users.email as email, t.name as need AS name FROM users INNER JOIN needs USING (user_id) WHERE needs.need_id = $1',[result.need_id])
+					])
+					.spread( (have, need) => {
+						let h = have.rows[0];
+						let n = need.rows[0];
+						return transactions.offer_match(n.email,{have_name: h.name, need_name:n.name, thing:n.need });
+					})
+					.catch(err=> console.log(err));
+			});
 	}
 
 	accept_match(body) {
