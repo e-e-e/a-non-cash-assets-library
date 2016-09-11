@@ -4,6 +4,7 @@
 "use strict";
 
 const Q 				= require('q');
+const moment    = require('moment');
 
 const db 				= require('./database.js');
 const sql 			= require('./queries');
@@ -52,7 +53,12 @@ class Matches {
 
 	static conversation(match_id) {
 		return db.query(sql.select.converstation.with_match_id, [match_id])
-						 .then( results => results.rows );
+						 .then( results => {
+							 return results.rows.map( e => {
+								 e.time_ago_in_words = moment(e.date_added).fromNow();
+								 return e;
+							 });
+						 });
 	}
 }
 

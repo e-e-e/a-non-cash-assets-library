@@ -10,19 +10,20 @@
 	{>"./match"/}
 {/match}
 <hr>
-<ul>
+<ul class="conversation">
 	{#messages}
-		<li>
-			<h3>({date_added}) {name}:</h3>
-			<p>{message}</p>
-		</li>
+		{@eq key=user.user_id value=user_id}
+		{>"./chat-message" is_owned="owned"/}
+		{:else}
+		{>"./chat-message"/}
+		{/eq}
 	{/messages}
 </ul>
 <form action="/profile/matches/comment" method="POST">
 	<input type="hidden" name="user_id" value="{user.user_id}">
 	<input type="hidden" name="match_id" value="{match.match.match_id}">
 	<label for="message">Write something to:</label>
-	<textarea name="message"></textarea>
+	<textarea name="message" required="required"></textarea>
 	<button type="submit">Post</button>
 </form>
 </div>
