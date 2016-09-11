@@ -2,8 +2,6 @@
 {<content}
 <div class="inset-section">
 <h1>Chit-Chat</h1>
-{?error}<div class="error">{error}</div>{/error}
-{?message}<div class="message">{message}</div>{/message}
 <p>Need some text that says that this is private etc.</p>
 <p>HERE SHOULD BE THE INFO ABOUT THE ITEM</p>
 {#match}
@@ -23,6 +21,8 @@
 		{/eq}
 	{/messages}
 </ul>
+{?error}<div class="error">{error}</div>{/error}
+{?message}<div class="message">{message}</div>{/message}
 <form action="/profile/matches/comment" method="POST">
 	<input type="hidden" name="user_id" value="{user.user_id}">
 	<input type="hidden" name="match_id" value="{match.match.match_id}">
