@@ -91,7 +91,7 @@ class Things {
 		var sqlselect = sql.select.needs;
 		if(user && user.admin) {
 			if(search) {
-				q = db.query(sqlselect.all + ' WHERE t.name ILIKE $2', [user.user_id, '%'+search+'%']);
+				q = db.query(sqlselect.all_with_search, [user.user_id, '%'+search+'%']);
 			} else {
 				q = db.query(sqlselect.all, [user.user_id]);
 			}
@@ -99,7 +99,7 @@ class Things {
 			//get only public
 			let id = (user) ? user.user_id : null;
 			if(search) {
-				q = db.query(sqlselect.all_public + ' AND t.name ILIKE $2', [ id, '%'+search+'%']);
+				q = db.query(sqlselect.all_public_with_search, [ id, '%'+search+'%']);
 			} else {
 				q = db.query(sqlselect.all_public, [ id ]);
 			}

@@ -20,8 +20,12 @@ const sql = {
 		haves: {
 			all: 
 				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) ORDER BY a.date_added DESC ",
+			all_with_search: 
+				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE t.name ILIKE $2 ORDER BY a.date_added DESC ",
 			all_public: 
 				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true ORDER BY a.date_added DESC ",
+			all_public_with_search: 
+				"SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true AND t.name ILIKE $2 ORDER BY a.date_added DESC ",
 			with_user_id: "SELECT a.have_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM haves a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE user_id = $1 ORDER BY a.date_added DESC ",
 			with_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public, u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 ORDER BY haves.date_added DESC ",
 			with_id_and_user_id: "SELECT haves.have_id as id, t.thing_id, t.name, t.description, haves.public u.user_id as owner_id, u.name as owner FROM haves INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE have_id=$1 and user_id=$2 ORDER BY haves.date_added DESC "
@@ -29,8 +33,12 @@ const sql = {
 		needs: {
 			all: 
 				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) ORDER BY a.date_added DESC ",
+			all_with_search: 
+				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE t.name ILIKE $2 ORDER BY a.date_added DESC ",
 			all_public: 
 				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true ORDER BY a.date_added DESC ",
+			all_public_with_search: 
+				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE a.public=true AND t.name ILIKE $2 ORDER BY a.date_added DESC ",
 			with_user_id: 
 				"SELECT a.need_id as id, a.public, (u.user_id = $1) as owned, u.user_id as owner_id, u.name as owner, t.thing_id, t.name, t.description FROM needs a INNER JOIN users u USING (user_id) INNER JOIN things t USING (thing_id) WHERE user_id = $1 ORDER BY a.date_added DESC ",
 			with_id:
