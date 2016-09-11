@@ -14,7 +14,7 @@
 	{#messages}
 		<li>
 			<p>{message}</p>
-			<h3>{name} wrote on ({date_added})</h3>
+			<h3>{name} wrote <span title="{date_added}">{time_ago_in_words}</span></h3>
 		</li>
 	{/messages}
 </ul>
