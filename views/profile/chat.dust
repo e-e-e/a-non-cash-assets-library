@@ -7,7 +7,11 @@
 <p>Need some text that says that this is private etc.</p>
 <p>HERE SHOULD BE THE INFO ABOUT THE ITEM</p>
 {#match}
+	{@eq key=match.status value=3}
+	{>"./match" hide_actions="true"/}
+	{:else}
 	{>"./match"/}
+	{/eq}
 {/match}
 <hr>
 <ul class="conversation">

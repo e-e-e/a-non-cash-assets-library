@@ -15,6 +15,7 @@
 			{/eq}
 		{/need}
 	</div>
+{^hide_actions}
 <section class="match-actions">
 {?your_have}
 	{@select key=match.status}
@@ -79,4 +80,5 @@
 	{/select}
 {/your_have}
 </section class="match-actions">
+{/hide_actions}
 </article>
