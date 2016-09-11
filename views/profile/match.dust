@@ -24,7 +24,7 @@
 				<form action="/profile/matches/offer" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button class="primary-button button" type="submit">Discuss sharing this with {need.owner}</button>
+						<button class="primary-button button" type="submit">Let {need.owner} know your willing to help.</button>
 					</li>
 					<li>
 						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
@@ -33,7 +33,7 @@
 			</ul>
 		{/eq}
 		{@eq value=2}
-			<p>Match has been offered. Ball's in their court.</p>
+			<p>You have offered to chat about helping. The ball's in their court now, so they will let you know.</p>
 		{/eq}
 		{@eq value=3}
 			<ul>
@@ -45,18 +45,21 @@
 		{@eq value=4}
 			<p>This match was a success! Thanks for sharing!</p>
 		{/eq}
+		{@none}
+			<p>This matches status is a bit unknown.</p>
+		{/none}
 	{/select}
 {:else}
 	{@select key=match.status}
 		{@eq value=1} {! match suggested !}
-			<p>Not yet offered to you. You should not be able to see this.</p>
+			<p>Not yet offered to you. You should not be able to see this. Are you admin?</p>
 		{/eq}
 		{@eq value=2}
 			<ul>
 				<form action="/profile/matches/accept" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button class="primary-button button" type="submit">Accept Offer</button>
+						<button class="primary-button button" type="submit">Start talking with {have.owner} about the nitty gritty.</button>
 					</li>
 					<li>
 						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
@@ -75,7 +78,7 @@
 			<p>This match was a success! Thanks for sharing!</p>
 		{/eq}
 		{@none}
-			<p>this match was most likely dismissed</p>
+			<p>This matches status is a bit unknown.</p>
 		{/none}
 	{/select}
 {/your_have}
