@@ -10,11 +10,11 @@
 	{>"./match"/}
 {/match}
 <hr>
-<ul>
+<ul class="conversation">
 	{#messages}
-		<li>
-			<p>{message}</p>
-			<h3>{name} wrote <span title="{date_added}">{time_ago_in_words}</span></h3>
+		<li class="conversation-message">
+			<blockquote>{message}</blockquote>
+			<footer>{name} wrote <span title="{date_added}">{time_ago_in_words}</span></footer>
 		</li>
 	{/messages}
 </ul>
