@@ -47,6 +47,7 @@
 		{+content/}
 	</main>
 	<footer class="site-footer">
+		<p>This Arts Assets Prototype is a work in progress. Please <a href="mailto:non.cash.assets@gmail.com">email us</a> if something is broken or you have an idea to make it more useful.</p>
 		<p>This project is proudly opensource. Contibute or check out the code at <a href="https://github.com/frontyardprojects/a-non-cash-assets-library" target="__blank">github</a>.</p>
 	</footer>
 	<script>
