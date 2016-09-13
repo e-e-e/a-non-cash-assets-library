@@ -72,4 +72,25 @@ server {
 create symbolic link from www root to dir where platform is installed.
 `ln -s /var/www/noncash/public /to/dir/where/this/is/installed/../public/dist/`
 
+## To deploy
+
+Currently deploying stupidly via SSH.
+
+```sh
+# cd to codebase
+cd ~/a-non-cash-assets-library/
+
+# if made changes to server code and added packages
+git pull; npm i; gulp; pm2 restart index;
+# if made changes to server code
+git pull; gulp; pm2 restart index;
+# if just changes to css or dust
+git pull; gulp;
+```
+
+## Todo:
+
+- Implement tests using Mocha and Chai
+- refactor Dust templates into a better form - or replace with React.
+
 
