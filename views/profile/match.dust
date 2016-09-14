@@ -24,7 +24,7 @@
 				<form action="/profile/matches/offer" method="post">
 					<input type="hidden" name="match_id" value="{match.match_id}">
 					<li>
-						<button class="primary-button button" type="submit">Let {need.owner} know your willing to help.</button>
+						<button class="primary-button button" type="submit">Let {need.owner} know you’re willing to discuss this</button>
 					</li>
 					<li>
 						<button class="button" type="submit" formaction="/profile/matches/dismiss">Dismiss</button>
