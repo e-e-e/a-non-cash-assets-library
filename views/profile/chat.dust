@@ -1,7 +1,7 @@
 {>"../base"/}
 {<content}
 <div class="inset-section">
-<h1>Chit-Chat</h1>
+<h1>No-obligation chat</h1>
 <p>Need some text that says that this is private etc.</p>
 {#match}
 	{@eq key=match.status value=3}
