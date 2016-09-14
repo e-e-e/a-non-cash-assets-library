@@ -2,7 +2,6 @@
 {<content}
 <div class="inset-section">
 <h1>No-obligation chat</h1>
-<p>Need some text that says that this is private etc.</p>
 {#match}
 	{@eq key=match.status value=3}
 	{>"./match" hide_actions="true"/}
@@ -10,6 +9,10 @@
 	{>"./match"/}
 	{/eq}
 {/match}
+<p>It’s now up to you to see if this match works and get to know each other a bit. 
+It’s a good idea to share some links about yourself, and say why you’re interested in this match. 
+This is a private, no-obligation conversation that you can leave at any time.</p>
+<p>If you need to report something, or have a question, you’re welcome to <a href="mailto:non.cash.assets@gmail.com">email the admin team</a>—we’re here to help.</p>
 <hr>
 <ul class="conversation">
 	{#messages}
