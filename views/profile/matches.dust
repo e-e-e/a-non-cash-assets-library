@@ -10,6 +10,8 @@
 {#user.need_matches}
 	{>match/}
 {/user.need_matches}
-<!--  TODO: if there's nothing say something -->
+<p><a href="/profile/add/have">List your non-cash assets</a> and 
+<a href="/profile/add/need">the things you need</a> 
+so we can find matches for you.</p>
 </div>
 {/content}
