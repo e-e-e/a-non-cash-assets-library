@@ -23,8 +23,12 @@
 				<a href="/profile/edit/{type}?id={id}">edit</a> 
 			{/eq}
 			{@none}{/none}
-			<a href="/{type}/?id={id}">view more</a> 
 		{/select}
+		{?description}
+			{@ne value=name key=description}
+				<a href="/{type}/?id={id}">view more</a>
+			{/ne}
+		{/description}
 	</div>
 	<p>{description}</p>
 </div>
