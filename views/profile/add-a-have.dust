@@ -1,7 +1,7 @@
 {>"../base"/}
 {<content}
 <div class="inset-section">
-<h2>Add a have:</h2>
+<h2>Add a have</h2>
 {?error}<div class="error">{error}</div>{/error}
 {?message}
 <div class="message">
