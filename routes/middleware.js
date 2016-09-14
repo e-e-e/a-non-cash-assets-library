@@ -52,15 +52,15 @@ function attach_template_data (req,res,next) {
 	req.data = {
 		title: 'Arts Assets Prototype',
 		path: url.parse(req.originalUrl).pathname,
-		menu: [{ 
+		menu: [{
+			name: 'Home',
+			link:'/',
+			title: 'Find the things you need to make art and share the things you have for others.'
+		}, {
 			name: 'About',
 			link:'/about',
 			title: 'Learn about about this project.',
-		},{ 
-			name: 'Listings',
-			link:'/',
-			title: 'Find the things you need to make art and share the things you have for others.'
-			}],
+		}],
 		search: req.query.q,
 		user: req.user,
 		message: req.flash('message'),
