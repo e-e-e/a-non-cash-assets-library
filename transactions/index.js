@@ -31,7 +31,7 @@ const templates = {
 		body: path.join(__dirname,"/emails/offer.dust")
 	},
 	new_message: {
-		subject: "Someone has left a message for you.",
+		subject: "New message for you on the Arts Assets Platform",
 		body: path.join(__dirname,"/emails/new-message.dust")
 	}
 };
