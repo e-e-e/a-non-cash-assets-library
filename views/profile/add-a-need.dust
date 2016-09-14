@@ -9,6 +9,7 @@
 	<p>Why not add another "need" below, add to your <a href="/profile/add/have">"haves"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
 </div>
 {/message}
+<p>We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "need" something for a specific project or ongoing... please feel free to add these details to the description as you see fit.</p>
 {>contribute action="/profile/add/need" type="need" public="true"/}
 {<placeholder}
 eg: I'm looking for a rehearsal space close to a train station for 3 hours per week... &#10;
@@ -17,6 +18,5 @@ eg: 1x HD projector for an exhibition at Gallery X for the month of August &#10;
 OR &#10;
 eg: A workshop or two in basic accounting skills &#10;
 {/placeholder}
-<p>Please Note: We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "need" something for a specific project or ongoing... please feel free to add these details as you see fit.</p>
 </div>
 {/content}
