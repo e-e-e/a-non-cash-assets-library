@@ -11,7 +11,18 @@
 	{?thing.have_id}
 		<input type="hidden" name="have_id" value="{thing.have_id}">
 	{/thing.have_id}
-	<label for="name">Short name:</label>
+	{@select key=type}
+		{@eq value="have"}
+		<label for="name">{user.name} has:</label>
+		{/eq}
+		{@eq value="need"}
+		<label for="name">{user.name} needs:</label>
+		{/eq}
+		<!-- Is this last case necessary? -->
+		{@none}
+		<label for="name">short description:</label>
+		{/none}
+	{/select}
 	<input type="text" name="name" placeholder="eg. {randomthing.name}" required='true' value="{thing.name}"></input>
 	<label for="description">Longer description:</label>
 	<textarea name="description" placeholder="{+placeholder/}" rows="7">{thing.description}</textarea>
