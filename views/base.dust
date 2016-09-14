@@ -17,10 +17,13 @@
 					</li>
 				{/menu}
 				{?user}
-					<li>
-						<span>{@ne key=path value="/profile"}<a href="/profile" title="Add listings and manage your account">Profile</a>{:else}Profile{/ne}</span>
-					</li>
 					{?user.verified}
+						<li>
+							<span>{@ne key=path value="/profile/add/have"}<a href="/profile/add/have">Add a have</a>{:else}Add a have{/ne}</span>
+						</li>
+						<li>
+							<span>{@ne key=path value="/profile/add/need"}<a href="/profile/add/need">Add a need</a>{:else}Add a need{/ne}</span>
+						</li>
 						<li>
 							<span>{@ne key=path value="/profile/matches"}<a href="/profile/matches" title="View and discuss your potential matches">Your matches</a>{:else}Your matches{/ne}</span>
 						</li>
