@@ -1,6 +1,6 @@
 <p>Hi {havers_name},</p>
 
-<p>Clare (or another member of the Arts Assets Team) think that your HAVE (<strong>{have}</strong>) may be a match for the NEED (<strong>{need}</strong>) listed by <strong>{needers_name}</strong>!
+<p>The Arts Assets Team think that your HAVE (<strong>{have}</strong>) may be a match for the NEED (<strong>{need}</strong>) listed by <strong>{needers_name}</strong>!
 
 <p>Are you up for a no-obligation chat to see if you could help {needers_name} out? If so, <a href="{domain}/profile/matches">login to your profile</a> to let them know that you might be able to help.</p>
 
