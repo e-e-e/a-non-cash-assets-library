@@ -15,7 +15,7 @@ const default_data = {
 
 const templates = {
 	welcome: {
-		subject: "Thanks for signing up to the Arts Asset Platform.",
+		subject: "Thanks for signing up to the Arts Assets Platform.",
 		body: path.join(__dirname,"/emails/welcome.dust")
 	},
 	verified: {
