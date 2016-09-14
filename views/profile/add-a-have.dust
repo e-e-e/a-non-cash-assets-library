@@ -9,7 +9,7 @@
 	<p>Why not add another "have" below, add to your <a href="/profile/add/need">"needs"</a>, or review your haves and needs on your <a href="/profile">profile</a>.</p>
 </div>
 {/message}
-<p>You are under NO OBLIGATION to share any of these listings. It is currently just as valuable to register them as "assets" even if they are currently unavailable. These listings are also anonymous so that participants don't feel obligated or hassled to share.</p>
+<p>You are under <em>no obligation</em> to share any of these listings. It is currently just as valuable to register them as "assets" even if they are currently unavailable. These listings are also anonymous so that participants don't feel obligated or hassled to share.</p>
 <p>We are deliberately keeping this open as far as categories, location and timing are concerned, as well as whether you "have" something for a specific project or ongoing... please feel free to add these details to the description as you see fit.</p>
 {>contribute action="/profile/add/have" type="have" public="true" /}
 {<placeholder}
