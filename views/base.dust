@@ -18,7 +18,7 @@
 				{/menu}
 				{?user}
 					<li>
-						<span>{@ne key=path value="/profile"}<a href="/profile" title="{title}">Profile</a>{:else}Profile{/ne}</span>
+						<span>{@ne key=path value="/profile"}<a href="/profile" title="Add listings and manage your account">Profile</a>{:else}Profile{/ne}</span>
 					</li>
 					<li>
 						<span>{@ne key=path value="/profile/matches"}<a href="/profile/matches" title="View and discuss your potential matches">Your matches</a>{:else}Your matches{/ne}</span>
