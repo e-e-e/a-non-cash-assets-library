@@ -28,7 +28,7 @@ This is a private, no-obligation conversation that you can leave at any time.</p
 <form action="/profile/matches/comment" method="POST">
 	<input type="hidden" name="user_id" value="{user.user_id}">
 	<input type="hidden" name="match_id" value="{match.match.match_id}">
-	<label for="message">Write something to:</label>
+	<label for="message">Write something:</label>
 	<textarea name="message" required="required"></textarea>
 	<button type="submit">Post</button>
 </form>
