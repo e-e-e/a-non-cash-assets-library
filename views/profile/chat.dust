@@ -3,7 +3,6 @@
 <div class="inset-section">
 <h1>Chit-Chat</h1>
 <p>Need some text that says that this is private etc.</p>
-<p>HERE SHOULD BE THE INFO ABOUT THE ITEM</p>
 {#match}
 	{@eq key=match.status value=3}
 	{>"./match" hide_actions="true"/}
