@@ -2,7 +2,7 @@
 
 <p>The Arts Assets Team think that your HAVE (<strong>{have}</strong>) may be a match for the NEED (<strong>{need}</strong>) listed by <strong>{needers_name}</strong>!
 
-<p>Are you up for a <em>no-obligation</em> chat to see if you could help {needers_name} out?</p>
+<p>Are you up for a <em>no obligation</em> chat to see if you could help {needers_name} out?</p>
 
 <p>If so, check out <a href="{domain}/profile/matches">Your Matches</a>. Find this match from the list and hit “Let {needers_name} know your willing to discuss this”.</p>
 
