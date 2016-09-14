@@ -16,5 +16,5 @@
 	<label for="description">Longer description:</label>
 	<textarea name="description" placeholder="{+placeholder/}" rows="7">{thing.description}</textarea>
 	<input type="checkbox" name="public" {?thing.public}checked{:else}{?public}checked{/public}{/thing.public}/><label for="public">Publicly listed</label>
-	<button type="submit">{?thing}Update{:else}Contribute{/thing}</button>
+	<button type="submit">{?thing}Update{:else}Post{/thing}</button>
 </form>
