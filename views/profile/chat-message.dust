@@ -1,5 +1,7 @@
 	<li class="conversation-message {is_owned}">
-		<blockquote>{message}</blockquote>
+		<blockquote>
+		  <pre>{message}</pre>
+		</blockquote>
 		<footer>
 			{?is_owned}
 			You, 
