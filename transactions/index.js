@@ -13,6 +13,8 @@ const default_data = {
 	'domain': options.server.domain
 };
 
+const from = 'non.cash.assets@gmail.com';
+
 const templates = {
 	welcome: {
 		subject: "Thanks for signing up to the Arts Assets Platform.",
@@ -69,7 +71,8 @@ function send_email(template, to, data) {
 			return deferred.reject(err);
 		var email_data = {
 			to: to,
-			from : options.mailgun.from,
+			from:from,
+			"h:Reply-To": from,
 			subject : template.subject,
 			html: body
 		};
