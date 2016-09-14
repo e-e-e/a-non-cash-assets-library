@@ -23,11 +23,11 @@ const templates = {
 		body: path.join(__dirname,"/emails/verified.dust")
 	},
 	match: {
-		subject: "Hey you might be able to help.",
+		subject: "New potential match on the Arts Assets Platform",
 		body: path.join(__dirname,"/emails/match.dust")
 	},
 	offer: {
-		subject: "Hey you might have a match.",
+		subject: "New potential match on the Arts Assets Platform",
 		body: path.join(__dirname,"/emails/offer.dust")
 	},
 	new_message: {
