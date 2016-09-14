@@ -31,6 +31,7 @@ This is a private, no-obligation conversation that you can leave at any time.</p
 	<label for="message">Write something:</label>
 	<textarea name="message" required="required" rows="6"></textarea>
 	<button type="submit">Post</button>
+	<!-- add a note that the person will get an email "CMC will be notified by email"-->
 </form>
 </div>
 {/content}
