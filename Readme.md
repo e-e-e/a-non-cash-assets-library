@@ -54,7 +54,7 @@ upstream noncash {
 server {
 
 	listen 80;
-	server_name *.whatchamacallit.space;
+	server_name *.noncash.space;
 	root /var/www/noncash/public;
 
 	location / {
