@@ -81,12 +81,19 @@ Currently deploying stupidly via SSH.
 cd ~/a-non-cash-assets-library/
 
 # if made changes to server code and added packages
-git pull; npm i; gulp; pm2 restart index;
+git pull; npm i; gulp; pm2 restart noncash;
 # if made changes to server code
-git pull; gulp; pm2 restart index;
+git pull; gulp; pm2 restart noncash;
 # if just changes to css or dust
 git pull; gulp;
 ```
+
+If pm2 has stopped for whatever reason, start the app again via:
+```sh
+cd ~/a-non-cash-assets-library/
+pm2 start index.js --name noncash
+```
+
 
 ## Todo:
 
